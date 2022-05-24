@@ -28,6 +28,6 @@ my realization
 
 ---
 
-```principle
-information of fixed principle
+```tip
+principle
 ```
