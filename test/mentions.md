@@ -1,17 +1,35 @@
 ---
-sort: 8
+sort: 3
 ---
 
-# Mentions Test
+# Code Blocks
+
+`inline code`
+
+[`inline code inside link`](./)
 
 ```
-Hey @saowang, what do you think of this?
+:root {
+  @for $level from 1 through 12 {
+    @if $level % 4 == 0 {
+      --toc-#{$level}: #{darken($theme-white, 4 * 8.8%)};
+    } @else {
+      --toc-#{$level}: #{darken($theme-white, $level % 4 * 8.8%)};
+    }
+  }
+}
 ```
 
-Hey @saowang, what do you think of this?
+**Highlight:**
 
-```tip
-Set config `plugins: [jekyll-mentions]`
-
-For documentation, see: [https://github.com/jekyll/jekyll-mentions](https://github.com/jekyll/jekyll-mentions)
+```scss
+:root {
+  @for $level from 1 through 12 {
+    @if $level % 4 == 0 {
+      --toc-#{$level}: #{darken($theme-white, 4 * 8.8%)};
+    } @else {
+      --toc-#{$level}: #{darken($theme-white, $level % 4 * 8.8%)};
+    }
+  }
+}
 ```
