@@ -4,6 +4,13 @@ sort: 11
 
 # Primer Utilities Test
 
+
+```tip
+Set config `plugins: [jekyll-avatar]`
+
+For documentation, see: [https://github.com/benbalter/jekyll-avatar](https://github.com/benbalter/jekyll-avatar)
+```
+
 Text can be **bold**, _italic_, or ~~strikethrough~~. [Links](https://github.com) should be blue with no underlines (unless hovered over).
 
 {:.text-red}
