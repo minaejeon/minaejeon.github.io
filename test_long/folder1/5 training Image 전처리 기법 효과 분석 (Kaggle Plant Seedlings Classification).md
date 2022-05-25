@@ -1,5 +1,5 @@
 
-#5 training Image 전처리 기법 효과 분석 (Kaggle Plant Seedlings Classification)
+# 5 training Image 전처리 기법 효과 분석 (Kaggle Plant Seedlings Classification)
 
 ```python
 # This Python 3 environment comes with many helpful analytics libraries installed
