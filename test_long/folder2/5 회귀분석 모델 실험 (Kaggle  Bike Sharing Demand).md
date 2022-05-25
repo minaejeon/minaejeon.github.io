@@ -1,84 +1,4 @@
----
-layout: single
-title:  "jupyter notebook 변환하기!"
-categories: coding
-tag: [python, blog, jekyll]
-toc: true
-author_profile: false
----
-
-<head>
-  <style>
-    table.dataframe {
-      white-space: normal;
-      width: 100%;
-      height: 240px;
-      display: block;
-      overflow: auto;
-      font-family: Arial, sans-serif;
-      font-size: 0.9rem;
-      line-height: 20px;
-      text-align: center;
-      border: 0px !important;
-    }
-
-    table.dataframe th {
-      text-align: center;
-      font-weight: bold;
-      padding: 8px;
-    }
-
-    table.dataframe td {
-      text-align: center;
-      padding: 8px;
-    }
-
-    table.dataframe tr:hover {
-      background: #b8d1f3; 
-    }
-
-    .output_prompt {
-      overflow: auto;
-      font-size: 0.9rem;
-      line-height: 1.45;
-      border-radius: 0.3rem;
-      -webkit-overflow-scrolling: touch;
-      padding: 0.8rem;
-      margin-top: 0;
-      margin-bottom: 15px;
-      font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
-      color: $code-text-color;
-      border: solid 1px $border-color;
-      border-radius: 0.3rem;
-      word-break: normal;
-      white-space: pre;
-    }
-
-  .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-  }
-
-  .dataframe tbody tr th {
-      vertical-align: top;
-  }
-
-  .dataframe thead th {
-      text-align: center !important;
-      padding: 8px;
-  }
-
-  .page__content p {
-      margin: 0 0 0px !important;
-  }
-
-  .page__content p > strong {
-    font-size: 0.8rem !important;
-  }
-
-  </style>
-</head>
-
-
+# 5 회귀분석 모델 실험 (Kaggle  Bike Sharing Demand).md
 
 ```python
 # This Python 3 environment comes with many helpful analytics libraries installed
@@ -113,19 +33,7 @@ display(train,test)
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -491,19 +399,7 @@ sub
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -599,19 +495,7 @@ display(train,test)
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -839,19 +723,7 @@ display(train,test)
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1119,19 +991,7 @@ train2
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1317,19 +1177,7 @@ test2
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2201,348 +2049,7 @@ Learning rate set to 0.059704
 654:	learn: 33.4498384	total: 1.7s	remaining: 896ms
 655:	learn: 33.4408530	total: 1.7s	remaining: 893ms
 656:	learn: 33.4289708	total: 1.71s	remaining: 890ms
-657:	learn: 33.4212407	total: 1.71s	remaining: 888ms
-658:	learn: 33.4171858	total: 1.71s	remaining: 885ms
-659:	learn: 33.4169922	total: 1.71s	remaining: 882ms
-660:	learn: 33.4115780	total: 1.72s	remaining: 880ms
-661:	learn: 33.4047314	total: 1.72s	remaining: 877ms
-662:	learn: 33.3967114	total: 1.72s	remaining: 875ms
-663:	learn: 33.3855884	total: 1.72s	remaining: 872ms
-664:	learn: 33.3769037	total: 1.73s	remaining: 869ms
-665:	learn: 33.3691729	total: 1.73s	remaining: 867ms
-666:	learn: 33.3525293	total: 1.73s	remaining: 864ms
-667:	learn: 33.3523183	total: 1.73s	remaining: 861ms
-668:	learn: 33.3374793	total: 1.74s	remaining: 858ms
-669:	learn: 33.3268928	total: 1.74s	remaining: 856ms
-670:	learn: 33.3199120	total: 1.74s	remaining: 853ms
-671:	learn: 33.3135076	total: 1.74s	remaining: 850ms
-672:	learn: 33.2907247	total: 1.74s	remaining: 848ms
-673:	learn: 33.2694706	total: 1.75s	remaining: 845ms
-674:	learn: 33.2647341	total: 1.75s	remaining: 842ms
-675:	learn: 33.2535152	total: 1.75s	remaining: 840ms
-676:	learn: 33.2411377	total: 1.75s	remaining: 837ms
-677:	learn: 33.2239638	total: 1.76s	remaining: 834ms
-678:	learn: 33.2090901	total: 1.76s	remaining: 832ms
-679:	learn: 33.2008356	total: 1.76s	remaining: 829ms
-680:	learn: 33.2006360	total: 1.76s	remaining: 826ms
-681:	learn: 33.1788689	total: 1.76s	remaining: 823ms
-682:	learn: 33.1666952	total: 1.77s	remaining: 821ms
-683:	learn: 33.1623612	total: 1.77s	remaining: 818ms
-684:	learn: 33.1489752	total: 1.77s	remaining: 815ms
-685:	learn: 33.1418190	total: 1.77s	remaining: 813ms
-686:	learn: 33.1366449	total: 1.78s	remaining: 810ms
-687:	learn: 33.1280835	total: 1.78s	remaining: 807ms
-688:	learn: 33.1262224	total: 1.78s	remaining: 804ms
-689:	learn: 33.1190058	total: 1.78s	remaining: 802ms
-690:	learn: 33.1130753	total: 1.79s	remaining: 799ms
-691:	learn: 33.0925400	total: 1.79s	remaining: 796ms
-692:	learn: 33.0829636	total: 1.79s	remaining: 794ms
-693:	learn: 33.0734867	total: 1.79s	remaining: 791ms
-694:	learn: 33.0605635	total: 1.8s	remaining: 788ms
-695:	learn: 33.0489916	total: 1.8s	remaining: 786ms
-696:	learn: 33.0488077	total: 1.8s	remaining: 783ms
-697:	learn: 33.0369076	total: 1.8s	remaining: 780ms
-698:	learn: 33.0177992	total: 1.8s	remaining: 777ms
-699:	learn: 33.0107292	total: 1.81s	remaining: 775ms
-700:	learn: 33.0001145	total: 1.81s	remaining: 772ms
-701:	learn: 32.9854216	total: 1.81s	remaining: 769ms
-702:	learn: 32.9761089	total: 1.81s	remaining: 767ms
-703:	learn: 32.9587635	total: 1.82s	remaining: 764ms
-704:	learn: 32.9481696	total: 1.82s	remaining: 762ms
-705:	learn: 32.9378569	total: 1.82s	remaining: 759ms
-706:	learn: 32.9248247	total: 1.82s	remaining: 756ms
-707:	learn: 32.9006136	total: 1.83s	remaining: 754ms
-708:	learn: 32.8943599	total: 1.83s	remaining: 751ms
-709:	learn: 32.8833185	total: 1.83s	remaining: 748ms
-710:	learn: 32.8786262	total: 1.83s	remaining: 746ms
-711:	learn: 32.8749580	total: 1.84s	remaining: 743ms
-712:	learn: 32.8695201	total: 1.84s	remaining: 740ms
-713:	learn: 32.8647824	total: 1.84s	remaining: 737ms
-714:	learn: 32.8546303	total: 1.84s	remaining: 735ms
-715:	learn: 32.8485429	total: 1.84s	remaining: 732ms
-716:	learn: 32.8392893	total: 1.85s	remaining: 729ms
-717:	learn: 32.8216976	total: 1.85s	remaining: 727ms
-718:	learn: 32.8186352	total: 1.85s	remaining: 724ms
-719:	learn: 32.8023569	total: 1.85s	remaining: 721ms
-720:	learn: 32.7914710	total: 1.86s	remaining: 719ms
-721:	learn: 32.7746879	total: 1.86s	remaining: 716ms
-722:	learn: 32.7628075	total: 1.86s	remaining: 714ms
-723:	learn: 32.7507770	total: 1.86s	remaining: 711ms
-724:	learn: 32.7458933	total: 1.87s	remaining: 708ms
-725:	learn: 32.7412048	total: 1.87s	remaining: 706ms
-726:	learn: 32.7267513	total: 1.87s	remaining: 703ms
-727:	learn: 32.7147093	total: 1.88s	remaining: 701ms
-728:	learn: 32.7039902	total: 1.88s	remaining: 698ms
-729:	learn: 32.6937434	total: 1.88s	remaining: 696ms
-730:	learn: 32.6797901	total: 1.88s	remaining: 693ms
-731:	learn: 32.6605634	total: 1.89s	remaining: 690ms
-732:	learn: 32.6600397	total: 1.89s	remaining: 688ms
-733:	learn: 32.6503237	total: 1.89s	remaining: 685ms
-734:	learn: 32.6345945	total: 1.89s	remaining: 683ms
-735:	learn: 32.6326952	total: 1.9s	remaining: 680ms
-736:	learn: 32.6242206	total: 1.9s	remaining: 677ms
-737:	learn: 32.6094500	total: 1.9s	remaining: 675ms
-738:	learn: 32.6062704	total: 1.9s	remaining: 672ms
-739:	learn: 32.5902867	total: 1.9s	remaining: 669ms
-740:	learn: 32.5743896	total: 1.91s	remaining: 667ms
-741:	learn: 32.5673761	total: 1.91s	remaining: 664ms
-742:	learn: 32.5568917	total: 1.91s	remaining: 661ms
-743:	learn: 32.5474715	total: 1.91s	remaining: 659ms
-744:	learn: 32.5380078	total: 1.92s	remaining: 656ms
-745:	learn: 32.5281987	total: 1.92s	remaining: 654ms
-746:	learn: 32.5157186	total: 1.92s	remaining: 651ms
-747:	learn: 32.5127579	total: 1.93s	remaining: 649ms
-748:	learn: 32.4991562	total: 1.93s	remaining: 646ms
-749:	learn: 32.4926830	total: 1.93s	remaining: 643ms
-750:	learn: 32.4911494	total: 1.93s	remaining: 641ms
-751:	learn: 32.4889417	total: 1.93s	remaining: 638ms
-752:	learn: 32.4845308	total: 1.94s	remaining: 635ms
-753:	learn: 32.4654414	total: 1.94s	remaining: 633ms
-754:	learn: 32.4533165	total: 1.94s	remaining: 630ms
-755:	learn: 32.4455170	total: 1.94s	remaining: 628ms
-756:	learn: 32.4376369	total: 1.95s	remaining: 625ms
-757:	learn: 32.4351829	total: 1.95s	remaining: 622ms
-758:	learn: 32.4301598	total: 1.95s	remaining: 620ms
-759:	learn: 32.4166460	total: 1.95s	remaining: 617ms
-760:	learn: 32.4041439	total: 1.96s	remaining: 615ms
-761:	learn: 32.3906258	total: 1.96s	remaining: 612ms
-762:	learn: 32.3840231	total: 1.96s	remaining: 609ms
-763:	learn: 32.3728043	total: 1.96s	remaining: 607ms
-764:	learn: 32.3711626	total: 1.97s	remaining: 604ms
-765:	learn: 32.3598267	total: 1.97s	remaining: 601ms
-766:	learn: 32.3548571	total: 1.97s	remaining: 599ms
-767:	learn: 32.3394689	total: 1.98s	remaining: 597ms
-768:	learn: 32.3375641	total: 1.98s	remaining: 594ms
-769:	learn: 32.3359141	total: 1.98s	remaining: 592ms
-770:	learn: 32.3290021	total: 1.98s	remaining: 589ms
-771:	learn: 32.3180506	total: 1.99s	remaining: 586ms
-772:	learn: 32.3141196	total: 1.99s	remaining: 584ms
-773:	learn: 32.2987861	total: 1.99s	remaining: 582ms
-774:	learn: 32.2986657	total: 1.99s	remaining: 579ms
-775:	learn: 32.2851671	total: 2s	remaining: 576ms
-776:	learn: 32.2834411	total: 2s	remaining: 574ms
-777:	learn: 32.2766417	total: 2s	remaining: 571ms
-778:	learn: 32.2708932	total: 2s	remaining: 569ms
-779:	learn: 32.2614231	total: 2.01s	remaining: 566ms
-780:	learn: 32.2532264	total: 2.01s	remaining: 563ms
-781:	learn: 32.2442548	total: 2.01s	remaining: 561ms
-782:	learn: 32.2320237	total: 2.01s	remaining: 558ms
-783:	learn: 32.2222219	total: 2.02s	remaining: 556ms
-784:	learn: 32.2068012	total: 2.02s	remaining: 553ms
-785:	learn: 32.1881779	total: 2.02s	remaining: 550ms
-786:	learn: 32.1777474	total: 2.02s	remaining: 548ms
-787:	learn: 32.1708862	total: 2.03s	remaining: 545ms
-788:	learn: 32.1607108	total: 2.03s	remaining: 543ms
-789:	learn: 32.1541093	total: 2.03s	remaining: 540ms
-790:	learn: 32.1425655	total: 2.03s	remaining: 537ms
-791:	learn: 32.1331393	total: 2.04s	remaining: 535ms
-792:	learn: 32.1171408	total: 2.04s	remaining: 532ms
-793:	learn: 32.1170288	total: 2.04s	remaining: 529ms
-794:	learn: 32.1066128	total: 2.04s	remaining: 527ms
-795:	learn: 32.1052717	total: 2.04s	remaining: 524ms
-796:	learn: 32.0980946	total: 2.05s	remaining: 522ms
-797:	learn: 32.0873785	total: 2.05s	remaining: 519ms
-798:	learn: 32.0803580	total: 2.05s	remaining: 516ms
-799:	learn: 32.0791544	total: 2.06s	remaining: 514ms
-800:	learn: 32.0714431	total: 2.06s	remaining: 511ms
-801:	learn: 32.0566149	total: 2.06s	remaining: 509ms
-802:	learn: 32.0305920	total: 2.06s	remaining: 506ms
-803:	learn: 32.0211078	total: 2.06s	remaining: 504ms
-804:	learn: 32.0080636	total: 2.07s	remaining: 501ms
-805:	learn: 31.9979709	total: 2.07s	remaining: 498ms
-806:	learn: 31.9908278	total: 2.07s	remaining: 496ms
-807:	learn: 31.9838625	total: 2.08s	remaining: 493ms
-808:	learn: 31.9743849	total: 2.08s	remaining: 491ms
-809:	learn: 31.9666349	total: 2.08s	remaining: 488ms
-810:	learn: 31.9590175	total: 2.08s	remaining: 486ms
-811:	learn: 31.9543343	total: 2.09s	remaining: 483ms
-812:	learn: 31.9478603	total: 2.09s	remaining: 481ms
-813:	learn: 31.9327166	total: 2.09s	remaining: 478ms
-814:	learn: 31.9256395	total: 2.1s	remaining: 476ms
-815:	learn: 31.9109037	total: 2.1s	remaining: 473ms
-816:	learn: 31.9010972	total: 2.1s	remaining: 471ms
-817:	learn: 31.8927099	total: 2.1s	remaining: 468ms
-818:	learn: 31.8921762	total: 2.11s	remaining: 466ms
-819:	learn: 31.8843107	total: 2.11s	remaining: 463ms
-820:	learn: 31.8729959	total: 2.11s	remaining: 460ms
-821:	learn: 31.8658450	total: 2.11s	remaining: 458ms
-822:	learn: 31.8570295	total: 2.12s	remaining: 455ms
-823:	learn: 31.8494447	total: 2.12s	remaining: 453ms
-824:	learn: 31.8402568	total: 2.12s	remaining: 450ms
-825:	learn: 31.8316240	total: 2.12s	remaining: 447ms
-826:	learn: 31.8252821	total: 2.13s	remaining: 445ms
-827:	learn: 31.8166967	total: 2.13s	remaining: 442ms
-828:	learn: 31.8128037	total: 2.13s	remaining: 440ms
-829:	learn: 31.7982896	total: 2.13s	remaining: 437ms
-830:	learn: 31.7845742	total: 2.14s	remaining: 435ms
-831:	learn: 31.7745396	total: 2.14s	remaining: 432ms
-832:	learn: 31.7595915	total: 2.14s	remaining: 429ms
-833:	learn: 31.7467459	total: 2.14s	remaining: 427ms
-834:	learn: 31.7394151	total: 2.15s	remaining: 424ms
-835:	learn: 31.7339793	total: 2.15s	remaining: 422ms
-836:	learn: 31.7215979	total: 2.15s	remaining: 419ms
-837:	learn: 31.7121631	total: 2.15s	remaining: 417ms
-838:	learn: 31.7072917	total: 2.16s	remaining: 414ms
-839:	learn: 31.7006931	total: 2.16s	remaining: 411ms
-840:	learn: 31.6903768	total: 2.16s	remaining: 409ms
-841:	learn: 31.6841330	total: 2.16s	remaining: 406ms
-842:	learn: 31.6746906	total: 2.17s	remaining: 404ms
-843:	learn: 31.6651007	total: 2.17s	remaining: 401ms
-844:	learn: 31.6452129	total: 2.17s	remaining: 399ms
-845:	learn: 31.6407989	total: 2.18s	remaining: 396ms
-846:	learn: 31.6353436	total: 2.18s	remaining: 394ms
-847:	learn: 31.6296050	total: 2.18s	remaining: 391ms
-848:	learn: 31.6217759	total: 2.18s	remaining: 388ms
-849:	learn: 31.6152763	total: 2.19s	remaining: 386ms
-850:	learn: 31.6088483	total: 2.19s	remaining: 383ms
-851:	learn: 31.6046897	total: 2.19s	remaining: 381ms
-852:	learn: 31.5953173	total: 2.19s	remaining: 378ms
-853:	learn: 31.5892084	total: 2.2s	remaining: 376ms
-854:	learn: 31.5811548	total: 2.2s	remaining: 373ms
-855:	learn: 31.5725673	total: 2.2s	remaining: 371ms
-856:	learn: 31.5634174	total: 2.21s	remaining: 368ms
-857:	learn: 31.5546848	total: 2.21s	remaining: 365ms
-858:	learn: 31.5386089	total: 2.21s	remaining: 363ms
-859:	learn: 31.5289133	total: 2.21s	remaining: 360ms
-860:	learn: 31.5259210	total: 2.21s	remaining: 358ms
-861:	learn: 31.5182290	total: 2.22s	remaining: 355ms
-862:	learn: 31.5111742	total: 2.22s	remaining: 353ms
-863:	learn: 31.5043655	total: 2.22s	remaining: 350ms
-864:	learn: 31.4925454	total: 2.23s	remaining: 347ms
-865:	learn: 31.4823617	total: 2.23s	remaining: 345ms
-866:	learn: 31.4742112	total: 2.23s	remaining: 342ms
-867:	learn: 31.4623386	total: 2.23s	remaining: 340ms
-868:	learn: 31.4555748	total: 2.23s	remaining: 337ms
-869:	learn: 31.4473968	total: 2.24s	remaining: 334ms
-870:	learn: 31.4376728	total: 2.24s	remaining: 332ms
-871:	learn: 31.4305756	total: 2.24s	remaining: 329ms
-872:	learn: 31.4199285	total: 2.25s	remaining: 327ms
-873:	learn: 31.4034737	total: 2.25s	remaining: 324ms
-874:	learn: 31.3969817	total: 2.25s	remaining: 322ms
-875:	learn: 31.3915957	total: 2.25s	remaining: 319ms
-876:	learn: 31.3777642	total: 2.25s	remaining: 316ms
-877:	learn: 31.3695378	total: 2.26s	remaining: 314ms
-878:	learn: 31.3605689	total: 2.26s	remaining: 311ms
-879:	learn: 31.3544207	total: 2.26s	remaining: 309ms
-880:	learn: 31.3448070	total: 2.26s	remaining: 306ms
-881:	learn: 31.3316295	total: 2.27s	remaining: 303ms
-882:	learn: 31.3270494	total: 2.27s	remaining: 301ms
-883:	learn: 31.3142284	total: 2.27s	remaining: 298ms
-884:	learn: 31.3030925	total: 2.27s	remaining: 295ms
-885:	learn: 31.2937194	total: 2.27s	remaining: 293ms
-886:	learn: 31.2869598	total: 2.28s	remaining: 290ms
-887:	learn: 31.2816691	total: 2.28s	remaining: 288ms
-888:	learn: 31.2788816	total: 2.28s	remaining: 285ms
-889:	learn: 31.2692410	total: 2.28s	remaining: 282ms
-890:	learn: 31.2610214	total: 2.29s	remaining: 280ms
-891:	learn: 31.2488923	total: 2.29s	remaining: 277ms
-892:	learn: 31.2439526	total: 2.29s	remaining: 275ms
-893:	learn: 31.2339115	total: 2.29s	remaining: 272ms
-894:	learn: 31.2215562	total: 2.3s	remaining: 270ms
-895:	learn: 31.2186097	total: 2.3s	remaining: 267ms
-896:	learn: 31.2126351	total: 2.3s	remaining: 265ms
-897:	learn: 31.1943428	total: 2.31s	remaining: 262ms
-898:	learn: 31.1906592	total: 2.31s	remaining: 259ms
-899:	learn: 31.1798981	total: 2.31s	remaining: 257ms
-900:	learn: 31.1726192	total: 2.31s	remaining: 254ms
-901:	learn: 31.1664538	total: 2.32s	remaining: 252ms
-902:	learn: 31.1544166	total: 2.32s	remaining: 249ms
-903:	learn: 31.1374797	total: 2.32s	remaining: 247ms
-904:	learn: 31.1319832	total: 2.32s	remaining: 244ms
-905:	learn: 31.1235929	total: 2.33s	remaining: 241ms
-906:	learn: 31.1110392	total: 2.33s	remaining: 239ms
-907:	learn: 31.1074770	total: 2.33s	remaining: 236ms
-908:	learn: 31.1029519	total: 2.33s	remaining: 234ms
-909:	learn: 31.0966315	total: 2.34s	remaining: 231ms
-910:	learn: 31.0904389	total: 2.34s	remaining: 229ms
-911:	learn: 31.0804541	total: 2.34s	remaining: 226ms
-912:	learn: 31.0703900	total: 2.34s	remaining: 223ms
-913:	learn: 31.0638430	total: 2.35s	remaining: 221ms
-914:	learn: 31.0569745	total: 2.35s	remaining: 218ms
-915:	learn: 31.0507797	total: 2.35s	remaining: 216ms
-916:	learn: 31.0446039	total: 2.35s	remaining: 213ms
-917:	learn: 31.0404374	total: 2.35s	remaining: 210ms
-918:	learn: 31.0322295	total: 2.36s	remaining: 208ms
-919:	learn: 31.0261685	total: 2.36s	remaining: 205ms
-920:	learn: 31.0160774	total: 2.36s	remaining: 203ms
-921:	learn: 31.0049978	total: 2.37s	remaining: 200ms
-922:	learn: 30.9982886	total: 2.37s	remaining: 198ms
-923:	learn: 30.9916487	total: 2.37s	remaining: 195ms
-924:	learn: 30.9861481	total: 2.37s	remaining: 192ms
-925:	learn: 30.9740046	total: 2.38s	remaining: 190ms
-926:	learn: 30.9694016	total: 2.38s	remaining: 187ms
-927:	learn: 30.9616055	total: 2.38s	remaining: 185ms
-928:	learn: 30.9551095	total: 2.38s	remaining: 182ms
-929:	learn: 30.9470434	total: 2.39s	remaining: 180ms
-930:	learn: 30.9423056	total: 2.39s	remaining: 177ms
-931:	learn: 30.9348984	total: 2.39s	remaining: 175ms
-932:	learn: 30.9268601	total: 2.39s	remaining: 172ms
-933:	learn: 30.9193543	total: 2.4s	remaining: 169ms
-934:	learn: 30.9105081	total: 2.4s	remaining: 167ms
-935:	learn: 30.9067290	total: 2.4s	remaining: 164ms
-936:	learn: 30.9045097	total: 2.4s	remaining: 162ms
-937:	learn: 30.8947240	total: 2.41s	remaining: 159ms
-938:	learn: 30.8910195	total: 2.41s	remaining: 156ms
-939:	learn: 30.8842359	total: 2.41s	remaining: 154ms
-940:	learn: 30.8723682	total: 2.41s	remaining: 151ms
-941:	learn: 30.8662651	total: 2.42s	remaining: 149ms
-942:	learn: 30.8493046	total: 2.42s	remaining: 146ms
-943:	learn: 30.8385176	total: 2.42s	remaining: 144ms
-944:	learn: 30.8281024	total: 2.42s	remaining: 141ms
-945:	learn: 30.8162636	total: 2.42s	remaining: 138ms
-946:	learn: 30.8123682	total: 2.43s	remaining: 136ms
-947:	learn: 30.8084375	total: 2.43s	remaining: 133ms
-948:	learn: 30.8018771	total: 2.43s	remaining: 131ms
-949:	learn: 30.7928906	total: 2.44s	remaining: 128ms
-950:	learn: 30.7869724	total: 2.44s	remaining: 126ms
-951:	learn: 30.7789703	total: 2.44s	remaining: 123ms
-952:	learn: 30.7697021	total: 2.44s	remaining: 120ms
-953:	learn: 30.7637842	total: 2.44s	remaining: 118ms
-954:	learn: 30.7554668	total: 2.45s	remaining: 115ms
-955:	learn: 30.7529124	total: 2.45s	remaining: 113ms
-956:	learn: 30.7451214	total: 2.45s	remaining: 110ms
-957:	learn: 30.7441752	total: 2.45s	remaining: 108ms
-958:	learn: 30.7340382	total: 2.46s	remaining: 105ms
-959:	learn: 30.7299517	total: 2.46s	remaining: 102ms
-960:	learn: 30.7142225	total: 2.46s	remaining: 99.9ms
-961:	learn: 30.7066774	total: 2.46s	remaining: 97.3ms
-962:	learn: 30.7052306	total: 2.46s	remaining: 94.7ms
-963:	learn: 30.6987661	total: 2.47s	remaining: 92.2ms
-964:	learn: 30.6927177	total: 2.47s	remaining: 89.6ms
-965:	learn: 30.6872604	total: 2.47s	remaining: 87.1ms
-966:	learn: 30.6847120	total: 2.48s	remaining: 84.5ms
-967:	learn: 30.6748291	total: 2.48s	remaining: 82ms
-968:	learn: 30.6633217	total: 2.48s	remaining: 79.4ms
-969:	learn: 30.6557878	total: 2.48s	remaining: 76.8ms
-970:	learn: 30.6453337	total: 2.49s	remaining: 74.3ms
-971:	learn: 30.6418130	total: 2.49s	remaining: 71.7ms
-972:	learn: 30.6362096	total: 2.49s	remaining: 69.2ms
-973:	learn: 30.6283889	total: 2.5s	remaining: 66.6ms
-974:	learn: 30.6156711	total: 2.5s	remaining: 64.1ms
-975:	learn: 30.5987270	total: 2.5s	remaining: 61.5ms
-976:	learn: 30.5958966	total: 2.5s	remaining: 59ms
-977:	learn: 30.5895396	total: 2.51s	remaining: 56.4ms
-978:	learn: 30.5821811	total: 2.51s	remaining: 53.8ms
-979:	learn: 30.5708061	total: 2.51s	remaining: 51.3ms
-980:	learn: 30.5618869	total: 2.51s	remaining: 48.7ms
-981:	learn: 30.5561800	total: 2.52s	remaining: 46.1ms
-982:	learn: 30.5484338	total: 2.52s	remaining: 43.6ms
-983:	learn: 30.5433152	total: 2.52s	remaining: 41ms
-984:	learn: 30.5353536	total: 2.52s	remaining: 38.4ms
-985:	learn: 30.5242230	total: 2.53s	remaining: 35.9ms
-986:	learn: 30.5098657	total: 2.53s	remaining: 33.3ms
-987:	learn: 30.4974017	total: 2.53s	remaining: 30.7ms
-988:	learn: 30.4928357	total: 2.53s	remaining: 28.2ms
-989:	learn: 30.4777960	total: 2.54s	remaining: 25.6ms
-990:	learn: 30.4756946	total: 2.54s	remaining: 23.1ms
-991:	learn: 30.4689997	total: 2.54s	remaining: 20.5ms
-992:	learn: 30.4591056	total: 2.54s	remaining: 17.9ms
-993:	learn: 30.4538462	total: 2.54s	remaining: 15.4ms
-994:	learn: 30.4485157	total: 2.55s	remaining: 12.8ms
-995:	learn: 30.4445026	total: 2.55s	remaining: 10.2ms
-996:	learn: 30.4422946	total: 2.55s	remaining: 7.68ms
-997:	learn: 30.4314655	total: 2.56s	remaining: 5.12ms
-998:	learn: 30.4217777	total: 2.56s	remaining: 2.56ms
+...
 999:	learn: 30.4092078	total: 2.56s	remaining: 0us
 </pre>
 <pre>
@@ -2681,19 +2188,7 @@ sub
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2771,19 +2266,7 @@ sub
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
