@@ -2,5 +2,5 @@
 sort: 2
 ---
 
-# Data Analysis and Realization
+# 데이터 분석 실험 및 고찰
 
