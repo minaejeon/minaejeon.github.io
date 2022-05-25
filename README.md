@@ -20,7 +20,7 @@ https://minaejeon.github.io/
   ▷ Text 분석 및 Image 분류
   -
   田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
-  
+  -
     1. Call Backs 실험 (Dacon : 전복 나이 예측 대회)
     2. Vectorizer와 차원 축소 실험 (Kaggle : two Sigma Connect: Rental Listing Inquiries)
     3. Stemming과 Lemmatization, stop words 실험 (Kaggle : Spooky Author Identification)
@@ -34,7 +34,7 @@ https://minaejeon.github.io/
   ▷ Data 처리 및 분석
   -
   田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
-  
+  -
     1. Scaler 실험 및 결과 분석 (Kaggle : Otto Group Product Classification Challenge)
     2. Boost Classifier 모델 실험 1 (Kaggle : Shelter Animal Outcomes)
     3. Boost Classifier 모델 실험 2 (Kaggle : Don't Get Kicked!)
