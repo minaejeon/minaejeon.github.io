@@ -1,4 +1,4 @@
-# Data 처리 및 분석
+# 정형 BIG DATA 정제 및 분석
 
 1. Scaler 실험 및 결과 분석 (Kaggle : Otto Group Product Classification Challenge)
 2. Boost Classifier 모델 실험 (Kaggle : Shelter Animal Outcomes)
