@@ -1,6 +1,5 @@
----
+
 # 1 Scaler 실험 및 결과 분석 (Kaggle Otto Group Product Classification Challenge)
----
 
 
 ```python
