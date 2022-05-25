@@ -4,13 +4,13 @@ https://minaejeon.github.io/
 
 # Attending Active Competition
 
-  ###   대회 RANK, SCORE
+###   대회 RANK, SCORE
   
-  ###   Predict accident risk score for unique postcode
+###   Predict accident risk score for unique postcode
   
-  ###   Computer Vision 이상치 탐지 알고리즘 경진대회
+###   Computer Vision 이상치 탐지 알고리즘 경진대회
   
-  ###   생육 환경 최적화 경진대회
+###   생육 환경 최적화 경진대회
 ∵
 
 # Data Analysis and Realization 
