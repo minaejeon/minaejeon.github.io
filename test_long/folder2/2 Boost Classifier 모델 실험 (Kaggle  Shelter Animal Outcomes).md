@@ -1,84 +1,4 @@
----
-layout: single
-title:  "jupyter notebook 변환하기!"
-categories: coding
-tag: [python, blog, jekyll]
-toc: true
-author_profile: false
----
-
-<head>
-  <style>
-    table.dataframe {
-      white-space: normal;
-      width: 100%;
-      height: 240px;
-      display: block;
-      overflow: auto;
-      font-family: Arial, sans-serif;
-      font-size: 0.9rem;
-      line-height: 20px;
-      text-align: center;
-      border: 0px !important;
-    }
-
-    table.dataframe th {
-      text-align: center;
-      font-weight: bold;
-      padding: 8px;
-    }
-
-    table.dataframe td {
-      text-align: center;
-      padding: 8px;
-    }
-
-    table.dataframe tr:hover {
-      background: #b8d1f3; 
-    }
-
-    .output_prompt {
-      overflow: auto;
-      font-size: 0.9rem;
-      line-height: 1.45;
-      border-radius: 0.3rem;
-      -webkit-overflow-scrolling: touch;
-      padding: 0.8rem;
-      margin-top: 0;
-      margin-bottom: 15px;
-      font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
-      color: $code-text-color;
-      border: solid 1px $border-color;
-      border-radius: 0.3rem;
-      word-break: normal;
-      white-space: pre;
-    }
-
-  .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-  }
-
-  .dataframe tbody tr th {
-      vertical-align: top;
-  }
-
-  .dataframe thead th {
-      text-align: center !important;
-      padding: 8px;
-  }
-
-  .page__content p {
-      margin: 0 0 0px !important;
-  }
-
-  .page__content p > strong {
-    font-size: 0.8rem !important;
-  }
-
-  </style>
-</head>
-
-
+# 2 Boost Classifier 모델 실험 (Kaggle  Shelter Animal Outcomes).md
 
 ```python
 # This Python 3 environment comes with many helpful analytics libraries installed
@@ -114,19 +34,7 @@ display(train,test)
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -294,19 +202,7 @@ display(train,test)
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -481,19 +377,7 @@ alldata
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -751,19 +635,7 @@ alldata2
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1058,19 +930,7 @@ alldata2
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1496,19 +1356,7 @@ sub
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1643,19 +1491,7 @@ sub
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
