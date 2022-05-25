@@ -1324,7 +1324,15 @@ sub.to_csv('cutting.csv',index=False)
 
 
 
-각 species 별 이미지를 한개씩 불러와 보겠습니다. 이미지 필요 !!
+각 species 별 이미지를 한개씩 불러와 보겠습니다.
+
+![image](https://user-images.githubusercontent.com/69743938/170181948-7494ad51-9af6-4cc5-8683-eed786e89e0b.png)
+![image](https://user-images.githubusercontent.com/69743938/170181967-5ec29e8a-5016-4d11-b7ef-7172ed5fb733.png)
+![image](https://user-images.githubusercontent.com/69743938/170181981-b46d6314-2b35-4288-83ef-61cd3b023a66.png)
+![image](https://user-images.githubusercontent.com/69743938/170181991-bd2353ad-9e17-4c8d-ab27-82f713157563.png)
+![image](https://user-images.githubusercontent.com/69743938/170182001-ada66401-2db4-4004-989c-684ce0ab5ef9.png)
+![image](https://user-images.githubusercontent.com/69743938/170182009-398dd227-be7a-429b-aa63-19f547abf50a.png)
+
 
 
 캐니 경계선 감지 > 자르기 > 이진화 > 대비 높이기 1번째 > 투명도 처리 2번째 > 투명도 처리 1번째 > 색상 구분 > 선명하게 하기 > 대비 높이기 2번째
