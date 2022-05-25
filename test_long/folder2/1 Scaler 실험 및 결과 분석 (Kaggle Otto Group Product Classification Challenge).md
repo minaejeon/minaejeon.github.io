@@ -2923,6 +2923,7 @@ sub
 <p>144368 rows × 10 columns</p>
 </div>
 
+{![image](https://user-images.githubusercontent.com/69743938/170178427-290a6b94-a959-4933-bb24-12e7583f4b58.png)}
 
 
 ```python
