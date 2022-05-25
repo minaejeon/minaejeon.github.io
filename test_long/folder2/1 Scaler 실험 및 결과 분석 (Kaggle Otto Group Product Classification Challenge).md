@@ -2923,14 +2923,14 @@ sub
 <p>144368 rows × 10 columns</p>
 </div>
 
-{![image](https://user-images.githubusercontent.com/69743938/170178427-290a6b94-a959-4933-bb24-12e7583f4b58.png)}
+
 
 
 ```python
 sub.to_csv('submission.csv',index=False)
 ```
 
-![image.png](attachment:908c8d70-a736-465a-b5ba-233845ca9ca8.png)
+![image](https://user-images.githubusercontent.com/69743938/170178474-9cc57c43-a8ec-4ae6-b550-9625eaa4bb51.png)
 
 
 alldata의 각 feat columnn의 data는 0에 가까운 값이 가장 많습니다.
