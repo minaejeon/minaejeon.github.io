@@ -2,7 +2,7 @@
 
 https://minaejeon.github.io/
 
-# Attending Active Competition
+# 진행중인 대회 참여 이력
 
 ###   대회 RANK, SCORE
   
@@ -13,9 +13,9 @@ https://minaejeon.github.io/
 ###   생육 환경 최적화 경진대회
 ∵
 
-# Data Analysis and Realization 
+# 데이터 분석 실험 및 고찰 
 
-###   Text 분석 및 Image 분류
+###  비정형 TEXT/IMAGE DATA 정제 및 분석
 
   田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
 
@@ -26,10 +26,10 @@ https://minaejeon.github.io/
     5. training Image 전처리 기법 효과 분석 (Kaggle : Plant Seedlings Classification)
     6. Image Classification 모델 실험 (Kaggle : Invasive Species Monitoring)
     7. Sequential Model Compile 실험 (Kaggle : Toxic Comment Classification Challenge)
-    8. NLTK와 Keras의 Text 토큰화 실험 (Kaggle : Spam Mails Dataset)
+    8. NLTK와 Keras의 Text 토큰화 실험1 (Kaggle : Spam Mails Dataset)
     9. NLTK와 Keras의 Text 토큰화 실험2 (Kaggle : Fake and real news Dataset)
   
-###   Data 처리 및 분석
+###  정형 BIG DATA 정제 및 분석
 
   田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
 
