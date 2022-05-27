@@ -1,4 +1,4 @@
-# 3 Stemming과 Lemmatization, stop words 실험 (Kaggle Spooky Author Identification)
+# 5 Stemming과 Lemmatization, stop words 실험 (Kaggle Spooky Author Identification)
 
 
 
