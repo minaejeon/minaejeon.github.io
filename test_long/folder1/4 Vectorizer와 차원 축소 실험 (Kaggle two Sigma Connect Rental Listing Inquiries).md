@@ -1,5 +1,5 @@
 
-# 2 Vectorizer와 차원 축소 실험 (Kaggle two Sigma Connect Rental Listing Inquiries)
+# 4 Vectorizer와 차원 축소 실험 (Kaggle two Sigma Connect Rental Listing Inquiries)
 
 
 
