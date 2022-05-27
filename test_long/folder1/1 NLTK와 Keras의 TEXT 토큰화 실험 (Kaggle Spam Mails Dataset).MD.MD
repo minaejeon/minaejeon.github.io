@@ -1,4 +1,4 @@
-# 8 NLTK와 Keras의 Text 토큰화 실험 (Kaggle Spam Mails Dataset)
+# 1 NLTK와 Keras의 Text 토큰화 실험 (Kaggle Spam Mails Dataset)
 
 
 ```python
