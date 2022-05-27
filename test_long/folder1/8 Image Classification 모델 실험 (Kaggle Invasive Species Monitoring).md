@@ -1,5 +1,5 @@
 
-#6 Image Classification 모델 실험 (Kaggle Invasive Species Monitoring)
+#8 Image Classification 모델 실험 (Kaggle Invasive Species Monitoring)
 
 
 ```python
