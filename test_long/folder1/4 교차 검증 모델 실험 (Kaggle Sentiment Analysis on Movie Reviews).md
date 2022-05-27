@@ -1,5 +1,5 @@
 
-# 4 교차 검증 모델 실험 (Kaggle Sentiment Analysis on Movie Reviews)
+# 6 교차 검증 모델 실험 (Kaggle Sentiment Analysis on Movie Reviews)
 
 
 
