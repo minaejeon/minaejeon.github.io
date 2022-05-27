@@ -1,5 +1,5 @@
 
-# 7 Sequential Model Compile 실험 (Kaggle Toxic Comment Classification Challenge) 
+# 9 Sequential Model Compile 실험 (Kaggle Toxic Comment Classification Challenge) 
 
 
 ```python
