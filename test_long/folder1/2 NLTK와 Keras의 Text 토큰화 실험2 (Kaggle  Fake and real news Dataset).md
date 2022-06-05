@@ -20,10 +20,10 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 # You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
 ```
 
-<pre>
+
 /kaggle/input/fake-and-real-news-dataset/True.csv
 /kaggle/input/fake-and-real-news-dataset/Fake.csv
-</pre>
+
 
 ```python
 true=pd.read_csv("/kaggle/input/fake-and-real-news-dataset/True.csv")
@@ -344,50 +344,21 @@ data
 data["text"][3]
 ```
 
-<pre>
+
 3    WASHINGTON (Reuters) - Trump campaign adviser ...
 3    On Christmas day, Donald Trump announced that ...
 Name: text, dtype: object
-</pre>
-word_tokenize
 
+---------------
+Kaggle Spam Mails Dataset에서는 NLTK와 Keras에서 제공하는 Text 토큰화 실험을 진행하였습니다.
 
+이번에는 다른 Kaggle Fake and real news Dataset에 동일하게 적용하고, 각 모델의 장단점을 추가로 분석하겠습니다.
 
-단어 토큰화 : 토큰의 기준을 단어로 하는 경우. 단어 단위, 단어 구, 의미를 갖는 문자 열로 구분
+또한, Pretrain 방식을 이용하여 단어별 학습된 의미를 상황에 맞게 적절히 적용하는 방식을 실험해 보겠습니다.
 
+첫째, NLTK의 word_tokenize를 적용하였습니다.
 
-
-마침표(.) 컴마(,) 물음표(?) 세미콜론(;) 느낌표(!)와 같은 구두점을 지우고 띄어쓰기 기준으로 잘라내는 특징
-
-
-
-['0','WASHINGTON','(','Reuters',')','-','The','head','of','a','conservat','...','1','WASHINGTON','(','Reuters',')','-
-
-
-
-','Transgender','people','will','...','2','WASHINGTON','(','Reuters',')','-
-
-
-
-','The','special','counsel','inv','...','3','WASHINGTON','(','Reuters', ')','-
-
-
-
-','Trump','campaign','adviser','...','4','SEATTLE/WASHINGTON','(','Reuters',')','-
-
-
-
-','President','Donal','...','...','23476','21st','Century','Wire','says','As','21WIRE','reported','earl','...','23477','21st','Century','Wire
-
-
-
-','says','It',...':',
-
-
-
- 'object']
-
-
+----------------
 
 
 ```python
@@ -399,7 +370,6 @@ tk_result=TK(str(text))
 tk_result
 ```
 
-<pre>
 ['0',
  'WASHINGTON',
  '(',
@@ -513,64 +483,16 @@ tk_result
  'dtype',
  ':',
  'object']
-</pre>
-TreebankWordTokenizer(다른 tokenizer에 비해 시간이 오래 걸렸다)
+
+-------------
+index의 number와 '-'하이픈까지 모두 하나의 독립된 의미단위로 분류하였습니다.
+
+text의 정확한 분류에는 기여될 수 있으나 분석 속도가 느리기 때문에 비효율적으로 보입니다.
+
+둘째, TreebankWordTokenizer를 적용하겠습니다. 
 
 
-
-hyphen(-)으로 구성된 단어를 유지
-
-
-
-doesn't와 같이 접어(줄임말을 쓸때 생기는 형태)가 있을 경우 분리
-
-
-
-0        [WASHINGTON, (, Reuters, ), -, The, head, of, ...
-
-
-
-1        [WASHINGTON, (, Reuters, ), -, Transgender, pe...
-
-
-
-2        [WASHINGTON, (, Reuters, ), -, The, special, c...
-
-
-
-3        [WASHINGTON, (, Reuters, ), -, Trump, campaign...
-
-
-
-4        [SEATTLE/WASHINGTON, (, Reuters, ), -, Preside...
-
-
-
-                               ...                        
-
-23476    [21st, Century, Wire, says, As, 21WIRE, report...
-
-
-
-23477    [21st, Century, Wire, says, It, s, a, familiar...
-
-
-
-23478    [Patrick, Henningsen, 21st, Century, WireRemem...
-
-
-
-23479    [21st, Century, Wire, says, Al, Jazeera, Ameri...
-
-
-
-23480    [21st, Century, Wire, says, As, 21WIRE, predic...
-
-
-
-Name: text, Length: 44898, dtype: object
-
-
+--------------
 
 ```python
 from nltk.tokenize import TreebankWordTokenizer
@@ -578,31 +500,6 @@ TK = TreebankWordTokenizer()
 tk_result = data['text'].apply(TK.tokenize)
 tk_result
 ```
-
-<pre>
-0        [WASHINGTON, (, Reuters, ), -, The, head, of, ...
-1        [WASHINGTON, (, Reuters, ), -, Transgender, pe...
-2        [WASHINGTON, (, Reuters, ), -, The, special, c...
-3        [WASHINGTON, (, Reuters, ), -, Trump, campaign...
-4        [SEATTLE/WASHINGTON, (, Reuters, ), -, Preside...
-                               ...                        
-23476    [21st, Century, Wire, says, As, 21WIRE, report...
-23477    [21st, Century, Wire, says, It, s, a, familiar...
-23478    [Patrick, Henningsen, 21st, Century, WireRemem...
-23479    [21st, Century, Wire, says, Al, Jazeera, Ameri...
-23480    [21st, Century, Wire, says, As, 21WIRE, predic...
-Name: text, Length: 44898, dtype: object
-</pre>
-sent_tokenize
-
-
-
-문장 단위로 구분
-
-
-
-단순 마침표(.)기준으로 문장을 분리하지 않고 영어 문장에 적합.
-
 
 
 ['0        WASHINGTON (Reuters) - The head of a conservat...
@@ -652,11 +549,16 @@ sent_tokenize
  
 
  \nName: text, Length: 44898, dtype: object']
+ 
 
+-------------------
+word_tokenize에 비해 의미가 없는 기호를 독립적인 의미 단위로 구분하지 않음으로써 Text 분석의 효율성은 높일 수 있을 것으로 보입니다.
 
+그러나 이는 같은 의미의 단어이나 기호의 추가 여부에 따라 다른 단위로 구분하는 문제가 생기지 않을까 고민하게 되었습니다.
 
-**TURE 뉴스와 FAKE 뉴스의 'text' column을 보았을 때, 문장 단위의 토큰화는 세밀하게 학습하는 것이 어려워 단어 단위의 토큰화가 적합해 보인다.**
+따라서 세번째, 문장단위로 text를 토큰화하면 문맥이 중요한 요소로 작용하기 때문에, 분석에 보다 정확성을 높일 수 있을지 확인해 보겠습니다.
 
+----------------------
 
 
 ```python
@@ -667,317 +569,24 @@ tk_result=TK(str(data['text']))
 tk_result
 ```
 
-<pre>
+
 ['0        WASHINGTON (Reuters) - The head of a conservat...\n1        WASHINGTON (Reuters) - Transgender people will...\n2        WASHINGTON (Reuters) - The special counsel inv...\n3        WASHINGTON (Reuters) - Trump campaign adviser ...\n4        SEATTLE/WASHINGTON (Reuters) - President Donal...\n                               ...                        \n23476    21st Century Wire says As 21WIRE reported earl...\n23477    21st Century Wire says It s a familiar theme.',
  '...\n23478    Patrick Henningsen  21st Century WireRemember ...\n23479    21st Century Wire says Al Jazeera America will...\n23480    21st Century Wire says As 21WIRE predicted in ...\nName: text, Length: 44898, dtype: object']
-</pre>
-WordPunctTokenizer
 
+--------------------
+단순히 '-','.'와 같은 기호로 분류하지 않은 점에서 토큰화의 완성도가 높아보입니다.
 
+토큰화 단위를 '문장'으로 설정할 경우, '단어' 단위보다 학습시 문맥에 맞는 정확도로 토큰화 할 수 있다는 장점이 보입니다.
 
-단어 토큰화 : 토큰의 기준을 단어로 하는 경우. 단어 단위, 단어 구, 의미를 갖는 문자 열로 구분
+그러나 학습에 사용되지 않은 문장을 이용하여 NEWS의 FAKE OR TRUTH 여부를 판별하려면 학습 빈도가 낮아 유연성이 낮아질 우려가 있습니다.
 
+작은 단어 단위로 토큰화하면 문맥상의 정확한 의미를 학습/예측하기가 어렵고 문장 단위로 토큰화하면 정확히 예측할 수 있는 데이터에 한계를 갖게 됩니다.
 
+# 이를 모두 보완할 수 있는 방법에 고민하게 되었고, 단어 단위로 토큰화하되 문맥 파악 학습이 추가되면 좋겠다는 생각이 들었습니다.
 
-마침표(.) 컴마(,) 물음표(?) 세미콜론(;) 느낌표(!)와 같은 구두점을 별도로 분류하는 특징.
+넷째, Keras의 Tokenizer를 이용하여 단어 단위의 토큰화를 진행하고 빈도순으로 정렬해 보겠습니다.
 
-
-
-word_tokenizer를 사용했을 때보다 정확하게 예측 가능
-
-
-
-
-
-0        [WASHINGTON, (, Reuters, ), -, The, head, of, ...
-
-
-
-1        [WASHINGTON, (, Reuters, ), -, Transgender, pe...
-
-
-
-2        [WASHINGTON, (, Reuters, ), -, The, special, c...
-
-
-
-3        [WASHINGTON, (, Reuters, ), -, Trump, campaign...
-
-
-
-4        [SEATTLE, /, WASHINGTON, (, Reuters, ), -, Pre...
-
-
-
-                               ...                        
-
-23476    [21st, Century, Wire, says, As, 21WIRE, report...
-
-
-
-23477    [21st, Century, Wire, says, It, s, a, familiar...
-
-
-
-23478    [Patrick, Henningsen, 21st, Century, WireRemem...
-
-
-
-23479    [21st, Century, Wire, says, Al, Jazeera, Ameri...
-
-
-
-23480    [21st, Century, Wire, says, As, 21WIRE, predic...
-
-
-
-Name: text, Length: 44898, dtype: object
-
-
-
-
-
-
-```python
-import tokenize
-from nltk.tokenize import WordPunctTokenizer
-text=data['text']
-TK=WordPunctTokenizer()
-tk_result = text.apply(TK.tokenize)
-tk_result
-```
-
-<pre>
-0        [WASHINGTON, (, Reuters, ), -, The, head, of, ...
-1        [WASHINGTON, (, Reuters, ), -, Transgender, pe...
-2        [WASHINGTON, (, Reuters, ), -, The, special, c...
-3        [WASHINGTON, (, Reuters, ), -, Trump, campaign...
-4        [SEATTLE, /, WASHINGTON, (, Reuters, ), -, Pre...
-                               ...                        
-23476    [21st, Century, Wire, says, As, 21WIRE, report...
-23477    [21st, Century, Wire, says, It, s, a, familiar...
-23478    [Patrick, Henningsen, 21st, Century, WireRemem...
-23479    [21st, Century, Wire, says, Al, Jazeera, Ameri...
-23480    [21st, Century, Wire, says, As, 21WIRE, predic...
-Name: text, Length: 44898, dtype: object
-</pre>
-text_to_word_sequence
-
-
-
-단어 토큰화 : 토큰의 기준을 단어로 하는 경우. 단어 단위, 단어 구, 의미를 갖는 문자 열로 구분
-
-
-
-모든 알파벳을 소문자로 변경하고 마침표(.) 컴마(,) 물음표(?) 세미콜론(;) 느낌표(!)와 같은 구두점을 제거.
-
-
-
-아포스트로피(')는 보존하는 특징.
-
-
-
-tokenizer와 text_to_word_sequence 모두 keras에서 제공하고, 단어 토큰화에 사용된다.
-
-
-
-빈도수를 감안하여 순서대로 배열하는 tokenizer가 러닝에 더 정확하게 사용 될 것으로 보인다.
-
-
-
-['0',
-
- 'washington',
-
- 'reuters',
-
- 'the',
-
- 'head',
-
- 'of',
-
- 'a',
-
- 'conservat',
-
- '1',
-
- 'washington',
-
- 'reuters',
-
- 'transgender',
-
- 'people',
-
- 'will',
-
- '2',
-
- 'washington',
-
- 'reuters',
-
- 'the',
-
- 'special',
-
- 'counsel',
-
- 'inv',
-
- '3',
-
- 'washington',
-
- 'reuters',
-
- 'trump',
-
- 'campaign',
-
- 'adviser',
-
- '4',
-
- 'seattle',
-
- 'washington',
-
- 'reuters',
-
- 'president',
-
- 'donal',
-
- '23476',
-
- '21st',
-
- 'century',
-
- 'wire',
-
- 'says',
-
- 'as',
-
- '21wire',
-
- 'reported',
-
- 'earl',
-
- '23477',
-
- '21st',
-
- 'century',
-
- 'wire',
-
- 'says',
-
- ...
-
- 'name',
-
- 'text',
-
- 'length',
-
- '44898',
-
- 'dtype',
-
- 'object']
-
-
-
-```python
-import tokenize
-from tensorflow.keras.preprocessing.text import text_to_word_sequence
-tw=text_to_word_sequence
-text=data["text"]
-tk_result=tw(str(text))
-tk_result
-```
-
-<pre>
-['0',
- 'washington',
- 'reuters',
- 'the',
- 'head',
- 'of',
- 'a',
- 'conservat',
- '1',
- 'washington',
- 'reuters',
- 'transgender',
- 'people',
- 'will',
- '2',
- 'washington',
- 'reuters',
- 'the',
- 'special',
- 'counsel',
- 'inv',
- '3',
- 'washington',
- 'reuters',
- 'trump',
- 'campaign',
- 'adviser',
-...
- 'century',
- 'wire',
- 'says',
- 'al',
- 'jazeera',
- 'america',
- 'will',
- '23480',
- '21st',
- 'century',
- 'wire',
- 'says',
- 'as',
- '21wire',
- 'predicted',
- 'in',
- 'name',
- 'text',
- 'length',
- '44898',
- 'dtype',
- 'object']
-</pre>
-Tokenizer
-
-
-
-Keras에서 제공하는 Tokenizer를 이용하면 
-
-
-
-마침표(.) 컴마(,) 물음표(?) 세미콜론(;) 느낌표(!)와 같은 구두점을 단어에 포함시키지 않고 분류
-
-
-
-빈도수가 높은 순서대로 정렬하여 각 단어에 숫자를 부여
-
-
-
-
-
-{'the': 1,'to': 2,'of': 3,'a': 4,'and': 5,'in': 6,'that': 7,'s': 8,'on': 9,'for': 10,
-
-...'14': 987,'secret': 988,'16': 989,'speak': 990,'forced': 991,'relationship': 992,'fear': 993,'push': 994,'proposed': 995,'created': 996,'helped': 997,'phone': 998,'incident': 999,'repeatedly': 1000,...}
-
+-----------------------
 
 
 ```python
@@ -987,7 +596,7 @@ tk_result=TK.fit_on_texts(data["text"])
 TK.word_index
 ```
 
-<pre>
+
 {'the': 1,
  'to': 2,
  'of': 3,
@@ -1019,13 +628,8 @@ TK.word_index
  'incident': 999,
  'repeatedly': 1000,
  ...}
-</pre>
-*true/fake data를 보았을때, sentence 단위 보다 word 단위로 분류하는 것이 필요해 보인다.*
 
-
-
-*또한, tokenizer는 nltk와 keras에서 제공하고 있는데 같은 keras 에서도 tokenizer만 단어의 빈도수를 반영하고 있어 text_to_word_sequence 보다 정확할 것으로 보인다*
-
+---------
 
 
 ```python
@@ -1033,17 +637,14 @@ sequence=TK.texts_to_sequences(data["text"])
 print(text[3])
 ```
 
-<pre>
 3    WASHINGTON (Reuters) - Trump campaign adviser ...
 3    On Christmas day, Donald Trump announced that ...
 Name: text, dtype: object
-</pre>
 
 ```python
 pd.Series(sequence)
 ```
 
-<pre>
 0        [107, 67, 1, 441, 3, 4, 317, 79, 6288, 6, 1, 3...
 1        [107, 67, 1549, 45, 39, 22, 752, 10, 1, 104, 9...
 2        [107, 67, 1, 524, 1366, 275, 3, 2102, 164, 152...
@@ -1056,7 +657,8 @@ pd.Series(sequence)
 44896    [1013, 754, 1005, 199, 343, 11426, 160, 39, 20...
 44897    [1013, 754, 1005, 199, 18, 1102, 4014, 6, 64, ...
 Length: 44898, dtype: object
-</pre>
+
+pd.Series(text).apply(len).max
 
 ```python
 import seaborn as sns
@@ -1066,22 +668,228 @@ sns.displot(pd.Series(sequence).apply(len))
 plt.xlim(0,20000)
 ```
 
-<pre>
 (0.0, 20000.0)
-</pre>
-<pre>
 <Figure size 1152x576 with 0 Axes>
-</pre>
-<img src="data:image/png;base64,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"/>
+![image](https://user-images.githubusercontent.com/69743938/172044885-5cf35e2f-4b06-4d23-978f-04bf025e992a.png)
+
+
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+pad_text=pad_sequences(text,maxlen=1750)
+pad_text
+
+
+--------------
+# 단어 단위의 토큰화를 진행하고, 예측의 유연성을 확보하고자 pretrain을 추가하겠습니다.
+
+facebook에서 제공하는 300차원의 vector를 이용하여 pretrain 하기 위해 먼저 load하여 embedding 값으로 넣어줍니다.
+
+embeddings의 값을 {}로 먼저 비워 준 뒤, 각 line의 value 값을 학습할 예정입니다.
+
+해당 데이터를 보면 line 마지막에 여백이 많이 있어, rstrip().split()처리하여 줍니다.
+
+-----------------------
+```python
+def load_embedding(filepath):
+    embeddings = {}
+    with open(filepath) as f:
+        for line in f:
+            values=line.rstrip().split()
+            word=values[0]
+            vector=np.asarray(values[1:],dtype=np.float32)
+            embeddings[word]=vector
+    return embeddings
+embeddings=load_embedding('../input/fasttext-crawl-300d-2m/crawl-300d-2M.vec')
+embeddings
+```
+{'2000000': array([ 2.0600e-02,  1.9530e-01, -9.0400e-02, -3.5390e-01, -6.2700e-02,
+        -1.4600e-02, -1.3150e-01,  5.8600e-02,  5.9930e-01,  6.3100e-02,
+        -9.3200e-02,  7.1720e-01, -3.4950e-01, -6.1100e-02, -3.0790e-01,
+         3.6940e-01, -2.5880e-01, -3.0210e-01, -1.2800e-02,  3.2680e-01,
+         6.9900e-02,  8.9400e-02, -1.1910e-01, -1.1900e-01, -1.2200e-01,
+        -4.5400e-02, -2.5100e-02, -1.7630e-01,  7.6370e-01, -8.4900e-02,
+        -4.1930e-01,  3.0050e-01, -9.8500e-02,  1.6770e-01, -2.0570e-01,
+        -1.8150e-01, -2.7360e-01,  3.7540e-01, -6.6400e-02,  1.7150e-01,
+         4.6900e-01,  3.0410e-01,  1.8830e-01,  1.0950e-01,  4.7590e-01,
+         1.1540e-01, -2.9670e-01, -3.4600e-02,  1.4270e-01,  4.1870e-01,
+         1.2770e-01,  1.7650e-01,  7.1670e-01,  5.0060e-01, -5.6000e-03,
+        -1.0700e-01, -3.6280e-01,  5.4290e-01,  1.0060e-01, -4.4410e-01,
+        -6.2800e-02, -3.6000e-03,  8.1900e-02, -4.5830e-01,  8.3400e-02,
+        -9.4100e-02,  7.5100e-02,  3.7370e-01, -1.0820e-01, -1.5300e-02,
+        -1.3900e-02, -5.9000e-02, -1.1600e-02, -8.0970e-01, -1.6890e-01,
+         6.1260e-01,  1.5200e-02, -1.7120e-01, -2.8400e-01,  3.7140e-01,
+         9.0600e-02,  2.4040e-01, -1.2440e-01, -3.8910e-01,  4.1730e-01,
+        -9.1600e-02,  6.1100e-02,  5.9410e-01, -6.5990e-01, -1.0140e-01,
+         2.5740e-01,  5.5680e-01, -1.1930e-01, -3.3940e-01, -3.7260e-01,
+         2.3520e-01,  8.0200e-02, -2.4910e-01,  9.8300e-02, -1.0260e-01,
+        -3.4620e-01,  2.9500e-02, -1.8830e-01,  1.1920e-01, -2.3710e-01,
+         1.2340e-01, -1.1770e-01, -6.8190e-01,  4.2390e-01,  2.9710e-01,
+         3.3000e-03,  7.3810e-01,  2.5250e-01, -2.3500e-02, -1.1836e+00,
+         2.6000e-01,  3.4200e-02, -3.9810e-01, -1.6400e-02,  5.1290e-01,
+        -3.8360e-01,  1.9830e-01, -1.1460e-01,  6.3550e-01, -2.4790e-01,
+        -3.6190e-01,  2.9730e-01,  2.0180e-01,  3.4330e-01, -1.4460e-01,
+        -4.3870e-01, -5.8100e-02, -5.0000e-04, -3.7000e-03, -2.1090e-01,
+         4.8070e-01, -1.0980e-01, -5.1590e-01,  4.5390e-01, -4.3330e-01,
+        -3.4400e-02, -5.1200e-02, -5.4900e-02, -1.2420e-01, -4.4240e-01,
+         3.4240e-01,  2.6360e-01, -1.6450e-01, -2.0510e-01,  7.4400e-02,
+        -1.0000e-02, -1.3730e-01,  1.5960e-01,  1.7360e-01,  1.6860e-01,
+         1.7930e-01,  1.4980e-01, -6.2220e-01, -1.0770e-01,  1.0280e-01,
+         1.9820e-01, -4.5300e-02,  4.6940e-01, -6.5300e-02,  1.5870e-01,
+        -1.6720e-01,  1.2900e-01,  1.4300e-02, -3.1500e-01,  2.2580e-01,
+        -1.0060e-01,  1.8500e-01, -1.1890e-01, -5.5900e-02, -5.3770e-01,
+         1.4140e-01,  1.0650e-01, -4.0230e-01,  1.2630e-01, -4.7200e-01,
+        -3.2660e-01, -3.9080e-01,  9.8900e-02,  3.2510e-01, -1.4740e-01,
+        -3.4340e-01, -1.5780e-01, -1.8930e-01,  3.0170e-01, -3.4050e-01,
+         5.4000e-02,  2.8060e-01, -1.2340e-01,  2.7000e-03,  3.2030e-01,
+        -9.6500e-02, -6.0200e-02, -6.2000e-02, -1.7620e-01,  6.4070e-01,
+         3.7880e-01, -4.9060e-01,  3.8680e-01,  8.6400e-02, -3.3680e-01,
+         1.1080e-01,  2.8830e-01,  1.3520e-01, -5.7200e-01,  1.9780e-01,
+         2.3600e-02,  7.1200e-01, -3.9950e-01,  4.6000e-03,  4.3200e-02,
+        -4.8900e-02, -2.9160e-01, -2.0000e-04,  1.1090e-01, -1.5390e-01,
+        -1.2050e-01, -1.2800e-01, -7.8000e-03, -1.8050e-01, -2.0700e-02,
+        -9.9000e-03, -3.7150e-01,  2.7100e-02, -2.2270e-01, -8.9000e-03,
+        -8.9000e-02, -5.5720e-01, -2.4770e-01, -4.4550e-01, -8.7900e-02,
+        -6.7630e-01, -2.3920e-01, -1.7040e-01,  1.1927e+00, -1.3530e-01,
+        -3.0590e-01, -2.5380e-01,  1.7630e-01, -4.0400e-02,  2.4220e-01,
+         3.2290e-01,  1.6560e-01,  3.5260e-01, -2.6600e-02,  3.1970e-01,
+        -3.2930e-01, -6.9840e-01,  3.7960e-01, -5.2400e-02, -1.6880e-01,
+         1.7040e-01,  6.2400e-02, -2.0740e-01,  4.8760e-01,  2.0620e-01,
+         6.4120e-01, -3.0160e-01, -1.2510e-01, -4.5100e-02,  8.5560e-01,
+         1.5600e-02,  3.5630e-01,  2.1720e-01, -5.8000e-03,  4.1010e-01,
+        -1.7880e-01, -3.2000e-02, -3.3430e-01,  1.2940e-01, -3.1430e-01,
+         3.2600e-01,  2.4230e-01,  2.8470e-01, -2.1530e-01,  5.3850e-01,
+         1.6840e-01, -4.1220e-01, -7.6000e-03,  3.7700e-02, -6.5370e-01,
+         3.2410e-01, -9.1000e-02,  2.6290e-01, -1.7060e-01,  1.6000e-03,
+         2.4310e-01,  5.3520e-01, -3.7310e-01,  2.5800e-01,  2.6100e-01,
+        -4.5380e-01, -2.9440e-01,  5.2330e-01, -3.7930e-01, -1.9200e-02],
+       dtype=float32),
+ ',': array([-2.820e-02, -5.570e-02, -4.510e-02, -4.340e-02,  7.120e-02,
+        -8.550e-02, -1.085e-01, -5.610e-02, -4.523e-01, -2.020e-02,
+         9.750e-02,  1.047e-01,  1.962e-01, -6.930e-02,  2.130e-02,
+        -2.350e-02,  1.336e-01, -4.200e-02, -5.640e-02, -7.980e-02,
+         4.240e-02, -4.090e-02, -5.360e-02, -2.520e-02,  1.350e-02,
+         6.400e-03,  1.235e-01,  4.610e-02,  1.200e-02, -3.720e-02,
+         6.500e-02,  4.100e-03, -1.074e-01, -2.630e-02,  1.133e-01,
+        -2.900e-03,  6.710e-02,  1.065e-01,  2.340e-02, -1.600e-02,
+         7.000e-03,  4.355e-01, -7.520e-02, -4.328e-01,  4.570e-02,
+         6.040e-02, -7.400e-02, -5.500e-03, -8.900e-03, -2.926e-01,
+        -5.450e-02, -1.519e-01,  9.900e-02, -1.930e-02, -5.000e-03,
+         5.110e-02,  4.040e-02,  1.023e-01, -1.280e-02,  4.880e-02,
+        -1.567e-01, -7.590e-02, -1.900e-02,  1.442e-01,  4.700e-03,
+        -1.860e-02,  1.400e-02, -3.850e-02, -8.530e-02,  1.572e-01,
+         1.770e-01,  8.400e-03, -2.500e-02, -1.145e-01, -6.630e-02,
+        -1.244e-01, -3.977e-01, -1.240e-02, -4.586e-01, -2.200e-02,
+         5.746e-01,  2.180e-02, -7.540e-02,  9.900e-03,  3.970e-02,
+         {'2000000': array([ 2.0600e-02,  1.9530e-01, -9.0400e-02, -3.5390e-01, -6.2700e-02,
+        -1.4600e-02, -1.3150e-01,  5.8600e-02,  5.9930e-01,  6.3100e-02,
+        -9.3200e-02,  7.1720e-01, -3.4950e-01, -6.1100e-02, -3.0790e-01,
+         3.6940e-01, -2.5880e-01, -3.0210e-01, -1.2800e-02,  3.2680e-01,
+         6.9900e-02,  8.9400e-02, -1.1910e-01, -1.1900e-01, -1.2200e-01,
+        -4.5400e-02, -2.5100e-02, -1.7630e-01,  7.6370e-01, -8.4900e-02,
+        -4.1930e-01,  3.0050e-01, -9.8500e-02,  1.6770e-01, -2.0570e-01,
+        -1.8150e-01, -2.7360e-01,  3.7540e-01, -6.6400e-02,  1.7150e-01,
+         4.6900e-01,  3.0410e-01,  1.8830e-01,  1.0950e-01,  4.7590e-01,
+         1.1540e-01, -2.9670e-01, -3.4600e-02,  1.4270e-01,  4.1870e-01,
+         1.2770e-01,  1.7650e-01,  7.1670e-01,  5.0060e-01, -5.6000e-03,
+        -1.0700e-01, -3.6280e-01,  5.4290e-01,  1.0060e-01, -4.4410e-01,
+        -6.2800e-02, -3.6000e-03,  8.1900e-02, -4.5830e-01,  8.3400e-02,
+        -9.4100e-02,  7.5100e-02,  3.7370e-01, -1.0820e-01, -1.5300e-02,
+        -1.3900e-02, -5.9000e-02, -1.1600e-02, -8.0970e-01, -1.6890e-01,
+         6.1260e-01,  1.5200e-02, -1.7120e-01, -2.8400e-01,  3.7140e-01,
+         9.0600e-02,  2.4040e-01, -1.2440e-01, -3.8910e-01,  4.1730e-01,
+        -9.1600e-02,  6.1100e-02,  5.9410e-01, -6.5990e-01, -1.0140e-01,
+         2.5740e-01,  5.5680e-01, -1.1930e-01, -3.3940e-01, -3.7260e-01,
+         2.3520e-01,  8.0200e-02, -2.4910e-01,  9.8300e-02, -1.0260e-01,
+        -3.4620e-01,  2.9500e-02, -1.8830e-01,  1.1920e-01, -2.3710e-01,
+         1.2340e-01, -1.1770e-01, -6.8190e-01,  4.2390e-01,  2.9710e-01,
+         3.3000e-03,  7.3810e-01,  2.5250e-01, -2.3500e-02, -1.1836e+00,
+         2.6000e-01,  3.4200e-02, -3.9810e-01, -1.6400e-02,  5.1290e-01,
+        -3.8360e-01,  1.9830e-01, -1.1460e-01,  6.3550e-01, -2.4790e-01,
+        -3.6190e-01,  2.9730e-01,  2.0180e-01,  3.4330e-01, -1.4460e-01,
+        -4.3870e-01, -5.8100e-02, -5.0000e-04, -3.7000e-03, -2.1090e-01,
+         4.8070e-01, -1.0980e-01, -5.1590e-01,  4.5390e-01, -4.3330e-01,
+        -3.4400e-02, -5.1200e-02, -5.4900e-02, -1.2420e-01, -4.4240e-01,
+         3.4240e-01,  2.6360e-01, -1.6450e-01, -2.0510e-01,  7.4400e-02,
+        -1.0000e-02, -1.3730e-01,  1.5960e-01,  1.7360e-01,  1.6860e-01,
+         1.7930e-01,  1.4980e-01, -6.2220e-01, -1.0770e-01,  1.0280e-01,
+         1.9820e-01, -4.5300e-02,  4.6940e-01, -6.5300e-02,  1.5870e-01,
+        -1.6720e-01,  1.2900e-01,  1.4300e-02, -3.1500e-01,  2.2580e-01,
+        -1.0060e-01,  1.8500e-01, -1.1890e-01, -5.5900e-02, -5.3770e-01,
+         1.4140e-01,  1.0650e-01, -4.0230e-01,  1.2630e-01, -4.7200e-01,
+        -3.2660e-01, -3.9080e-01,  9.8900e-02,  3.2510e-01, -1.4740e-01,
+        -3.4340e-01, -1.5780e-01, -1.8930e-01,  3.0170e-01, -3.4050e-01,
+         5.4000e-02,  2.8060e-01, -1.2340e-01,  2.7000e-03,  3.2030e-01,
+        -9.6500e-02, -6.0200e-02, -6.2000e-02, -1.7620e-01,  6.4070e-01,
+         3.7880e-01, -4.9060e-01,  3.8680e-01,  8.6400e-02, -3.3680e-01,
+         1.1080e-01,  2.8830e-01,  1.3520e-01, -5.7200e-01,  1.9780e-01,
+         2.3600e-02,  7.1200e-01, -3.9950e-01,  4.6000e-03,  4.3200e-02,
+        -4.8900e-02, -2.9160e-01, -2.0000e-04,  1.1090e-01, -1.5390e-01,
+        -1.2050e-01, -1.2800e-01, -7.8000e-03, -1.8050e-01, -2.0700e-02,
+        -9.9000e-03, -3.7150e-01,  2.7100e-02, -2.2270e-01, -8.9000e-03,
+        -8.9000e-02, -5.5720e-01, -2.4770e-01, -4.4550e-01, -8.7900e-02,
+        -6.7630e-01, -2.3920e-01, -1.7040e-01,  1.1927e+00, -1.3530e-01,
+        -3.0590e-01, -2.5380e-01,  1.7630e-01, -4.0400e-02,  2.4220e-01,
+         3.2290e-01,  1.6560e-01,  3.5260e-01, -2.6600e-02,  3.1970e-01,
+        -3.2930e-01, -6.9840e-01,  3.7960e-01, -5.2400e-02, -1.6880e-01,
+         1.7040e-01,  6.2400e-02, -2.0740e-01,  4.8760e-01,  2.0620e-01,
+         6.4120e-01, -3.0160e-01, -1.2510e-01, -4.5100e-02,  8.5560e-01,
+         1.5600e-02,  3.5630e-01,  2.1720e-01, -5.8000e-03,  4.1010e-01,
+        -1.7880e-01, -3.2000e-02, -3.3430e-01,  1.2940e-01, -3.1430e-01,
+         3.2600e-01,  2.4230e-01,  2.8470e-01, -2.1530e-01,  5.3850e-01,
+         1.6840e-01, -4.1220e-01, -7.6000e-03,  3.7700e-02, -6.5370e-01,
+         3.2410e-01, -9.1000e-02,  2.6290e-01, -1.7060e-01,  1.6000e-03,
+         2.4310e-01,  5.3520e-01, -3.7310e-01,  2.5800e-01,  2.6100e-01,
+        -4.5380e-01, -2.9440e-01,  5.2330e-01, -3.7930e-01, -1.9200e-02],
+       dtype=float32),
+ ',': array([-2.820e-02, -5.570e-02, -4.510e-02, -4.340e-02,  7.120e-02,
+        -8.550e-02, -1.085e-01, -5.610e-02, -4.523e-01, -2.020e-02,
+         9.750e-02,  1.047e-01,  1.962e-01, -6.930e-02,  2.130e-02,
+        -2.350e-02,  1.336e-01, -4.200e-02, -5.640e-02, -7.980e-02,
+         4.240e-02, -4.090e-02, -5.360e-02, -2.520e-02,  1.350e-02,
+         6.400e-03,  1.235e-01,  4.610e-02,  1.200e-02, -3.720e-02,
+         6.500e-02,  4.100e-03, -1.074e-01, -2.630e-02,  1.133e-01,
+        -2.900e-03,  6.710e-02,  1.065e-01,  2.340e-02, -1.600e-02,
+         7.000e-03,  4.355e-01, -7.520e-02, -4.328e-01,  4.570e-02,
+         6.040e-02, -7.400e-02, -5.500e-03, -8.900e-03, -2.926e-01,
+        -5.450e-02, -1.519e-01,  9.900e-02, -1.930e-02, -5.000e-03,
+         5.110e-02,  4.040e-02,  1.023e-01, -1.280e-02,  4.880e-02,
+        -1.567e-01, -7.590e-02, -1.900e-02,  1.442e-01,  4.700e-03,
+        -1.860e-02,  1.400e-02, -3.850e-02, -8.530e-02,  1.572e-01,
+         1.770e-01,  8.400e-03, -2.500e-02, -1.145e-01, -6.630e-02,
+        -1.244e-01, -3.977e-01, -1.240e-02, -4.586e-01, -2.200e-02,
+         5.746e-01,  2.180e-02, -7.540e-02,  9.900e-03,  3.970e-02,
 
 
 ```python
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-pad_text=pad_sequences(sequence,maxlen=1750)
-pad_text
-pad_text.shape
+TK.word_index.items()
 ```
 
-<pre>
-(44898, 1750)
-</pre>
+dict_items([('the', 1), ('to', 2), ('of', 3), ('a', 4), ('and', 5), ('in', 6), ('that', 7), ('s', 8), ('on', 9), ('for', 10), ('is', 11), ('said', 12), ('he', 13), ('it', 14), ('trump', 15), ('with', 16), ('was', 17), ('as', 18), ('his', 19), ('by', 20), ('has', 21), ('be', 22), ('have', 23), ('not', 24), ('from', 25), ('this', 26), ('at', 27), ('are', 28), ('who', 29), ('an', 30), ('they', 31), ('but', 32), ('i', 33), ('we', 34), ('would', 35), ('president', 36), ('u', 37), ('about', 38), ('will', 39), ('t', 40), ('their', 41), ('had', 42), ('you', 43), ('been', 44), ('people', 45), ('were', 46), ('”', 47), ('or', 48), ('more', 49), ('which', 50), ('she', 51), ('one', 52), ('after', 53), ('her', 54), ('all', 55), ('if', 56), ('out', 57), ('state', 58), ('what', 59), ('when', 60), ('also', 61), ('up', 62), ('new', 63), ('its', 64), ('there', 65), ('no', 66), ('reuters', 67), ('over', 68), ('so', 69), ('donald', 70), ('government', 71), ('house', 72), ('our', 73), ('clinton', 74), ('states', 75), ('can', 76), ('obama', 77), ('him', 78), ('republican', 79), ('than', 80), ('other', 81), ('just', 82), ('some', 83), ('year', 84), ('could', 85), ('united', 86), ('told', 87), ('into', 88), ('like', 89), ('white', 90), ('do', 91), ('against', 92), ('them', 93), ('two', 94), ('because', 95), ('campaign', 96), ('time', 97), ('election', 98), ('last', 99), ('now', 100), ('news', 101), ('any', 102), ('party', 103), ('first', 104), ('how', 105), ('only', 106), ('washington', 107), ('former', 108), ('while', 109), ('even', 110), ('country', 111), ('being', 112), ('should', 113), ('us', 114), ('during', 115), ('did', 116), ('hillary', 117), ('before', 118), ('years', 119), ('many', 120), ('american', 121), ('media', 122), ('most', 123), ('security', 124), ('law', 125), ('made', 126), ('may', 127), ('national', 128), ('say', 129), ('political', 130), ('police', 131), ('those', 132), ('get', 133), ('right', 134), ('since', 135), ('make', 136), ('court', 137), ('percent', 138), ('where', 139), ('twitter', 140), ('according', 141), ('going', 142), ('republicans', 143), ('under', 144), ('back', 145), ('these', 146), ('here', 147), ('presidential', 148), ('then', 149), ('re', 150), ('very', 151), ('russia', 152), ('via', 153), ('democratic', 154), ('administration', 155), ('called', 156), ('bill', 157), ('week', 158), ('support', 159), ('america', 160), ('down', 161), ('vote', 162), ('senate', 163), ('between', 164), ('way', 165), ('including', 166), ('know', 167), ('think', 168), ('group', 169), ('north', 170), ('officials', 171), ('office', 172), ('well', 173), ('public', 174), ('take', 175), ('such', 176), ('federal', 177), ('world', 178), ('military', 179), ('foreign', 180), ('my', 181), ('statement', 182), ('million', 183), ('trump’s', 184), ('000', 185), ('day', 186), ('department', 187), ('saying', 188), ('don', 189), ('want', 190), ('1', 191), ('tax', 192), ('see', 193), ('russian', 194), ('tuesday', 195), ('still', 196), ('both', 197), ('much', 198), ('says', 199), ('image', 200), ('2016', 201), ('another', 202), ('congress', 203), ('part', 204), ('wednesday', 205), ('women', 206), ('your', 207), ('work', 208), ('go', 209), ('through', 210), ('friday', 211), ('thursday', 212), ('off', 213), ('three', 214), ('minister', 215), ('war', 216), ('city', 217), ('asked', 218), ('democrats', 219), ('policy', 220), ('own', 221), ('secretary', 222), ('monday', 223), ('americans', 224), ('long', 225), ('video', 226), ('rights', 227), ('china', 2('fult', 137988), ('misrule', 137989), ('distractive', 137990), ('refugearmed', 137991), ('oregonoregon', 137992), ('buildingthe', 137993), ('saturating', 137994), ('vanillaisis', 137995), ('behoove', 137996), ('1114', 137997), ('fs', 137998), ('owyhee', 137999), ('canyonlands', 138000), ('misapplies', 138001), ('subterfugeto', 138002), ('manuever', 138003), ('bundyranch', 138004), ('2014if', 138005), ('souloftheeast', 138006), ('ec6tmdetik', 138007), ('familyhistory', 138008), ('irrigated', 138009), ('a1', 138010), ('blitzen', 138011), ('meadowlands', 138012), ('a4', 138013), ('barricading', 138014), ('j1', 138015), ('frenchglen', 138016), ('glerup', 138017), ('exemplifying', 138018), ('treehousehere', 138019), ('betti', 138020), ('mondoweiss', 138021)])
+
+---------------------------------
+
+분석 대상 데이터의 word는Tokenizer를 이용하여 빈도순으로 숫자가 부여되었습니다.
+
+pretrained embedding 중에서도 분석 대상 데이터의 word만 추출해 줍니다.
+
+---------------------------
+
+
+```python
+def filter_embedding(embeddings, word_index, vocab_size, dim=300):
+    embedding_matrix=np.zeros([vocab_size,dim])
+    for word, i in word_index.items():
+        vector=embeddings.get(word)
+        if vector is not None:
+            embedding_matrix[i]=vector
+    return embedding_matrix
+embedding_matrix=filter_embedding(embeddings, TK.word_index, len(TK.word_index)+1, 300)
+embedding_matrix.shape
+```
+
+(138022, 300)
+
+
+--------------------
+# 처음 토큰화 방식을 실험하였을 때, text의 의미를 정확히 학습하는 것은 어려워 보였습니다.
+# 그러나 pretrain방식을 이용하고 단어 단위로 세분화하는 방식을 이용한다면 이전에 접하지 못한 text의 의미를 분석하여 예측함에도 정확성을 향상할 수 있다는 것을 알게되었습니다. 중요한 것은 pretrain하는 data의 적절성인데, 분석 대상의 데이터 종류에 따라 전문용어/일상용어 등 의미 활용방식이 천차만별이기 때문입니다. 이 실험에서 Facebook에서 사용된 단어 데이터를 이용한 것은 실제 news나 issue가 facebook에 활용하고 있는 경우가 많고 real or fake news 여부를 많이 다루고 있기 때문이었습니다.
+# 6.교차 검증 모델 실험 (Kaggle : Sentiment Analysis on Movie Reviews)을 통해 주어진 데이터를 임의의 train/test data로 나누고 data손실과 정확성을 직접 확인하는 실험을 진행하겠습니다.
