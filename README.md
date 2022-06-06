@@ -18,8 +18,6 @@
 ------------------
 
 ###  비정형 텍스트 및 이미지 데이터 정제 및 분석
-
-좌측 메뉴의 田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
   
 ### 1. NLTK와 Keras의 Text 토큰화 실험 (Kaggle Spam Mails Dataset)
    
@@ -46,8 +44,6 @@ score : 0.99315, rank : 32 / 512 추정
 ------------
 
 ###  정형 빅 데이터 정제 및 분석
-
-좌측 메뉴의 田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
 
 ### 1. Scaler 실험 및 결과 분석 (Kaggle Otto Group Product Classification Challenge)     
 score : 0.47595, rank : 1105 / 3509 추정
