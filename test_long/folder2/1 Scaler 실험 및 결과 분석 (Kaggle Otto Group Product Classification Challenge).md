@@ -22,11 +22,12 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 # You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
 ```
 
-<pre>
 /kaggle/input/otto-group-product-classification-challenge/sampleSubmission.csv
+
 /kaggle/input/otto-group-product-classification-challenge/train.csv
+
 /kaggle/input/otto-group-product-classification-challenge/test.csv
-</pre>
+
 
 ```python
 train=pd.read_csv('/kaggle/input/otto-group-product-classification-challenge/train.csv')
@@ -1036,63 +1037,41 @@ alldata.describe()
 <p>8 rows × 94 columns</p>
 </div>
 
-
+-------
 min과 max의 차이가 있음에도 불구하고 25%, 50% 70% percentile에서 대부분 0의 값을 나타내고 있습니다.
-
-
 
 원인을 알아보기 위해 countplot으로 시각화하여 원인을 알아 보겠습니다.
 
-
+----
 
 ```python
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.countplot(alldata['feat_2'])
 ```
-
-<pre>
-/opt/conda/lib/python3.7/site-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
-  FutureWarning
-</pre>
-<pre>
-<AxesSubplot:xlabel='feat_2', ylabel='count'>
-</pre>
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZoAAAEHCAYAAACX/oD+AAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAi2klEQVR4nO3de7wdVX338c+XBPCKCeYQ0yQ0qMEWeTTKUWnrBUEx8PgYtEiDF6KiESRUai9CfT1AVVqtWlq8hAclErxwKYikGgp5UKS3AEFCSLjlBEJJCEkMd6KJgV//WGuTdSazzzkhmb3h8H2/Xvt1Zq81a2bN2jPz27NmndmKCMzMzJqyS7crYGZmw5sDjZmZNcqBxszMGuVAY2ZmjXKgMTOzRo3sdgWeKcaMGROTJk3qdjXMzJ5Vbrzxxl9FRM9A8zjQZJMmTWLRokXdroaZ2bOKpHsGm8ddZ2Zm1igHGjMza5QDjZmZNcqBxszMGuVAY2ZmjXKgMTOzRjnQmJlZoxxozMysUQ40ZmbWKD8ZoLB+9vdr03uO/1CHa2JmNnz4isbMzBrlQGNmZo1yoDEzs0Y50JiZWaMcaMzMrFGNBRpJcyStk7S0SLtI0uL8WilpcU6fJOnXRd7ZRZkDJN0iqU/SWZKU0/eUtEDS8vx3dE5Xnq9P0hJJr29qG83MbHBNXtGcB0wtEyLiTyJiSkRMAS4FflRkr2jlRcRxRfps4BPA5PxqLfNk4OqImAxcnd8DHFbMOzOXNzOzLmks0ETEtcADdXn5quQo4IKBliFpHLBHRCyMiADOB47I2dOAuXl6biX9/EgWAqPycszMrAu6dY/mLcDaiFhepO0j6SZJv5D0lpw2HlhVzLMqpwGMjYg1efp+YGxR5t42ZfqRNFPSIkmL1q9fvwObY2Zm7XQr0BxN/6uZNcDeEfE64DPADyXtMdSF5aud2N5KRMQ5EdEbEb09PT3bW9zMzIag44+gkTQSeB9wQCstIjYBm/L0jZJWAPsCq4EJRfEJOQ1graRxEbEmd42ty+mrgYltypiZWYd144rmHcDtEfFUl5ikHkkj8vTLSTfy78pdY49IOjDf1zkGuDwXmwfMyNMzKunH5NFnBwIPF11sZmbWYU0Ob74A+C/gVZJWSTo2Z01n20EAbwWW5OHOlwDHRURrIMGngO8AfcAK4Iqc/iXgnZKWk4LXl3L6fOCuPP+3c3kzM+uSxrrOIuLoNukfqUm7lDTcuW7+RcD+NekbgENq0gM4YTura2ZmDfGTAczMrFEONGZm1igHGjMza5QDjZmZNcqBxszMGuVAY2ZmjXKgMTOzRjnQmJlZoxxozMysUQ40ZmbWKAcaMzNrlAONmZk1yoHGzMwa5UBjZmaNcqAxM7NGOdCYmVmjHGjMzKxRDjRmZtYoBxozM2tUY4FG0hxJ6yQtLdJOl7Ra0uL8OrzIO0VSn6Q7JL2rSJ+a0/oknVyk7yPpupx+kaTdcvru+X1fzp/U1DaamdngmryiOQ+YWpN+ZkRMya/5AJL2A6YDr85lviVphKQRwDeBw4D9gKPzvABfzst6JfAgcGxOPxZ4MKefmeczM7MuaSzQRMS1wANDnH0acGFEbIqIu4E+4I351RcRd0XEZuBCYJokAQcDl+Tyc4EjimXNzdOXAIfk+c3MrAu6cY9mlqQluWttdE4bD9xbzLMqp7VLfynwUERsqaT3W1bOfzjPb2ZmXdDpQDMbeAUwBVgDfK3D6+9H0kxJiyQtWr9+fTerYmY2bHU00ETE2oh4IiKeBL5N6hoDWA1MLGadkNPapW8ARkkaWUnvt6yc/5I8f119zomI3ojo7enp2dHNMzOzGh0NNJLGFW/fC7RGpM0DpucRY/sAk4HrgRuAyXmE2W6kAQPzIiKAnwNH5vIzgMuLZc3I00cCP8vzm5lZF4wcfJanR9IFwEHAGEmrgNOAgyRNAQJYCXwSICKWSboYuBXYApwQEU/k5cwCrgRGAHMiYllexWeBCyV9EbgJODennwt8T1IfaTDC9Ka20czMBid/2U96e3vjimNPqs3rOf5Dna2MmdmzhKQbI6J3oHn8ZAAzM2uUA42ZmTXKgcbMzBrlQGNmZo1yoDEzs0Y50JiZWaMcaMzMrFEONGZm1igHGjMza5QDjZmZNcqBxszMGuVAY2ZmjXKgMTOzRjnQmJlZoxxozMysUQ40ZmbWKAcaMzNrlAONmZk1yoHGzMwa1VigkTRH0jpJS4u0r0i6XdISSZdJGpXTJ0n6taTF+XV2UeYASbdI6pN0liTl9D0lLZC0PP8dndOV5+vL63l9U9toZmaDa/KK5jxgaiVtAbB/RLwGuBM4pchbERFT8uu4In028Algcn61lnkycHVETAauzu8BDivmnZnLm5lZlzQWaCLiWuCBStpVEbElv10ITBhoGZLGAXtExMKICOB84IicPQ2Ym6fnVtLPj2QhMCovx8zMuqCb92g+BlxRvN9H0k2SfiHpLTltPLCqmGdVTgMYGxFr8vT9wNiizL1typiZWYeN7MZKJX0O2AL8ICetAfaOiA2SDgB+LOnVQ11eRISkeBr1mEnqXmPvvffe3uJmZjYEHb+ikfQR4N3AB3N3GBGxKSI25OkbgRXAvsBq+nevTchpAGtbXWL577qcvhqY2KZMPxFxTkT0RkRvT0/PTtg6MzOr6migkTQV+CvgPRGxsUjvkTQiT7+cdCP/rtw19oikA/Nos2OAy3OxecCMPD2jkn5MHn12IPBw0cVmZmYd1ljXmaQLgIOAMZJWAaeRRpntDizIo5QX5hFmbwU+L+m3wJPAcRHRGkjwKdIItueT7um07ut8CbhY0rHAPcBROX0+cDjQB2wEPtrUNpqZ2eAaCzQRcXRN8rlt5r0UuLRN3iJg/5r0DcAhNekBnLBdlTUzs8b4yQBmZtYoBxozM2uUA42ZmTXKgcbMzBrlQGNmZo1yoDEzs0Y50JiZWaMcaMzMrFEONGZm1igHGjMza5QDjZmZNcqBxszMGuVAY2ZmjXKgMTOzRjnQmJlZoxxozMysUUMKNJKuHkqamZlZ1YC/sCnpecALSD/HPBpQztoDGN9w3czMbBgY7KecPwmcBPwOcCNbA80jwDeaq5aZmQ0XAwaaiPgn4J8knRgRX+9QnczMbBgZ0j2aiPi6pD+U9AFJx7Reg5WTNEfSOklLi7Q9JS2QtDz/HZ3TJeksSX2Slkh6fVFmRp5/uaQZRfoBkm7JZc6SpIHWYWZmnTfUwQDfA74KvBl4Q371DqHoecDUStrJwNURMRm4Or8HOAyYnF8zgdl53XsCpwFvAt4InFYEjtnAJ4pyUwdZh5mZddhg92haeoH9IiK2Z+ERca2kSZXkacBBeXoucA3w2Zx+fl7HQkmjJI3L8y6IiAcAJC0Apkq6BtgjIhbm9POBI4ArBliHmZl12FD/j2Yp8LKdtM6xEbEmT98PjM3T44F7i/lW5bSB0lfVpA+0jn4kzZS0SNKi9evXP83NMTOzgQz1imYMcKuk64FNrcSIeM+OrDwiQtJ2XSXtzHVExDnAOQC9vb2N1sPM7LlqqIHm9J24zrWSxkXEmtw1ti6nrwYmFvNNyGmr2doN1kq/JqdPqJl/oHWYmVmHDXXU2S/qXk9znfOA1sixGcDlRfoxefTZgcDDufvrSuBQSaPzIIBDgStz3iOSDsyjzY6pLKtuHWZm1mFDuqKR9CjQ6lraDdgVeDwi9hik3AWkq5ExklaRRo99CbhY0rHAPcBRefb5wOFAH7AR+ChARDwg6QvADXm+z7cGBgCfIo1sez5pEMAVOb3dOszMrMOGFGgi4sWt6Xz1MA04cAjljm6TdUjNvAGc0GY5c4A5NemLgP1r0jfUrcPMzDpvu5/eHMmPgXft/OqYmdlwM9Sus/cVb3ch/V/NbxqpkZmZDStDHXX2f4rpLcBKUveZmZnZgIZ6j+ajTVfEzMyGp6E+62yCpMvyAzLXSbpU0oTBS5qZ2XPdUAcDfJf0vym/k1//ktPMzMwGNNRA0xMR342ILfl1HtDTYL3MzGyYGGqg2SDpQ5JG5NeHgA1NVszMzIaHoQaaj5H+u/5+YA1wJPCRhupkZmbDyFCHN38emBERD8JTP0b2VVIAMjMza2uoVzSvaQUZSM8fA17XTJXMzGw4GWqg2aX4+eTWFc1Qr4bMzOw5bKjB4mvAf0n65/z+/cAZzVTJzMyGk6E+GeB8SYuAg3PS+yLi1uaqZWZmw8WQu79yYHFwMTOz7bLdPxNgZma2PRxozMysUQ40ZmbWKAcaMzNrVMcDjaRXSVpcvB6RdJKk0yWtLtIPL8qcIqlP0h2S3lWkT81pfZJOLtL3kXRdTr9I0m6d3k4zM0s6Hmgi4o6ImBIRU4ADgI3AZTn7zFZeRMwHkLQfMB14NTAV+Fbr4Z7AN4HDgP2Ao/O8AF/Oy3ol8CBwbIc2z8zMKrrddXYIsCIi7hlgnmnAhRGxKSLuBvqAN+ZXX0TcFRGbgQuBaZJE+n+fS3L5ucARTW2AmZkNrNuBZjpwQfF+lqQlkuYUj7wZD9xbzLMqp7VLfynwUERsqaRvQ9JMSYskLVq/fv2Ob42ZmW2ja4Em3zd5D9B6rM1s4BXAFNJPEXyt6TpExDkR0RsRvT09/h03M7MmdPPBmIcBv4yItQCtvwCSvg38JL9dDUwsyk3IabRJ3wCMkjQyX9WU85uZWYd1s+vsaIpuM0njirz3Akvz9DxguqTdJe0DTAauB24AJucRZruRuuHmRUQAPyf9OBvADODyRrfEzMza6soVjaQXAu8EPlkk/72kKUAAK1t5EbFM0sWk56xtAU6IiCfycmYBVwIjgDkRsSwv67PAhZK+CNwEnNv0NpmZWb2uBJqIeJx0075M+/AA859Bzc8S5CHQ82vS7yKNSjMzsy7r9qgzMzMb5hxozMysUQ40ZmbWKAcaMzNrlAONmZk1yoHGzMwa5UBjZmaNcqAxM7NGOdCYmVmjHGjMzKxRDjRmZtYoBxozM2uUA42ZmTXKgcbMzBrlQGNmZo1yoDEzs0Y50JiZWaMcaMzMrFEONGZm1qiuBRpJKyXdImmxpEU5bU9JCyQtz39H53RJOktSn6Qlkl5fLGdGnn+5pBlF+gF5+X25rDq/lWZm1u0rmrdHxJSI6M3vTwaujojJwNX5PcBhwOT8mgnMhhSYgNOANwFvBE5rBac8zyeKclOb3xwzM6vqdqCpmgbMzdNzgSOK9PMjWQiMkjQOeBewICIeiIgHgQXA1Jy3R0QsjIgAzi+WZWZmHdTNQBPAVZJulDQzp42NiDV5+n5gbJ4eD9xblF2V0wZKX1WT3o+kmZIWSVq0fv36Hd0eMzOrMbKL635zRKyWtBewQNLtZWZEhKRosgIRcQ5wDkBvb2+j6zIze67q2hVNRKzOf9cBl5HusazN3V7kv+vy7KuBiUXxCTltoPQJNelmZtZhXQk0kl4o6cWtaeBQYCkwD2iNHJsBXJ6n5wHH5NFnBwIP5y62K4FDJY3OgwAOBa7MeY9IOjCPNjumWJaZmXVQt7rOxgKX5RHHI4EfRsS/SroBuFjSscA9wFF5/vnA4UAfsBH4KEBEPCDpC8ANeb7PR8QDefpTwHnA84Er8svMzDqsK4EmIu4CXluTvgE4pCY9gBPaLGsOMKcmfRGw/w5X1szMdsgzbXizmZkNMw40ZmbWKAcaMzNrlAONmZk1yoHGzMwa5UBjZmaNcqAxM7NGOdCYmVmjHGjMzKxRDjRmZtYoBxozM2uUA42ZmTXKgcbMzBrlQGNmZo1yoDEzs0Y50JiZWaMcaMzMrFEONGZm1igHGjMza1THA42kiZJ+LulWScskfTqnny5ptaTF+XV4UeYUSX2S7pD0riJ9ak7rk3Rykb6PpOty+kWSduvsVpqZWUs3rmi2AH8eEfsBBwInSNov550ZEVPyaz5AzpsOvBqYCnxL0ghJI4BvAocB+wFHF8v5cl7WK4EHgWM7tXFmZtZfxwNNRKyJiF/m6UeB24DxAxSZBlwYEZsi4m6gD3hjfvVFxF0RsRm4EJgmScDBwCW5/FzgiEY2xszMBtXVezSSJgGvA67LSbMkLZE0R9LonDYeuLcotiqntUt/KfBQRGyppJuZWRd0LdBIehFwKXBSRDwCzAZeAUwB1gBf60AdZkpaJGnR+vXrm16dmdlzUlcCjaRdSUHmBxHxI4CIWBsRT0TEk8C3SV1jAKuBiUXxCTmtXfoGYJSkkZX0bUTEORHRGxG9PT09O2fjzMysn26MOhNwLnBbRPxDkT6umO29wNI8PQ+YLml3SfsAk4HrgRuAyXmE2W6kAQPzIiKAnwNH5vIzgMub3CYzM2tv5OCz7HR/BHwYuEXS4pz216RRY1OAAFYCnwSIiGWSLgZuJY1YOyEingCQNAu4EhgBzImIZXl5nwUulPRF4CZSYDMzsy7oeKCJiH8HVJM1f4AyZwBn1KTPrysXEXextevNzMy6yE8GMDOzRjnQmJlZoxxozMysUQ40ZmbWKAcaMzNrlAONmZk1yoHGzMwa5UBjZmaN6saTAZ6V1p/9/9rm9Rz3yQ7WxMzs2cVXNGZm1igHGjMza5QDjZmZNcqBxszMGuVAY2ZmjXKgMTOzRjnQmJlZoxxozMysUQ40ZmbWKD8ZYCdZO/tLteljjz+5wzUxM3tm8RWNmZk1atgGGklTJd0hqU+SLyvMzLpkWHadSRoBfBN4J7AKuEHSvIi4tVt1uu+bJ9Wm/84J/9jRepiZddqwDDTAG4G+iLgLQNKFwDSga4FmICu+Pq02/RUnXg7AzbPfU5v/2uPn8Z/nvLvtcv9w5k92vHJmZjtIEdHtOux0ko4EpkbEx/P7DwNviohZlflmAjPz21cBdxTZY4BftVnFQHk7mv9MXbbr5Xo9W5ftejVb9ncjomeA+SEiht0LOBL4TvH+w8A3tnMZi55O3o7mP1OX7Xq5Xs/WZbtena1X3Wu4DgZYDUws3k/IaWZm1mHDNdDcAEyWtI+k3YDpwLwu18nM7DlpWA4GiIgtkmYBVwIjgDkRsWw7F3PO08zb0fxn6rJdr86VbXLZz9R6Nbls16tzZWsNy8EAZmb2zDFcu87MzOwZwoHGzMyatb3D1Ib7C5hK+n+aPuDkSt4cYB2wtE3ZicDPSf8Yugz4dJH3POB64Oac9zdtljECuAn4SU3eSuAWYDGVIYbAKOAS4HbgNuAPirxX5TKt1yPASUX+n+U6LQUuAJ5XWfanc94y4KS6dgD2BBYADwObgVuLvPfnsk8Cl9eU/Uqu95K8jesr+V/IeRuATcDtNW3z50DUlD2dNOJwA/BbYGWl3Il53Q8Cj1fKXlS02aO5fJk/BVhYLHtFkfda4L/ysn+V/z61TxTtdTfwQE1+2WaLqOxTuc36gMfy53lbkddqr2V52Xey7f44MZePvO5PV9prWd7m/64pe2Iu+3jetrJeFxVlNwO/LvJa7bUs1/muStlWmy3Nn8ctFMcKsA/pGPoN8FBuk1berGJ7fknlOAN+kNthY26TMu/cPP8tOa/feovt/ibwRM2yzyPtt4/n7V1R5Ak4A1ie81ZXyv4baf+6ObfXw5X8Q0jng8fzZ728yDs4b+tS4HyK80Zuq+tym1xEOv+U+WV7jaFy3snbdHeu2+a83sXk8w7998/eQc+r3TiZP1NfubFXAC8Hdssf/n5F/luB19M+0IwDXp+nX5x37P2KHe5FeXrXvBMcWLOMzwA/pH2gGdNm3XOBj+fp3YBRA2zj/aR/sgIYn3eo5+f3FwMfKebfP+/ILyANHvn/wNHVdgD+Hjg5t9FZwPoi7/dJwe4a4BM1ZQ8FRsbWE8J5lfw9ivb/e+CByjZNJA38uJ908FUDzV/UfXbA2/P27J7zDxngs70QmF0pfxVwWC57IvB4kXcD8La8T5xOOvk/tU8U7TUut9eXK/mtNvtP4IPVfSq32YS8TV8GzizyWu01Lq/nbLbdHw/Iy74H+N2ibKu9avflos1+N697r5plj8t5XwO+WJRttde43F7XVJbdajMBx+c2e+pYIe2b04EX5W06och7HTCJdIy09u2y7OF5uS8ifZkqy7baS8DX8+fS7xgFeoHvAY/VLPs80v/ubXN8Ax8lBYFd8rr3qi67WPePgWMq5e8k7QsvAj5FOs6vA/4QuBfYt9gXF7I1UFwMTM/TZ5O+hP6wyC/bawyV805rm9qdd+h/TA8aaNx11t9Tj66JiM2kk8u0VmZEXEv6xlMrItZExC/z9KOkb5nj8/uIiMfyrLvmV7+RGJImAP8b+M72VFrSS0gnu3PzujZHxENtZj+E9M37niJtJPB8SSNJAeW+Iu/3gesiYmNEbAF+QTqxV9thGjA3t9H3gD1aGRFxW0S0nrpwU7VsRFyVlw3pgBhVyX8k/72W1GbVESxnAn9F+qb7YN1Gt/nsjge+FBGbcv6KurKSBPwR6Zthv8WSTlLX5ve/LfL2Ba6NiDWkz+WPK/tEq73WAH8HHFHmF222mfzEikr+VRGxKu9vC0knsFZeq73W5PaI6v4InJK3P0jflsu8gfblVpvdExG/jIh1Nfv6GtLnfBTpxNjKa7XXGtKV0H2Vsq02C+AnwB/T/1g5GLgkH0dzgSNaeRFxU0SszNV/PP/dtcifXxyD1wN7F3mPFJ/byLyup8rmZyd+hbSPUV120WZ1x/fxwOcj4smIeCwi1tWVJQXct5GCTZnfarPHgJcAa3PeE8DmiLgznzf2JAWr1v56MOlYAphP+oLw1Hml0l7j2M7zTuWYHpQDTX/jSd8SWlZRHHzbQ9Ik0reG64q0EZIWk7qOFkTEdZVi/0jamZ9ss9gArpJ0Y358Tss+pC6j70q6SdJ3JL2wzTKmk77RpQVGrAa+SuoiWQM8HBFXFfMvBd4i6aWSXkD6Zlj+M2zL2HwCIdfl6Q6d/xjpW1I/ks6QdC/p5LKuSJ8GrI6ImwdY5ixJS0jf7st9fl/Stl0n6RfAa9qUfwvpAF9ZST8J+Equ1+fyPC3L2Pol5f3AxMo+UbbX/cDYun2mNED+x0hXA0/lFe31QeDUsmxNm02sLHeWpCWS5kgaXVlvvzaT9IY29Wq12W+LvLK9vgqcUilbttlRpG/M60hdjCuAhyL968II0knxYOqPo13aHWeSdid1ZZ1Y5kn6Lulz+D3gA5Wys4B5rc+rzbLPyG22rpL3CuBPJC2SdIWkW+vqRdqvrwaureR/HJgvaRVwGumqZgEpWI6U1Es6bywHWo+BeWmrrfL7T5K+cLQ7r5xB/XnnjHzcjAYW1Jx3hm6wS57n0oshPLqGdLlZ271SzPMi4EbgfW3yR5Hu5exfpL0b+FaePoj6rrPx+e9epG69t8bWy/otpOe5AfwT8IWa8ruRvkmOLdJGAz8j7aS7kr5RfahS7ti8PdeSuo/+sdoOpB27bKMnatZ/Ta5rbRuSTtaXDdTGpG6idXn6BaQT1Evy+5Wkk1ZZr7Gk7sJdgG8ADxZ5S0ldJSJdzd7bpl6zSfeAqtt8FulKBVJXzGNF3u+RujNuJJ0gNpT7RNle+f2DdftM0Wa1+1Rus3l1eTn/FOBvW/k1bXYPqe/9fTXtdQap26esd7XNVrap1+y87rJs2V5HkY6BMr+uzUbl+d5M6m1oLX8i6R5N9ThaSe7mof44+zZp/63LGwF8i9Td1cp/K/DvbO3afay6bNIVgUhdsHNze7fyHgP+PJd5H+meTN26ryjaplz2j9h6XP9l/jxaeX9ACs5rSV2UfaQrwTGttiKdV87Pn9tBVM4rueyc6nmnsk3/DJxK5bxT7p+DnlsHm+G59Mof3JWVg/SUyjyTGCDQkE7WVwKfGWRdpwJ/Ubz/O9IV1ErSN6uNwPcHKH96qzzwMoqb3KRvkz+tKTMNuKqS9n7g3OL9MeSA12a9f0v6VtWvHUjdO+Py9BuATTVlr6FNoAE+QroR/IKB2pjUN/2bPP2/SN/+VubXFtLN1m0GC+T539wqm9//K/D24v09wG2VMiPzwTihZpsfZuv/ok2iJrjmvP3yvJ8p0sr2mkjq7tlmn8lt9qa6fSq32ULSN9za/Y10v/HRVn5Nmz1JCnIvqyn7yrJstc1I+/pG4P+2abNrKmXL9to1f17t6r0vcH1xrPwl6UtS64T/B7lNqsfRSor7CWU+KXj9GNil7hjMaW9l68n21Fzm/kp79Q1Q/iDSyf5U0r2u24F9cp5IPQbVeo0hBdXnVer9l/QfYLI3KbiWZVvnjftJgw02ku5z/ip/Dn+XP+9fU3NeIQ2quI8Bzjv0D0CnV9r7GnyPZrvt0KNrct/ouaST1T9U8nokjcrTzyf9Vs7trfyIOCUiJkTEpLzen0XEh4ryL5T04tY06Wbw0lz2fuBeSa/Ksx9C/U8iHE3RbZb9N3CgpBfk+h9C6jMv675X/rs36VvZD2uWPQ+YkaePJI0qGhJJU0mX7u+JiI01+ZOLt+8kjTwjIm6JiL0iYlJut1Wkb3BbirLjirKHku7jtPyY1HeNpH3Z2vddegcpcK2qqfp9pH51SAFwc7HeVpvtAvwL6T5XuU/MA2bkNr+cmn2mcGo1v2ize4BllbzJ+a9I9xnvb+W32ozU3Xot6Rv35LwPPdVeuewFpPsoZb1+DLw951+c2+uLNW0WwOJK2fuAt+WyPwU2VOq9V/H3b4Czi2PlNtI3+Y/m42gG6d5Dv+OIdCW2R17OU8eZpI+T7kMcFxFPFnl3SHplnr+H9MXr9iL/xoh4Wd6/3gBsjIhXVpY9rji+j8j1adWr1V49ef131hz/R5K+LDyvUu/bgJdIelNe9jtJX1Ba690rIk4hdc8tA/6adN74YG6rI3P+j0hX5NucV0iB5jXV806xH7wwt8nS6nlnuwwWiZ5rL9I9iDtJfcKfq+RdQLqP8VvSSe3YSv6bSQfYErYOiz08572GdIN0Sf6gTh2gDgex7SXuy0mXra2hldW6TSENg11C2rlHV/JfSPrW9JKa9f0NaadfSrqRv3sl/99IgetmUiDaph1I/cJXk74Bb6rkvTdPbyKd6Kv5faRuq8VsHWZc5l+a6/ZQLt+u/R8jfSsry36PNFx1m7KkrsTv52U/wNZhyk8tmzT65rg22/xmUjfPg6QgU+Z9mrQf/XfdPlG01705f1klv9Vmm3P+o5X8PtJVQ5C+rf6qyGu1V2v46q1suz+29tXNbB0yf3jRXrVliza7K+evqFn2/Dbb3Gqv1rKXV/JbbbYyb1u/Y4V0DNxC2n8eym3WyvvT3F5b8ufwQKXsltzWG3N7rSUF8F2A/8jLXV6U2+YYJR3DT9TU62dsHb78YG6zVt4oUlBdTtqv76wum3RVcDw15wfSftBa9mOkQNPK+wopGN1Buv91EFuvPF5Ouo/TR+r62r2SX7bXfaR7XmX+z3Kb3EH/oeafK+rVOqbXUvQE1b38CBozM2uUu87MzKxRDjRmZtYoBxozM2uUA42ZmTXKgcbMzBrlQGNmZo1yoDHrEEl/Kuk2ST/YznKTJH1gkHnemZ9FdUv+e/CO1dZs5/H/0Zh1iKTbgXdE/VMGBip3EOmxH+8eYJ7XAWsj4j5J+5P+ge5pPRDWbGdzoDHrAElnk56yfAfpsTCvID0YcVfg9Ii4PD/J+HukpzgAzIqI/5S0kPRzDXeTflrgzEHWJdJTDsZFxKYmtsdsezjQmHWIpJWkh4p+hvQLpN/Pz7C6nvTU6QCejIjf5OeVXRARvUO5oqms50jSM73esfO3wmz7Pd3fDDGzp+9Q4D2S/iK/fx7pybz3Ad+QNIX0TK19t3fBkl5N+imFQ3dOVc12nAONWeeJ9Nsj/X6hUNLppAcUvpY0UOc32xYdYKHplxYvA46JiNpfCzXrBo86M+u8K4ET872U1o18SD/VuyYiniT96N6InP4o6ad+28pdcD8FTo6I/2ii0mZPlwONWed9gTQIYImkZfk9pF93nCHpZtKvTT6e05cAT0i6WdKftVnmLNIPlZ0qaXF+7dXcJpgNnQcDmJlZo3xFY2ZmjfJgALNnEUnvIo0qK90dEe/tRn3MhsJdZ2Zm1ih3nZmZWaMcaMzMrFEONGZm1igHGjMza9T/AFkThmp9SD0iAAAAAElFTkSuQmCC"/>
 
+--------
 대부분의 값이 0이 175000개로 압도적으로 많고 1부터의 값은 25000이하로 값이 잘 보이지 않습니다.
-
-
 
 y축을 확대하여 보겠습니다.
 
-
+-----------
 
 ```python
 sns.countplot(alldata['feat_2'])
 plt.ylim(0,10)
 ```
-
-<pre>
-/opt/conda/lib/python3.7/site-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
-  FutureWarning
-</pre>
-<pre>
-(0.0, 10.0)
-</pre>
 <img src="data:image/png;base64,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"/>
 
+------------
 0의 값이 1에 비해 10배 이상 많고, 1의 값이 2에 비해 2배 이상 많습니다.
-
-
 
 feat_1 뿐만 아니라 다른 column도 조회하였을 때, 비슷한 양상을 보입니다.
 
-
-
 따라서 Scaler 방식에 따라 전처리 데이터의 정확도가 달라지게 될 것으로 보입니다.
 
-
+----------
 
 ```python
 alldata2=alldata.drop(columns=['id','target'])
@@ -1398,62 +1377,12 @@ alldata2
 <p>206246 rows × 93 columns</p>
 </div>
 
+----
+Scaler로 RobustScaler / MinMaxScaler / yeo-johnson 변환 /StandardScaler를 적용해보고, 이 데이터에 적합한 Scaler를 분석하겠습니다.
 
-*RobustScaler*
+1) RobustScaler
 
-
-
-특이 치에 강력한 통계를 사용하여 기능을 확장합니다.
-
-
-
-이 스케일러는 중앙값을 제거하고 Quantile 범위( 기본값을 IQR : Interqurtile Range)에 따라 데이터를 스케일링합니다.
-
-
-
-IQR은 1분위(25분위)와 3분위(75분위) 사이의 범위입니다.
-
-
-
-센터링 및 스케일링은 학습 세트의 샘플에 대한 관련 통계를 계산하여 각 기능에서 독립적으로 발생합니다. 
-
-
-
-그런 다음 중앙값과 사 분위수 범위를 저장하여 transform방법을 사용하여 나중에 데이터에 사용합니다.
-
-
-
-평균과 분산 대신 중간값과 사분위 값을 조정하여 아주 동 떨어진 데이터를 제거해 줍니다.
-
-
-
-StandardScaler와 비슷 하지만 평균과 분산대신 중간값(median)과 사분위값(quartile)을 사용합니다.
-
-
-
-이런 방식 때문에 RobustScaler는 전체 데이터와 아주 동떨어진 데이터 포인트 (예를 들면 측정 에러)에 영향을 받지 않습니다.
-
-
-
-중앙값(median)과 IQR(interquartile range)을 사용하기 때문에 StandardScaler와 비교해보면 표준화 후 동일한 값을 더 넓게 분포 시킵니다.
-
-
-
-아웃라이어의 영향을 최소화하고, IQR = Q3 - Q1 즉 25퍼센타일과 75퍼센타일의 값을 다룹니다.
-
-
-
-아웃라이어가 많을 때 RobustScaler 작동 방식 : 특이치에 대해 강력한 통계를 사용하여 기능을 확장합니다.
-
-
-
-이 방법은 중앙값을 제거하고 1사분위와 3사 분위 범위의 데이터를 스케일링합니다.
-
-
-
-즉, 25번째 분위수와 75번째 분위수 범위 사이, 이번위를 사분위수 범위 라고도 합니다.
-
-
+-----
 
 ```python
 from sklearn.preprocessing import RobustScaler
@@ -1689,39 +1618,10 @@ alldata3.describe()
 <p>8 rows × 93 columns</p>
 </div>
 
+----
+2) MinMaxScaler
 
-*MinMaxScaler*
-
-
-
-데이터값을 0과 1사이의 범위 값으로 변환합니다.(음수 값이 있으면 -1에서 1값으로 변환합니다.)
-
-
-
-데이터의 분포가 가우시안 분포가 아닐 경우에 Min, Max Scale을 적용해 볼 수 있습니다.
-
-
-
-모든 피처에 0에서 1 사이의 값으로 변환되는 스케일링이 적용됩니다.
-
-
-
-변숫값이 취하는 범위를 특정 구간 (보통 0에서 1 사이 구간)으로 변환하는 최소-최대 스케일링(min-max scaling)방법.
-
-
-
-(X-Xmin)/(Xmax-Xmin)으로 표현됩니다.
-
-
-
-변환 후의 평균이 정확히 0이 되지 않고 이상치의 악영향을 받기 더 쉽다는 단점이 있으므로 표준화 방법이 더 자주 쓰입니다.
-
-
-
-한편 이미지 데이터의 각 픽셀값 등은 처음부터 0~255로 범위가 정해진 변수이므로 최소-최대 스케일링을 이용하는 게 자연스러울 수 있습니다.
-
-
-
+-----
 
 ```python
 from sklearn.preprocessing import MinMaxScaler
@@ -1958,34 +1858,10 @@ alldata3.describe()
 <p>8 rows × 93 columns</p>
 </div>
 
+------
+3) Box-Cox 변환
 
-*box-cox 변환, yeo-johnson 변환*
-
-
-
-표준화와 최소-최대 스케일링은 선형 변환이므로 변수의 분포가 유동적일 뿐 형태 그 자체는 변하지 않습니다.
-
-
-
-한편으로는 비선형변환(nonlinear transformation)을 통해 변수의 분포 형태를 바꾸는 편이 바람직한 경우도 있습니다.
-
-
-
-변수의 분포는 보통 어느 한 쪽으로 지나치게 치우치지 않는 게 좋습니다.
-
-
-
-box-cox변환은 로그 변환을 일반화한 것으로 변환 매개변수 람다=0일 때가 로그변환
-
-
-
-yeo-johnson 변환은 음의 값을 갖는 변수에도 적용할 수 있습니다.
-
-
-
-변환에 사용하는 매개변수는 되도록 정규 분포 (normal distribution)에 근접하도록 라이브러리 측에서 최적의 값을 추정해줄 때가 많은 만큼 반드시 명시적으로 지정할 필요는 없습니다.
-
-
+----
 
 ```python
 # from sklearn.preprocessing import PowerTransformer
@@ -1998,9 +1874,12 @@ yeo-johnson 변환은 음의 값을 갖는 변수에도 적용할 수 있습니�
 ValueError: The Box-Cox transformation can only be applied to strictly positive data
 
 
-
+-----
 data에 음수가 포함되어 있어 적용이 어렵습니다.
 
+4) yeo-johnson 변환
+
+-----
 
 
 ```python
@@ -2237,59 +2116,10 @@ alldata3.describe()
 </table>
 <p>8 rows × 93 columns</p>
 </div>
+------
+5) StandardScaler
 
-
-*StandardScaler*
-
-
-
-StandardScaler는 표준화를 쉽게 지원하기 위한 클래스입니다.
-
-
-
-즉, 개별 피처를 평균이 0이고, 분산이 1인 값으로 변환해줍니다.
-
-
-
-이렇게 가우시안 정규 분포를 가질 수 있도록 데이터를 변환하는 것은 몇몇 알고리즘에서 매우 중요합니다.
-
-
-
-특히 사이킷런에서 구현한 RBF 커널을 이용하는 서포트 벡터 머신(Support Vector Machine)이나 선형 회귀(Linear Regression), 로지스틱 회귀(Logistic Regression)는 데이터가 가우시안 분포를 가지고 있다고 가정하고 구현됐기 때문에 사전에 표준화를 적용하는 것은 예측 성능 향상에 중요한 요소가 될 수 있습니다.
-
-
-
-모든 칼럼 값의 평균이 0에 아주 가까운 값으로, 그리고 분산은 1에 아주 가까운 값으로 변환됩니다.
-
-
-
-가장 기본적인 변환 방법은 곱셈과 덧셈만으로 변환하는 선형변환(linear transformation)으로 변숫값의 범위를 변경하는 것입니다.
-
-
-
-선형변환을 통해 변수의 평균을 0, 표준편차를 1로 만드는 방법을 표준화라고 합니다.
-
-
-
-수식은 (x-평균)/표준편차으로 표현됩니다.
-
-
-
-선형 회귀나 로지스틱 회귀 등의 선형 모델에서는 값의 범위가 큰 변수일수록 회귀 계수(regression coefficient)가 작아지므로, 표준화하지 않으면 그러한 변수의 정규화(regularization)가 어려워집니다.
-
-
-
-신경망에서도 변수들 간의 값의 범위가 크게 차이나는 상태로는 학습이 잘 진행되지 않을 때가 많습니다.
-
-
-
-또한 평균은 0에서 크게 벗어나지 않는 게 좋습니다.
-
-
-
-또한 0 또는 1의 두 값으로 나타나는 변수는 0과 1의 비율이 어느 한 쪽으로 치우치면 표준편차가 작으므로, 변환한 뒤에 0 또는 1 중에 어느 한 쪽의 절댓값이 커질 가능성이 있습니다. 이들 두 값을 갖는 이진 변수에 대해서는 표준화를 실시하지 않아도 됩니다.
-
-
+----------
 
 ```python
 from sklearn.preprocessing import StandardScaler
@@ -2541,28 +2371,39 @@ cbc.fit(train2,train['target'])
 result=cbc.predict_proba(test2) #분류 확률 predict_proba
 ```
 
-<pre>
+
 Learning rate set to 0.150576
+
 0:	learn: 1.8237580	total: 59.9ms	remaining: 59.9s
+
 100:	learn: 0.5951059	total: 1.95s	remaining: 17.3s
+
 200:	learn: 0.5188079	total: 3.36s	remaining: 13.4s
+
 300:	learn: 0.4881267	total: 4.52s	remaining: 10.5s
+
 400:	learn: 0.4604935	total: 5.66s	remaining: 8.45s
+
 500:	learn: 0.4404324	total: 6.72s	remaining: 6.7s
+
 600:	learn: 0.4217809	total: 7.79s	remaining: 5.17s
+
 700:	learn: 0.4054717	total: 8.87s	remaining: 3.78s
+
 800:	learn: 0.3901965	total: 9.96s	remaining: 2.47s
+
 900:	learn: 0.3768811	total: 11.1s	remaining: 1.21s
+
 999:	learn: 0.3639291	total: 12.1s	remaining: 0us
-</pre>
+
 
 ```python
 train['target'].nunique()
 ```
 
-<pre>
+
 9
-</pre>
+
 
 ```python
 sub
@@ -2741,11 +2582,12 @@ sub
 result[0]
 ```
 
-<pre>
 array([1.10848760e-04, 1.37485225e-01, 4.30850904e-01, 4.23381804e-01,
-       1.17574317e-06, 7.09543749e-05, 8.07664121e-03, 1.62066168e-05,
-       6.24082380e-06])
-</pre>
+
+1.17574317e-06, 7.09543749e-05, 8.07664121e-03, 1.62066168e-05,
+
+6.24082380e-06])
+
 
 ```python
 sub.iloc[:,1:]=result
@@ -2935,23 +2777,11 @@ sub.to_csv('submission.csv',index=False)
 
 alldata의 각 feat columnn의 data는 0에 가까운 값이 가장 많습니다.
 
-
-
 max값이 91인 경우도 있으나 0인 경우가 150000배로 압도적입니다.
-
-
 
 따라서 데이터 분석에 앞서 비선형변환(nonlinear transformation)을 통해 변수의 분포 형태를 바꾸는 전처리 방식이 가장 효과적으로 나타났습니다.(yeo-johnson)
 
-
-
 또한 RobustScaler도 IQR[1분위(25분위)와 3분위(75분위) 사이의 범위] 외의 값을 outlier로 처리함으로써 가장 많은 경우의 수만 반영하여 전처리함으로써 정확도에 기여하였습니다.
 
-
-
-StandardScaler에 비해 MinMaxScaler의 전처리가 더 효과적이었던 이유는,
-
-
-
-alldata의 각 feat columnn의 data는 0에 가까운 값이 압도적으로 많아 그대로 정규화하게 되면 부정확하게 전처리 될 가능성이 높기 때문으로 보입니다.
+StandardScaler에 비해 MinMaxScaler의 전처리가 더 효과적이었던 이유는, alldata의 각 feat columnn의 data는 0에 가까운 값이 압도적으로 많아 그대로 정규화하게 되면 부정확하게 전처리 될 가능성이 높기 때문으로 보입니다.
 
