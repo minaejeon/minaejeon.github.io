@@ -1844,7 +1844,10 @@ sub.to_csv("submission.csv",index=0)
 ----------------------------
 HashingVectorizer를 사용하였을 때 negative 값 발생 및 정규화 어려움으로 NMF는 적용치 못하였습니다.
 이를 제외하고 총 15가지 CASE를 적용하였을 때 다음과 같은 score를 얻었습니다. (score가 작을 수록 순위가 개선됩니다.)
-![image.png](attachment:e956a406-3e57-4f05-845e-18c46c2e6773.png)
+
+![image](https://user-images.githubusercontent.com/69743938/172099087-721c2deb-da6d-4879-ab40-a307a6288816.png)
+
+
 TruncatedSVD의 경우 차원의 수를 증가(10에서20)함에 따라 score가 개선되는 듯 보였으나 30 이상에서 오히려 미개선 되는 것을 확인하였습니다.
 차원의 수가 증가함에 따라 학습의 정교성은 향상될 수 있으나 오히려 과적합이 발생할 우려가 있기 때문으로 보입니다.
 # 같은 조건이라면 TfidVectorizer에서 점수 개선이 뚜렷하였는데, Data내의 각 단어의 중요성을 고려하는 것이 효과적임을 느꼈습니다.
