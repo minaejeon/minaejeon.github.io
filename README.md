@@ -24,13 +24,21 @@ https://minaejeon.github.io/
   좌측 메뉴의 田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
   
    ### 1. NLTK와 Keras의 Text 토큰화 실험 (Kaggle Spam Mails Dataset)
-   ### 2. NLTK와 Keras의 Text 토큰화 실험2 (Kaggle Fake and real news Dataset).
+   
+   ### 2. NLTK와 Keras의 Text 토큰화 실험2 (Kaggle Fake and real news Dataset)
+   
    ### 3. Call Backs 실험, 학습 Parameter Tunning (Dacon 전복 나이 예측 대회)
+   
    ### 4. Vectorizer와 차원 축소 실험 (Kaggle two Sigma Connect Rental Listing Inquiries)
+   
    ### 5. Stemming과 Lemmatization, stop words 실험 (Kaggle Spooky Author Identification)   SCORE : 0.41446, RANK : 608 / 1241 추정
+   
    ### 6. 교차 검증 모델 실험 (Kaggle Sentiment Analysis on Movie Reviews)                   SCORE : 0.66756, RANK :   19 / 861 추정
+   
    ### 7. training Image 전처리 기법 효과 분석 (Kaggle Plant Seedlings Classification)       SCORE : 0.97103, RANK :  262 / 835 추정
+   
    ### 8. Image Classification 모델 실험 (Kaggle Invasive Species Monitoring)                SCORE : 0.99315, RANK :  32 / 512 추정
+   
    ### 9.  Sequential Model 적합 Layer 및 Compile 실험 (Kaggle Toxic Comment Classification Challenge)
 
 ------------
@@ -40,7 +48,11 @@ https://minaejeon.github.io/
   좌측 메뉴의 田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
 
    ### 1. Scaler 실험 및 결과 분석 (Kaggle Otto Group Product Classification Challenge)     SCORE : 0.47595, RANK : 1105 / 3509 추정
+   
    ### 2. Boost Classifier 모델 실험 (Kaggle Shelter Animal Outcomes)                       SCORE : 0.73234, RANK :  291 / 1600 추정
+   
    ### 3. Boost Classifier 모델 실험 2 (Kaggle Don't Get Kicked!)                           SCORE : 0.25750, RANK :    11 / 571 추정
+   
    ### 4. Boost Classifier 모델 실험 3 (Kaggle San Francisco Crime Classification)          SCORE : 2.41086, RANK :  571 / 2332 추정
+   
    ### 5. 회귀분석 모델 실험 (Kaggle Bike Sharing Demand)                                  SCORE : 0.41966, RANK :   408 / 3243 추정
