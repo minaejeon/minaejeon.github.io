@@ -465,25 +465,25 @@ from tensorflow.keras.applications.vgg19 import *
 ```
 -------
 
-동일 조건에서 실험하였을 때, 아래와 같은 순으로 점수가 개선 된 것을 확인하였습니다.
+# 동일 조건에서 실험하였을 때, 아래와 같은 순으로 점수가 개선 된 것을 확인하였습니다.
 
- VGG19 < VGG16 < ResNet50 < InceptionV3 < EfficientNetB1+ModelCheckpoint < EfficientNetB1 < MobileNet < EfficientNetB0 < Xception
+# VGG19 < VGG16 < ResNet50 < InceptionV3 < EfficientNetB1+ModelCheckpoint < EfficientNetB1 < MobileNet < EfficientNetB0 < Xception
 
-여기에서 주목하게 되는 점은, VGG16이 VGG19보다 점수가 개선되고, EfficientNetB0가 EfficientNetB1보다 점수가 개선된 것을 확인할 수 있습니다.
+# 여기에서 주목하게 되는 점은, VGG16이 VGG19보다 점수가 개선되고, EfficientNetB0가 EfficientNetB1보다 점수가 개선된 것을 확인할 수 있습니다.
 
-VGG16에서 VGG19를 사용하게 될 때, 레이어층을 더 깊게 사용하나 반드시 정확도가 개선되는 것은 아닌 것으로 보입니다.
+# VGG16에서 VGG19를 사용하게 될 때, 레이어층을 더 깊게 사용하나 반드시 정확도가 개선되는 것은 아닌 것으로 보입니다.
 
 ![image](https://user-images.githubusercontent.com/69743938/172105394-b64fe538-e0a5-4a19-8ea7-f82a1a5366e2.png)
 
-EfficientNetB0에서 EfficientNetB1보다 점수가 개선되지 않은 이유는 callback의 patience 인자 조절이 적합치 않아 최적화되지 않은 상태의 학습을 했을 것으로 보입니다.
+# EfficientNetB0에서 EfficientNetB1보다 점수가 개선되지 않은 이유는 callback의 patience 인자 조절이 적합치 않아 최적화되지 않은 상태의 학습을 했을 것으로 보입니다.
 
-parameter가 늘어났지만, 최적의 학습을 위해 적합한 인자값을 찾는 노력이 수반되어야 합니다.
-
-InceptionV3가 V16과 V19보다 예측 정확도가 향상하였는데, 이는 매개변수 수는 줄었고 네트워크 성능은 좋아졌습니다. 위의 그래프를 볼 때, 파라미터의 수가 증가할 수록 정확도가 향상되는 경향을 보이지만 각 모델마다 향상되는 속도가 달라짐을 확인했습니다.
+# parameter가 늘어났지만, 최적의 학습을 위해 적합한 인자값을 찾는 노력이 수반되어야 합니다.
+ 
+#  InceptionV3가 V16과 V19보다 예측 정확도가 향상하였는데, 이는 매개변수 수는 줄었고 네트워크 성능은 좋아졌습니다. 위의 그래프를 볼 때, 파라미터의 수가 증가할 수록 정확도가 향상되는 경향을 보이지만 각 모델마다 향상되는 속도가 달라짐을 확인했습니다.
 
 각 모델의 적용 code 및 예측 결과 score는 다음과 같습니다.
 
-# VGG 19(score : 0.96698)
+VGG 19(score : 0.96698)
 
 -------------
 ```python
@@ -497,7 +497,8 @@ InceptionV3가 V16과 V19보다 예측 정확도가 향상하였는데, 이는 �
 # model.fit(train_generator,validation_data=valid_generator,epochs=1000,callbacks=[es,rl])
 ```
 ----------
-#  VGG 16(score : 0.96876)
+VGG 16(score : 0.96876)
+
 --------
 
 
@@ -511,8 +512,10 @@ InceptionV3가 V16과 V19보다 예측 정확도가 향상하였는데, 이는 �
 # model.compile(optimizer='adam', metrics='acc', loss='categorical_crossentropy') 
 # model.fit(train_generator,validation_data=valid_generator,epochs=1000,callbacks=[es,rl])
 ```
-# ResNet (score : 0.98666)
+-------
+ResNet (score : 0.98666)
 
+-------
 ```python
 # es=EarlyStopping(patience=4,restore_best_weights=True)
 # rl=ReduceLROnPlateau(patience=3,verbose=1)
@@ -523,7 +526,8 @@ InceptionV3가 V16과 V19보다 예측 정확도가 향상하였는데, 이는 �
 # model.fit(train_generator,validation_data=valid_generator,epochs=1000,callbacks=[es,rl])
 ```
 ------
-# InceptionV3(score : 0.98724)
+InceptionV3(score : 0.98724)
+
 -----
 
 ```python
@@ -538,7 +542,8 @@ InceptionV3가 V16과 V19보다 예측 정확도가 향상하였는데, 이는 �
 # model.fit(train_generator,validation_data=valid_generator,epochs=1000,callbacks=[es,rl])
 ```
 -------
-# EfficientNetB1 + ModelCheckPoint (score : 0.98873)
+EfficientNetB1 + ModelCheckPoint (score : 0.98873)
+
 ---------
 
 
@@ -554,7 +559,8 @@ InceptionV3가 V16과 V19보다 예측 정확도가 향상하였는데, 이는 �
 # model.fit(train_generator,validation_data=valid_generator,epochs=1000,callbacks=[es,rl,mc])
 ```
 ------------
-# EfficientNetB1 (score : 0.99095)
+EfficientNetB1 (score : 0.99095)
+
 -----------
 
 
@@ -569,7 +575,8 @@ InceptionV3가 V16과 V19보다 예측 정확도가 향상하였는데, 이는 �
 # model.fit(train_generator,validation_data=valid_generator,epochs=1000,callbacks=[es,rl])
 ```
 -------
-# MobileNet(score : 0.99113)
+MobileNet(score : 0.99113)
+
 ----------
 
 ```python
@@ -583,7 +590,8 @@ InceptionV3가 V16과 V19보다 예측 정확도가 향상하였는데, 이는 �
 # model.fit(train_generator,validation_data=valid_generator,epochs=1000,callbacks=[es,rl])
 ```
 ----------
-# EfficientNetB0(score : 0.99233)
+EfficientNetB0(score : 0.99233)
+
 --------
 
 
@@ -657,7 +665,8 @@ Epoch 12/1000
 <keras.callbacks.History at 0x7fade406cf10>
 
 -----------
-# Xception(score : 0.99315)
+Xception(score : 0.99315)
+
 ---------
 
 
