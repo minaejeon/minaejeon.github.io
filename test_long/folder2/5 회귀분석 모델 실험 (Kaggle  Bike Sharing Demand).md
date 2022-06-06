@@ -1493,7 +1493,13 @@ result
 array([1, 1, 1, ..., 1, 1, 1])
 
 -------
-Lasso 모델 score 1.20873
+linear model중 Lasso model과 Ridge model이 있습니다.
+
+이들 역시 -값이 반환되어 절댓값으로 바꾸어 result에 적용했습니다.
+
+Lasso model (score : 1.20873) 과 Ridge model (score : 1.21130) 의 적용 code는 아래와 같습니다.
+
+Lasso 모델
 
 ----------
 
@@ -1512,7 +1518,7 @@ array([ 22.83753911,  18.77172599,  11.02199679, ..., 208.03925463,
        226.31880201, 215.67397738])
 
 --------------
-Ridge model -값으로 반환되어 절댓값으로 계산하자 score : 1.21130
+Ridge model 
 
 ------------
 
@@ -1544,11 +1550,21 @@ array([ 11.78 ,   4.62 ,   3.95 , ...,  98.425, 102.26 ,  47.31 ])
 
 --------------
 
-결론적으로 count값이 균일하지 않으므로 linear_model은 사용이 부적합하며, 절댓값을 제출하면 CatBoostRegressor > GradientBoostingRegressor 순으로 score가 높습니다.
+결론적으로 count값이 균일하지 않으므로 linear_model은 사용이 부적합하며, 절댓값 제출한 것을 포함하면
 
-RandomForestRegressor를 이용하면 예측 값에 음수가 존재하지 않으며 가장 정확한 예측이 가능합니다.(score:0.42058)
+RandomForestRegressor score : 0.42058 > CatBoostRegressor 절댓값  score : 0.49252 > GradientBoostingRegressor 절댓값 score : 0.70437 > Lasso 모델 절댓값 score : 1.20873 > Ridge model  절댓값  score : 1.21130 >LinearRegression 절댓값 score : 1.21132 > LogisticRegression score : 2.46839 순으로 점수가 개선됩니다.
 
-box plot의 count값을 보면 outlier가 존재하는데, RandomForestRegressor의 랜덤화와 예측 값 간의 비상관화가 노이즈에 대해서도 강인하게 만들어 주기 때문입니다.
+그러나 주의해야할 점은 -값은 0에 가깝기 때문에 절댓값으로 예측하는 것은 무리가 있어 보입니다.
+
+흥미로운 점은 절댓값으로 적용된 경우 LogisticRegressor보다 정확히 예측한 것으로 score가 나타났다는 것입니다.
+
+이는 양수로 나타난 count값만 두고 볼 때, Logistic Regression보다 정확히 맞추었음을 생각할 수 있습니다.
+
+단순히 -값을 예측했으므로 부적합한 모델로 제외하는 것보다 다른 모델 결과값과 비교하여 예측하는 것이 효과적임을 생각했습니다.
+
+RandomForestRegressor가 특히 정확도가 높은 것에 의구심을 품게 되었는데, box plot의 count값의 outlier를 보며 이유를 유추할 수 있습니다.
+
+RandomForestRegressor는 랜덤화와 예측 값 간의 비상관화가 노이즈에 대해서도 강인하게 만들 장점을 갖고 있어 이 데이터에 적용이 유리합니다.
 
 또한, Month column은 주어진 train,test 데이터에서 학습과정에 부정확도를 상승시키므로 제외하는 것이 적합할 것으로 보입니다.
 
@@ -1748,37 +1764,3 @@ dtype: float64
 sub.to_csv("rfr_without_month",index=False)
 ```
 
--------
-아래 내용 정리해서 다시쓰기
-
-GradientBoostingRegressor을 사용하니 predict에 -값이 출력되어 err가 발생하고 출력이 불가능합니다.
-
-predict값을 절댓값으로 변환하여 제출하자 score는 0.70437로 동일 조건의 RandomForestRegressor score : 0.42058에 비해 미개선 확인됩니다. (score는 낮을수록 순위 향상됩니다.)
-
-CatBoostRegressor의 경우 predict값에 -값이 출력되어 err가 발생하고 제출이 되지 않습니다.
-
-절댓값을 구하자 score : 0.49252로 동일 조건의 RandomForestRegressor score:0.42058 보다 미개선 확인됩니다.
-
-LinearRegression 적용하자 -값이 반환되어 제출이 불가능하고, 절댓값을 적용하자 score 1.21132로 가장 예측이 부정확합니다.
-
-LinearRegression은 다른 모델에 비해 성능이 낮은데, 특징값의 범위가 균일하지 않으면 정규화의 효과가 특징에 따라 달라지므로 학습이 진행되지 않을 수 있기 때문입니다.
-
-Count값을 확인하였을 때, 균일하지 않으므로 부정확한 예측을 초래한 것은 당연한 결과였습니다.
-
-LogisticRegression을 이용하자 -값은 없으나 predict값이 모두 1로 나오며 score 2.46839를 기록했습니다.
-
-이는 LinearRegression과 같이 특징값의 범위가 균일하지 않으면 정규화의 효과가 특징에 따라 달라지므로 학습이 진행되지 않을 수 있기 때문입니다.
-
-Lasso 모델 score 1.20873
-
-Ridge model -값으로 반환되어 절댓값으로 계산하자 score : 1.21130
-
-결론적으로 count값이 균일하지 않으므로 linear_model은 사용이 부적합하며, 절댓값을 제출하면 CatBoostRegressor > GradientBoostingRegressor 순으로 score가 높습니다.
-
-RandomForestRegressor를 이용하면 예측 값에 음수가 존재하지 않으며 가장 정확한 예측이 가능합니다.(score:0.42058)
-
-box plot의 count값을 보면 outlier가 존재하는데, RandomForestRegressor의 랜덤화와 예측 값 간의 비상관화가 노이즈에 대해서도 강인하게 만들어 주기 때문입니다.
-
-또한, Month column은 주어진 train,test 데이터에서 학습과정에 부정확도를 상승시키므로 제외하는 것이 적합할 것으로 보입니다.
-
---------
