@@ -37,15 +37,15 @@ https://minaejeon.github.io/
    
 ### 6. 교차 검증 모델 실험 (Kaggle Sentiment Analysis on Movie Reviews)                   
 
-       - score : 0.66756, rank :   19 / 861 추정
+       - score : 0.66756, rank : 19 / 861 추정
    
 ### 7. training Image 전처리 기법 효과 분석 (Kaggle Plant Seedlings Classification)       
 
-       - score : 0.97103, rank :  262 / 835 추정
+       - score : 0.97103, rank : 262 / 835 추정
    
 ### 8. Image Classification 모델 실험 (Kaggle Invasive Species Monitoring)                
 
-       - score : 0.99315, rank :  32 / 512 추정
+       - score : 0.99315, rank : 32 / 512 추정
    
 ### 9.  Sequential Model 적합 Layer 및 Compile 실험 (Kaggle Toxic Comment Classification Challenge)
 
@@ -61,16 +61,16 @@ https://minaejeon.github.io/
    
 ### 2. Boost Classifier 모델 실험 (Kaggle Shelter Animal Outcomes)                       
 
-       - score : 0.73234, rank :  291 / 1600 추정
+       - score : 0.73234, rank : 291 / 1600 추정
    
 ### 3. Boost Classifier 모델 실험 2 (Kaggle Don't Get Kicked!)                           
 
-       - score : 0.25750, rank :    11 / 571 추정
+       - score : 0.25750, rank : 11 / 571 추정
    
 ### 4. Boost Classifier 모델 실험 3 (Kaggle San Francisco Crime Classification)          
 
-       - score : 2.41086, rank :  571 / 2332 추정
+       - score : 2.41086, rank : 571 / 2332 추정
    
 ### 5. 회귀분석 모델 실험 (Kaggle Bike Sharing Demand)                                  
 
-       - score : 0.41966, rank :   408 / 3243 추정
+       - score : 0.41966, rank : 408 / 3243 추정
