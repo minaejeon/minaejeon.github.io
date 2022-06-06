@@ -1,6 +1,6 @@
 
 
-# 진행중인 대회 참여 이력 (상위권 진입)
+# 진행중인 대회 참여, 상위권 달성
 
 ## 1. Predict accident risk score for unique postcode
 ### Score : 0.64 , Rank : 20 / 283
