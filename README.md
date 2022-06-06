@@ -17,7 +17,7 @@ https://minaejeon.github.io/
 
 ###  비정형 텍스트 및 이미지 데이터 정제 및 분석
 
-  田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
+  좌측 메뉴의 田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
   
    ### 1. NLTK와 Keras의 Text 토큰화 실험 (Kaggle Spam Mails Dataset)
    ### 2. NLTK와 Keras의 Text 토큰화 실험2 (Kaggle Fake and real news Dataset).
@@ -32,7 +32,7 @@ https://minaejeon.github.io/
   
 ###  정형  정제 및 분석
 
-  田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
+  좌측 메뉴의 田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
 
    ### 1. Scaler 실험 및 결과 분석 (Kaggle Otto Group Product Classification Challenge)     SCORE : 0.47595, RANK : 1105 / 3509 추정
    ### 2. Boost Classifier 모델 실험 (Kaggle Shelter Animal Outcomes)                       SCORE : 0.73234, RANK :  291 / 1600 추정
