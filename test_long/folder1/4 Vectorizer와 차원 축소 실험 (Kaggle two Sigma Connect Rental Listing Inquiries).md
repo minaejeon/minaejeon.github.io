@@ -25,9 +25,13 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 
 
 /kaggle/input/two-sigma-connect-rental-listing-inquiries/images_sample.zip
+
 /kaggle/input/two-sigma-connect-rental-listing-inquiries/Kaggle-renthop.torrent
+
 /kaggle/input/two-sigma-connect-rental-listing-inquiries/sample_submission.csv.zip
+
 /kaggle/input/two-sigma-connect-rental-listing-inquiries/test.json.zip
+
 /kaggle/input/two-sigma-connect-rental-listing-inquiries/train.json.zip
 
 
