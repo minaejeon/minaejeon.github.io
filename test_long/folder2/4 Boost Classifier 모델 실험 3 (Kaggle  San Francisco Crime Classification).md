@@ -917,7 +917,16 @@ train2=alldata2[:len(train)]
 test2=alldata2[len(train):]
 ```
 ----
-분류 Model중 RandomForestClassifier/ CatBoostClassifier / GradientBoostingClassifier 를 적용하여 데이터와의 적합성을 확인해보겠습니다.
+분류 Model중 RandomForestClassifier/ CatBoostClassifier / GradientBoostingClassifier 를 적용하여 데이터와의 적합성을 확인해보았습니다.
+
+SCORE가 낮을수록 순위가 개선되는데, CatBoostClassifier(score 2.41086) > RandomForestClassifier(score 9.53751) 순으로 큰 차이를 보였습니다.
+
+또한, GradientBoostingClassifier는 방대한 데이터를 처리하기에 적합치 않아 5시간 이상 소요되어 학습을 중지하였습니다.
+
+CatBoostingClassifier의 경우, 성능도 월등히 높고 GBM에 비해 시간은 적게 걸리기 때문에 가장 적합한 모델입니다.
+
+약한 학습기를 순차적으로 학습-예측하면서 잘못 예측한 데이터에 가중치 부여를 통해 오류를 개선해 나가면서 학습하는 방식이기 때문으로 보입니다.
+
 
 1) RandomForestClassifier
 ----
@@ -1047,10 +1056,10 @@ array([[5.13981685e-03, 1.33836675e-01, 2.60218668e-04, ...,
 -----
 
 ```python
-from sklearn.ensemble import GradientBoostingClassifier
-gbc=GradientBoostingClassifier(random_state=0)
-gbc.fit(train2,train["Category"])
-result=gbc.predict_proba(test2)
+# from sklearn.ensemble import GradientBoostingClassifier
+# gbc=GradientBoostingClassifier(random_state=0)
+# gbc.fit(train2,train["Category"])
+# result=gbc.predict_proba(test2)
 ```
 
 
@@ -2120,8 +2129,6 @@ sub
 </div>
 
 ---------
-
-SanFrancisco
 
 
 ```python
