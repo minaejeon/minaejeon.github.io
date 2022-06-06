@@ -2116,6 +2116,7 @@ alldata3.describe()
 </table>
 <p>8 rows × 93 columns</p>
 </div>
+
 ------
 5) StandardScaler
 
