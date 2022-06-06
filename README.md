@@ -3,7 +3,9 @@ Minae-Jeon (93.10.05)
 https://minaejeon.github.io/
 
 # 진행중인 대회 참여 이력
-  
+
+------------------------
+
 ###   Predict accident risk score for unique postcode ( SCORE : 0.64 , RANK : 20 / 283 )
   
 ###   Computer Vision 이상치 탐지 알고리즘 경진대회 ( SCORE : 0.82019 , RANK : 71 / 481 )
@@ -14,6 +16,8 @@ https://minaejeon.github.io/
 ∵
 
 # 데이터 분석 실험 및 고찰 
+
+------------------
 
 ###  비정형 텍스트 및 이미지 데이터 정제 및 분석
 
