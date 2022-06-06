@@ -403,19 +403,19 @@ text
 ------
 
 ```python
-# import nltk
+ import nltk
 
-# stopwords = nltk.corpus.stopwords.words('english')
+ stopwords = nltk.corpus.stopwords.words('english')
 
-# for sentence in TK.word_index:
-#     filtered_words=[]
+ for sentence in TK.word_index:
+     filtered_words=[]
     
-#     for word in sentence:
-#         word=word.lower()
-#     if word not in stopwords:
-#         filtered_words.append(word)
+     for word in sentence:
+         word=word.lower()
+     if word not in stopwords:
+         filtered_words.append(word)
         
-# text.append(filtered_words)
+ text.append(filtered_words)
 ```
 
 
