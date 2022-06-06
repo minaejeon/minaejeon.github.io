@@ -930,6 +930,7 @@ CatBoostingClassifier의 경우, 성능도 월등히 높고 GBM에 비해 시간
 적용 code는 아래와 같습니다.
 
 1) RandomForestClassifier
+
 ----
 
 ```python
