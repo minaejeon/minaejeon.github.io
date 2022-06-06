@@ -979,3 +979,4 @@ sub.to_csv("submission.csv",index=0)
 
 # Stemming의 경우 미개선 이유는 역시 단어의 원형을 찾는 과정에서 train data의 text column의 의미를 조금씩 변화시켜 정확도를 향상하는데 도움이 되지 않았던 것으로 보입니다.
 
+# Text의 문맥상 미세한 차이가 정확성에 큰 영향을 주는 경우 STOP WORDS와 Stemming을 사용하는 것은 부적합함을 느꼈습니다. 따라서 Data 특성을 먼저 파악하여 적합한 기법을 사용하는 것이 필요할 것입니다.
