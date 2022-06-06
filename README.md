@@ -1,5 +1,4 @@
-# Minae-Jeon (93.10.05) #
-
+Minae-Jeon (93.10.05)
 https://minaejeon.github.io/
 
 # 진행중인 대회 참여 이력
