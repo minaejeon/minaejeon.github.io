@@ -192,19 +192,6 @@ display(train,test)
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -806,19 +793,6 @@ alldata2
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -943,19 +917,20 @@ train2=alldata2[:len(train)]
 test2=alldata2[len(train):]
 ```
 ----
+분류 Model중 RandomForestClassifier/ CatBoostClassifier / GradientBoostingClassifier 를 적용하여 데이터와의 적합성을 확인해보겠습니다.
+
 1) RandomForestClassifier
 ----
 
 ```python
-# from sklearn.ensemble import RandomForestClassifier 
-# rfc=RandomForestClassifier(n_jobs=-1)
-# rfc.fit(train2,train["Category"])
+from sklearn.ensemble import RandomForestClassifier 
+rfc=RandomForestClassifier(n_jobs=-1)
+rfc.fit(train2,train["Category"])
 ```
 
 
 ```python
-# result=rfc.predict_proba(test2)
-# result
+result=rfc.predict_proba(test2)
 ```
 ----
 2) CatBoostClassifier
@@ -1072,11 +1047,10 @@ array([[5.13981685e-03, 1.33836675e-01, 2.60218668e-04, ...,
 -----
 
 ```python
-# from sklearn.ensemble import GradientBoostingClassifier
-# gbc=GradientBoostingClassifier(random_state=0)
-# gbc.fit(train2,train["Category"])
-# result=gbc.predict_proba(test2)
-# result
+from sklearn.ensemble import GradientBoostingClassifier
+gbc=GradientBoostingClassifier(random_state=0)
+gbc.fit(train2,train["Category"])
+result=gbc.predict_proba(test2)
 ```
 
 
@@ -2145,6 +2119,9 @@ sub
 <p>884262 rows × 40 columns</p>
 </div>
 
+---------
+
+SanFrancisco
 
 
 ```python
