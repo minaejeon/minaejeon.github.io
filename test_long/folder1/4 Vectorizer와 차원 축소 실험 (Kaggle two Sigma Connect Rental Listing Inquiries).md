@@ -780,6 +780,7 @@ photo의 갯수가 선호도에 영향을 줄 것으로 생각하였고, descrip
 photo는 사진을 볼 수 있는 site가 list 형식으로 구성되어 있습니다.
 description은 text로 구성되어 있는데 띄어쓰기 기준으로 counting하려 합니다.
 features 또한 list 형식으로 구성되어 있어 apply(len)을 이용하여 쉽게 counting할 수 있습니다. 
+
 -------------
 
 
@@ -810,6 +811,7 @@ plt.xlim(-1,15)
 ------------------
 사진의 갯수가 많을 수록 interest_level이 낮은 경우가 급격히 감소함을 알 수 있습니다.
 따라서 num_photos column은 예측에 도움을 주는 column으로 볼 수 있습니다.
+
 ------------------
 
 
@@ -827,6 +829,7 @@ street_address : 25766 개
 building_id : 11635개
 manager_id : 4399개
 따라서 위의 column들은 LabelEncoder를 사용하여 처리함으로써 숫자 형식으로 통일하려 합니다.
+
 ---------------
 
 
@@ -1105,6 +1108,7 @@ alldata
 
 --------------
 features는 1개의 특징내에 띄어쓰기가 들어가는 경우가 있으므로 이를 '-'로 이어준 후 다른 feature간 ' ' 띄어쓰기 처리하여 전처리 하였습니다.
+
 -----------
 
 ```python
@@ -1140,6 +1144,7 @@ Vectorizer 2: HashingVectorizer
 from sklearn.feature_extraction.text import HashingVectorizer
 hv=HashingVectorizer()
 features=hv.fit_transform(alldata['features'])
+```
 
 ------------
 적합한 Vectorizer방식을 고민하였을 때, 중요치 않은 정보가 학습에 중점적으로 사용된다면 예측의 정확성을 떨어뜨릴 수 있다는 생각이 들었습니다.
@@ -1185,7 +1190,8 @@ features_dec'
 TypeError: A sparse matrix was passed, but dense data is required. Use X.toarray() to convert to a dense numpy array. 발생하였고
 text데이터를 온전히 classification 처럼 기준을 잡기에 부적합해 보입니다. (데이터 또한 양이 방대하여 LDA를 적용하기 어렵습니다.)
 
-따라서 TruncatedSVD와 NMF 두가지 차원축소 기법을 이용하여 실험하겠습니다.
+# 따라서 TruncatedSVD와 NMF 두가지 차원축소 기법을 이용하여 실험하겠습니다.
+
 -------------------------------
 
 ```python
@@ -1195,31 +1201,10 @@ features_dec=svd.fit_transform(features)
 features_dec
 ```
 
-array([[ 0.64819358,  0.2268297 ,  0.43422181, ..., -0.19330316,
-
-         0.08684557, -0.05572787],
-
-       [ 0.74925628, -0.48301106, -0.00998859, ...,  0.01122021,
-
-         0.01288652, -0.10817629],
-
-       [ 0.6759141 , -0.44965067,  0.00340276, ...,  0.28775837,
-
-         0.30178022, -0.0861425 ],
-
-       ...,
-
-       [ 0.48567834,  0.73391381, -0.38417872, ..., -0.07282077,
-
-         0.05410576, -0.05185555],
-
-       [ 0.66626494,  0.40339067, -0.41024916, ...,  0.20264503,
-
-        -0.14865679, -0.11466418],
-
-       [ 0.41549047,  0.03875045, -0.06200761, ...,  0.01225767,
-
-        -0.0645448 , -0.0791891 ]])
+array([[ 0.64819358,  0.2268297 ,  0.43422181, ..., -0.19330316, 0.08684557, -0.05572787],
+      [ 0.74925628, -0.48301106, -0.00998859, ...,  0.01122021,0.01288652, -0.10817629],
+      [ 0.6759141 , -0.44965067,  0.00340276, ...,  0.28775837,0.30178022, -0.0861425 ],
+      ...,-0.0645448 , -0.0791891 ]])
 
 ```python
 from sklearn.decomposition import NMF
@@ -1228,33 +1213,12 @@ features_dec=nmf.fit_transform(features)
 features_dec
 ```
 
-array([[3.53982969e-02, 3.64364794e-02, 5.62484688e-02, ...,
-
-        0.00000000e+00, 2.14662288e-02, 1.78256081e-04],
-
-       [4.67000249e-02, 0.00000000e+00, 0.00000000e+00, ...,
-
-        4.73919124e-02, 4.06890991e-03, 3.70018723e-04],
-
-       [4.18874316e-02, 0.00000000e+00, 0.00000000e+00, ...,
-
-        4.34924434e-02, 4.96008463e-02, 0.00000000e+00],
-
-       ...,
-
-       [0.00000000e+00, 9.53027887e-02, 1.76697103e-05, ...,
-
-        0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
-
-       [0.00000000e+00, 6.76456287e-02, 1.13973140e-05, ...,
-
-        5.99124970e-02, 0.00000000e+00, 0.00000000e+00],
-
-       [0.00000000e+00, 3.20661262e-02, 0.00000000e+00, ...,
-
-        0.00000000e+00, 5.43850286e-02, 0.00000000e+00]])
-
-
+array([[3.53982969e-02, 3.64364794e-02, 5.62484688e-02, ..., 0.00000000e+00, 2.14662288e-02, 1.78256081e-04],
+      [4.67000249e-02, 0.00000000e+00, 0.00000000e+00, ...,4.73919124e-02, 4.06890991e-03, 3.70018723e-04],
+      [4.18874316e-02, 0.00000000e+00, 0.00000000e+00, ...,4.34924434e-02, 4.96008463e-02, 0.00000000e+00],...,
+      [0.00000000e+00, 9.53027887e-02, 1.76697103e-05, ...,0.00000000e+00, 0.00000000e+00, 0.00000000e+00]
+      [0.00000000e+00, 6.76456287e-02, 1.13973140e-05, ...,5.99124970e-02, 0.00000000e+00, 0.00000000e+00],
+      [0.00000000e+00, 3.20661262e-02, 0.00000000e+00, ..., 0.00000000e+00, 5.43850286e-02, 0.00000000e+00]])
 
 -------------------
 이 데이터에 HashingVectorizer를 적용 후 NMF로 차원 축소를 하게 되면 
@@ -1275,24 +1239,17 @@ display(alldata,alldata.columns)
 ```
 
 Index(['bathrooms', 'bedrooms', 'building_id', 'created', 'description',
-
-       'display_address', 'features', 'latitude', 'listing_id', 'longitude',
-
-       'manager_id', 'photos', 'price', 'street_address', 'interest_level',
-
-       'num_photos', 'num_features', 'num_description', 'features_dec0',
-
-       'features_dec1', 'features_dec2', 'features_dec3', 'features_dec4',
-
-       'features_dec5', 'features_dec6', 'features_dec7', 'features_dec8',
-
-       'features_dec9'],
-
-      dtype='object')
+'display_address', 'features', 'latitude', 'listing_id', 'longitude',
+'manager_id', 'photos', 'price', 'street_address', 'interest_level',
+ 'num_photos', 'num_features', 'num_description', 'features_dec0',
+'features_dec1', 'features_dec2', 'features_dec3', 'features_dec4',
+'features_dec5', 'features_dec6', 'features_dec7', 'features_dec8',
+'features_dec9'], dtype='object')
 
 -----------------
 alldata에서 list, 문자형 칼럼 제외하고 숫자형(int,float) column은 따로 학습이 필요합니다.
 따라서 object가 아닌 int나 float 만 alldata2로 구분하였습니다.
+
 ----------------
 
 
@@ -1601,8 +1558,8 @@ alldata2
 </div>
 
 -----------
-alldata의 column과 비교하였을 때, alldata2에는 created column을 제외하고 모두 숫자형으로 반영 되었음을 알 수 있습니다.
-(ex. photos->num_photos..)
+alldata의 column과 비교하였을 때, alldata2에는 created column을 제외하고 모두 숫자형으로 반영 되었음을 알 수 있습니다. (ex. photos->num_photos..)
+
 ---------------
 
 
@@ -1621,6 +1578,7 @@ Index(['bathrooms', 'bedrooms', 'building_id', 'display_address', 'latitude',
 
 -------------
 alldata의 숫자형으로 반영된 column만 분석에 사용하고자 train2와 test2 set는 alldata2로 부터 분할합니다.
+
 -----------------
 
 
@@ -1636,7 +1594,6 @@ cbc.fit(train2,train["interest_level"])
 result=cbc.predict_proba(test2)
 ```
 
-<pre>
 Learning rate set to 0.096534
 0:	learn: 1.0274068	total: 82.1ms	remaining: 1m 22s
 100:	learn: 0.5924534	total: 2.57s	remaining: 22.8s
@@ -1649,7 +1606,7 @@ Learning rate set to 0.096534
 800:	learn: 0.4670123	total: 17.5s	remaining: 4.34s
 900:	learn: 0.4566555	total: 19.6s	remaining: 2.15s
 999:	learn: 0.4470241	total: 21.7s	remaining: 0us
-</pre>
+
 
 ```python
 sub=pd.read_csv("/kaggle/input/two-sigma-connect-rental-listing-inquiries/sample_submission.csv.zip")
@@ -1755,6 +1712,7 @@ sub
 result의 값을 sub에 적용할 때는 column중 'listing_id'를 제외한 'high', 'medium', 'low'로 input 해주어야 합니다.
 따라서 모든 row의 값을 적용하되, 'high' column부터 적용 될 수 있도록
 sub.iloc[:,1:]=result로 적용합니다.
+
 --------------
 
 
@@ -1764,22 +1722,17 @@ result
 ```
 
 array([[0.06048403, 0.58370268, 0.35581329],
-
-       [0.01975243, 0.93237652, 0.04787105],
-
-       [0.00210448, 0.98662512, 0.01127041],
-
-       ...,
-
-       [0.00142394, 0.98373856, 0.0148375 ],
-
-       [0.00139356, 0.98817259, 0.01043385],
-
-       [0.04733993, 0.63413075, 0.31852932]])
+[0.01975243, 0.93237652, 0.04787105],
+[0.00210448, 0.98662512, 0.01127041],
+...,
+[0.00142394, 0.98373856, 0.0148375 ],
+[0.00139356, 0.98817259, 0.01043385],
+[0.04733993, 0.63413075, 0.31852932]])
 
 ----------------
 train과 test는 json 형식으로 비정형 데이터와 정형 데이터가 혼재 되어 있습니다. (column 고정이 되지 않는 문제가 발생할 수 있습니다.)
 sub의 column을 고정하고자 할 때는 아래와 같이 진행할 수 있습니다.
+
 ----------------------
 
 
