@@ -1,4 +1,4 @@
-#2 NLTK와 Keras의 Text 토큰화 실험2 (Kaggle  Fake and real news Dataset).md
+# 2 NLTK와 Keras의 Text 토큰화 실험2 (Kaggle  Fake and real news Dataset).md
 
 ```python
 # This Python 3 environment comes with many helpful analytics libraries installed
