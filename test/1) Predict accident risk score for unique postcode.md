@@ -1,0 +1,1055 @@
+# 1) Predict accident risk score for unique postcode
+
+
+
+```python
+# This Python 3 environment comes with many helpful analytics libraries installed
+# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
+# For example, here's several helpful packages to load
+
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+/kaggle/input/participantsdataset/sample_submission.csv
+
+/kaggle/input/participantsdataset/population.csv
+
+/kaggle/input/participantsdataset/train.csv
+
+/kaggle/input/participantsdataset/test.csv
+
+/kaggle/input/participantsdataset/roads_network.csv
+
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+pd.options.display.max_columns=999
+pd.options.display.max_rows=100
+```
+
+
+```python
+train = pd.read_csv("/kaggle/input/participantsdataset/train.csv")
+test = pd.read_csv("/kaggle/input/participantsdataset/test.csv")
+sub = pd.read_csv("/kaggle/input/participantsdataset/sample_submission.csv")
+roads_network = pd.read_csv("/kaggle/input/participantsdataset/roads_network.csv")
+population = pd.read_csv("/kaggle/input/participantsdataset/population.csv")
+```
+
+
+```python
+roads_network # length 추가해주는 것이 좋음
+
+roads_network_postcode_length = roads_network.groupby("postcode")["length"].mean()
+roads_network_postcode_length
+```
+
+postcode
+
+AB1         2643.0
+
+AB1 9NN     2643.0
+
+AB10 1UH    2643.0
+
+AB10 1YL    2643.0
+
+AB10 6AT    2643.0
+
+             ...  
+
+ZE3 9          NaN
+
+ZE3 9JL        NaN
+
+ZE3 9JP        NaN
+
+ZE3 9JW      295.0
+
+m23 5bt      934.0
+
+Name: length, Length: 75895, dtype: float64
+
+
+
+```python
+population_postcode_values = population.groupby("postcode")["Variable: All usual residents; measures: Value"].mean()
+```
+
+
+```python
+train.nunique() # 값의 종류를 확인, 값이 하나 이하면 의미없음 2nd_Road_Number, country
+```
+
+
+Accident_ID                                    478741
+Police_Force                                       66
+Number_of_Vehicles                                  4
+Number_of_Casualties                                5
+Date                                              366
+Day_of_Week                                         7
+Time                                             1367
+Local_Authority_(District)                        880
+Local_Authority_(Highway)                         207
+1st_Road_Class                                      5
+1st_Road_Number                                  5464
+Road_Type                                           6
+Speed_limit                                         6
+2nd_Road_Class                                      5
+2nd_Road_Number                                     1
+Pedestrian_Crossing-Human_Control                   3
+Pedestrian_Crossing-Physical_Facilities             6
+Light_Conditions                                    5
+Weather_Conditions                                  9
+Road_Surface_Conditions                             5
+Special_Conditions_at_Site                          8
+Carriageway_Hazards                                 6
+Urban_or_Rural_Area                                 2
+Did_Police_Officer_Attend_Scene_of_Accident         2
+state                                               3
+postcode                                        95625
+country                                             1
+dtype: int64
+
+
+```python
+test["Local_Authority_(District)"]
+```
+
+0         218
+
+1         157
+
+2         155
+
+3          26
+
+4           6
+
+         ... 
+
+121254      6
+
+121255    633
+
+121256    143
+
+121257      7
+
+121258     22
+
+Name: Local_Authority_(District), Length: 121259, dtype: int64
+
+
+
+```python
+test.nunique() # 값의 종류를 확인, 값이 하나 이하면 의미없음 2nd_Road_Number, country, Number_of_Casualties(종속변수임)
+```
+
+
+Accident_ID                                    121259
+Police_Force                                       60
+Number_of_Vehicles                                  4
+Number_of_Casualties                                1
+Date                                              365
+Day_of_Week                                         7
+Time                                             1302
+Local_Authority_(District)                        778
+Local_Authority_(Highway)                         205
+1st_Road_Class                                      5
+1st_Road_Number                                  3827
+Road_Type                                           6
+Speed_limit                                         6
+2nd_Road_Class                                      5
+2nd_Road_Number                                     1
+Pedestrian_Crossing-Human_Control                   3
+Pedestrian_Crossing-Physical_Facilities             6
+Light_Conditions                                    5
+Weather_Conditions                                  9
+Road_Surface_Conditions                             5
+Special_Conditions_at_Site                          8
+Carriageway_Hazards                                 6
+Urban_or_Rural_Area                                 2
+Did_Police_Officer_Attend_Scene_of_Accident         2
+state                                               3
+postcode                                        49772
+country                                             1
+dtype: int64
+
+
+```python
+train["Number_of_Casualties"].value_counts()
+```
+
+
+1    329124
+2     98814
+3     35399
+4      9318
+5      6086
+Name: Number_of_Casualties, dtype: int64
+
+
+```python
+train.info()
+```
+
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 478741 entries, 0 to 478740
+Data columns (total 27 columns):
+ #   Column                                       Non-Null Count   Dtype 
+---  ------                                       --------------   ----- 
+ 0   Accident_ID                                  478741 non-null  int64 
+ 1   Police_Force                                 478741 non-null  int64 
+ 2   Number_of_Vehicles                           478741 non-null  int64 
+ 3   Number_of_Casualties                         478741 non-null  int64 
+ 4   Date                                         478741 non-null  object
+ 5   Day_of_Week                                  478741 non-null  int64 
+ 6   Time                                         478727 non-null  object
+ 7   Local_Authority_(District)                   478741 non-null  int64 
+ 8   Local_Authority_(Highway)                    478741 non-null  object
+ 9   1st_Road_Class                               478741 non-null  int64 
+ 10  1st_Road_Number                              478741 non-null  int64 
+ 11  Road_Type                                    478741 non-null  object
+ 12  Speed_limit                                  478741 non-null  int64 
+ 13  2nd_Road_Class                               478741 non-null  int64 
+ 14  2nd_Road_Number                              478741 non-null  int64 
+ 15  Pedestrian_Crossing-Human_Control            478741 non-null  object
+ 16  Pedestrian_Crossing-Physical_Facilities      478741 non-null  object
+ 17  Light_Conditions                             478741 non-null  object
+ 18  Weather_Conditions                           478741 non-null  object
+ 19  Road_Surface_Conditions                      478289 non-null  object
+ 20  Special_Conditions_at_Site                   478678 non-null  object
+ 21  Carriageway_Hazards                          478741 non-null  object
+ 22  Urban_or_Rural_Area                          478741 non-null  int64 
+ 23  Did_Police_Officer_Attend_Scene_of_Accident  478741 non-null  object
+ 24  state                                        478741 non-null  object
+ 25  postcode                                     478741 non-null  object
+ 26  country                                      478741 non-null  object
+dtypes: int64(12), object(15)
+memory usage: 98.6+ MB
+
+
+```python
+allData = pd.concat([train, test], axis=0)
+allData = pd.merge(allData, roads_network_postcode_length, how="left", on="postcode")
+allData = pd.merge(allData, population_postcode_values, how="left", on="postcode")
+allData["Date"] = pd.to_datetime(allData["Date"])
+allData["Time"] = pd.to_datetime(allData["Time"])
+allData["hour"] = allData["Time"].dt.hour
+allData["minute"] = allData["Time"].dt.minute
+#allData["year"] = allData["Date"].dt.year # 도움이 안됨, 왜냐하면 train과 test에 각각 다른 하나의 고유값만 있어서임
+allData["month"] = allData["Date"].dt.month
+allData["day"] = allData["Date"].dt.day
+allData2 = allData.drop(columns=["Accident_ID","2nd_Road_Number", "country", "Date", "Number_of_Casualties", "Time", "Day_of_Week"])
+allData2
+```
+
+<div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Police_Force</th>
+      <th>Number_of_Vehicles</th>
+      <th>Local_Authority_(District)</th>
+      <th>Local_Authority_(Highway)</th>
+      <th>1st_Road_Class</th>
+      <th>1st_Road_Number</th>
+      <th>Road_Type</th>
+      <th>Speed_limit</th>
+      <th>2nd_Road_Class</th>
+      <th>Pedestrian_Crossing-Human_Control</th>
+      <th>Pedestrian_Crossing-Physical_Facilities</th>
+      <th>Light_Conditions</th>
+      <th>Weather_Conditions</th>
+      <th>Road_Surface_Conditions</th>
+      <th>Special_Conditions_at_Site</th>
+      <th>Carriageway_Hazards</th>
+      <th>Urban_or_Rural_Area</th>
+      <th>Did_Police_Officer_Attend_Scene_of_Accident</th>
+      <th>state</th>
+      <th>postcode</th>
+      <th>length</th>
+      <th>Variable: All usual residents; measures: Value</th>
+      <th>hour</th>
+      <th>minute</th>
+      <th>month</th>
+      <th>day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>34</td>
+      <td>2</td>
+      <td>344</td>
+      <td>E10000032</td>
+      <td>4</td>
+      <td>395</td>
+      <td>Single carriageway</td>
+      <td>30</td>
+      <td>-1</td>
+      <td>None within 50 metres</td>
+      <td>No physical crossing within 50 meters</td>
+      <td>Daylight: Street light present</td>
+      <td>Fine without high winds</td>
+      <td>Dry</td>
+      <td>Ol or diesel</td>
+      <td>None</td>
+      <td>1</td>
+      <td>Yes</td>
+      <td>England</td>
+      <td>OX3 9UP</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>13.0</td>
+      <td>20.0</td>
+      <td>12</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>2</td>
+      <td>102</td>
+      <td>E09000026</td>
+      <td>3</td>
+      <td>13</td>
+      <td>One way street</td>
+      <td>30</td>
+      <td>-1</td>
+      <td>None within 50 metres</td>
+      <td>No physical crossing within 50 meters</td>
+      <td>Daylight: Street light present</td>
+      <td>Raining without high winds</td>
+      <td>Dry</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1</td>
+      <td>No</td>
+      <td>England</td>
+      <td>S35 4EZ</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7.0</td>
+      <td>53.0</td>
+      <td>2</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>2</td>
+      <td>531</td>
+      <td>E10000016</td>
+      <td>6</td>
+      <td>8</td>
+      <td>Roundabout</td>
+      <td>40</td>
+      <td>6</td>
+      <td>None within 50 metres</td>
+      <td>Zebra crossing</td>
+      <td>Daylight: Street light present</td>
+      <td>Fine without high winds</td>
+      <td>Dry</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1</td>
+      <td>No</td>
+      <td>England</td>
+      <td>BN21 2XR</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>16.0</td>
+      <td>0.0</td>
+      <td>2</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>7</td>
+      <td>E08000035</td>
+      <td>6</td>
+      <td>13</td>
+      <td>Single carriageway</td>
+      <td>30</td>
+      <td>6</td>
+      <td>None within 50 metres</td>
+      <td>No physical crossing within 50 meters</td>
+      <td>Daylight: Street light present</td>
+      <td>Fine without high winds</td>
+      <td>Dry</td>
+      <td>Roadworks</td>
+      <td>None</td>
+      <td>1</td>
+      <td>Yes</td>
+      <td>England</td>
+      <td>TA20 3PT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>16.0</td>
+      <td>50.0</td>
+      <td>6</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>46</td>
+      <td>1</td>
+      <td>519</td>
+      <td>E10000031</td>
+      <td>3</td>
+      <td>24</td>
+      <td>Dual carriageway</td>
+      <td>30</td>
+      <td>6</td>
+      <td>None within 50 metres</td>
+      <td>Zebra crossing</td>
+      <td>Daylight: Street light present</td>
+      <td>Fine without high winds</td>
+      <td>Dry</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1</td>
+      <td>No</td>
+      <td>England</td>
+      <td>DN20 0QF</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>13.0</td>
+      <td>25.0</td>
+      <td>6</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>599995</th>
+      <td>1</td>
+      <td>2</td>
+      <td>6</td>
+      <td>E06000042</td>
+      <td>6</td>
+      <td>0</td>
+      <td>Single carriageway</td>
+      <td>30</td>
+      <td>3</td>
+      <td>None within 50 metres</td>
+      <td>No physical crossing within 50 meters</td>
+      <td>Darkness: Street lights present and lit</td>
+      <td>Fine without high winds</td>
+      <td>Wet/Damp</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1</td>
+      <td>Yes</td>
+      <td>England</td>
+      <td>HD9 4AB</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>18.0</td>
+      <td>31.0</td>
+      <td>5</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>599996</th>
+      <td>62</td>
+      <td>2</td>
+      <td>633</td>
+      <td>W06000004</td>
+      <td>3</td>
+      <td>379</td>
+      <td>Dual carriageway</td>
+      <td>30</td>
+      <td>6</td>
+      <td>None within 50 metres</td>
+      <td>No physical crossing within 50 meters</td>
+      <td>Daylight: Street light present</td>
+      <td>Raining without high winds</td>
+      <td>Wet/Damp</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1</td>
+      <td>Yes</td>
+      <td>Alba / Scotland</td>
+      <td>AL2 1FS</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7.0</td>
+      <td>40.0</td>
+      <td>11</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>599997</th>
+      <td>13</td>
+      <td>2</td>
+      <td>143</td>
+      <td>E10000034</td>
+      <td>3</td>
+      <td>19</td>
+      <td>Dual carriageway</td>
+      <td>40</td>
+      <td>5</td>
+      <td>None within 50 metres</td>
+      <td>No physical crossing within 50 meters</td>
+      <td>Daylight: Street light present</td>
+      <td>Fine without high winds</td>
+      <td>Dry</td>
+      <td>Roadworks</td>
+      <td>None</td>
+      <td>2</td>
+      <td>Yes</td>
+      <td>England</td>
+      <td>BN3 3WA</td>
+      <td>125.0</td>
+      <td>NaN</td>
+      <td>8.0</td>
+      <td>26.0</td>
+      <td>12</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>599998</th>
+      <td>1</td>
+      <td>2</td>
+      <td>7</td>
+      <td>E09000016</td>
+      <td>6</td>
+      <td>13</td>
+      <td>Single carriageway</td>
+      <td>30</td>
+      <td>6</td>
+      <td>None within 50 metres</td>
+      <td>No physical crossing within 50 meters</td>
+      <td>Daylight: Street light present</td>
+      <td>Fine without high winds</td>
+      <td>Wet/Damp</td>
+      <td>Roadworks</td>
+      <td>None</td>
+      <td>1</td>
+      <td>Yes</td>
+      <td>England</td>
+      <td>DL14 8HH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>54.0</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>599999</th>
+      <td>1</td>
+      <td>2</td>
+      <td>22</td>
+      <td>E09000025</td>
+      <td>5</td>
+      <td>13</td>
+      <td>Single carriageway</td>
+      <td>30</td>
+      <td>6</td>
+      <td>Control by other authorised person</td>
+      <td>Central refuge</td>
+      <td>Daylight: Street light present</td>
+      <td>Fine without high winds</td>
+      <td>Wet/Damp</td>
+      <td>Roadworks</td>
+      <td>None</td>
+      <td>1</td>
+      <td>Yes</td>
+      <td>England</td>
+      <td>E14 8JT</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>20.0</td>
+      <td>8</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<p>600000 rows × 26 columns</p>
+</div>
+
+
+
+```python
+from sklearn.preprocessing import LabelEncoder
+
+le = LabelEncoder()
+
+category_cols = allData2.columns[allData2.dtypes=="object"]
+category_cols
+
+for i in category_cols:
+    allData2[i] = le.fit_transform(allData2[i])
+    
+allData2
+```
+
+<div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Police_Force</th>
+      <th>Number_of_Vehicles</th>
+      <th>Local_Authority_(District)</th>
+      <th>Local_Authority_(Highway)</th>
+      <th>1st_Road_Class</th>
+      <th>1st_Road_Number</th>
+      <th>Road_Type</th>
+      <th>Speed_limit</th>
+      <th>2nd_Road_Class</th>
+      <th>Pedestrian_Crossing-Human_Control</th>
+      <th>Pedestrian_Crossing-Physical_Facilities</th>
+      <th>Light_Conditions</th>
+      <th>Weather_Conditions</th>
+      <th>Road_Surface_Conditions</th>
+      <th>Special_Conditions_at_Site</th>
+      <th>Carriageway_Hazards</th>
+      <th>Urban_or_Rural_Area</th>
+      <th>Did_Police_Officer_Attend_Scene_of_Accident</th>
+      <th>state</th>
+      <th>postcode</th>
+      <th>length</th>
+      <th>Variable: All usual residents; measures: Value</th>
+      <th>hour</th>
+      <th>minute</th>
+      <th>month</th>
+      <th>day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>34</td>
+      <td>2</td>
+      <td>344</td>
+      <td>150</td>
+      <td>4</td>
+      <td>395</td>
+      <td>3</td>
+      <td>30</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>4</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>63244</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>13.0</td>
+      <td>20.0</td>
+      <td>12</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>2</td>
+      <td>102</td>
+      <td>117</td>
+      <td>3</td>
+      <td>13</td>
+      <td>1</td>
+      <td>30</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>72569</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7.0</td>
+      <td>53.0</td>
+      <td>2</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>2</td>
+      <td>531</td>
+      <td>136</td>
+      <td>6</td>
+      <td>8</td>
+      <td>2</td>
+      <td>40</td>
+      <td>6</td>
+      <td>2</td>
+      <td>4</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>7991</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>16.0</td>
+      <td>0.0</td>
+      <td>2</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>7</td>
+      <td>90</td>
+      <td>6</td>
+      <td>13</td>
+      <td>3</td>
+      <td>30</td>
+      <td>6</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>7</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>86698</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>16.0</td>
+      <td>50.0</td>
+      <td>6</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>46</td>
+      <td>1</td>
+      <td>519</td>
+      <td>149</td>
+      <td>3</td>
+      <td>24</td>
+      <td>0</td>
+      <td>30</td>
+      <td>6</td>
+      <td>2</td>
+      <td>4</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>23334</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>13.0</td>
+      <td>25.0</td>
+      <td>6</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>599995</th>
+      <td>1</td>
+      <td>2</td>
+      <td>6</td>
+      <td>41</td>
+      <td>6</td>
+      <td>0</td>
+      <td>3</td>
+      <td>30</td>
+      <td>3</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>35428</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>18.0</td>
+      <td>31.0</td>
+      <td>5</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>599996</th>
+      <td>62</td>
+      <td>2</td>
+      <td>633</td>
+      <td>188</td>
+      <td>3</td>
+      <td>379</td>
+      <td>0</td>
+      <td>30</td>
+      <td>6</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>5</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>754</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7.0</td>
+      <td>40.0</td>
+      <td>11</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>599997</th>
+      <td>13</td>
+      <td>2</td>
+      <td>143</td>
+      <td>151</td>
+      <td>3</td>
+      <td>19</td>
+      <td>0</td>
+      <td>40</td>
+      <td>5</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>7</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>8235</td>
+      <td>125.0</td>
+      <td>NaN</td>
+      <td>8.0</td>
+      <td>26.0</td>
+      <td>12</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>599998</th>
+      <td>1</td>
+      <td>2</td>
+      <td>7</td>
+      <td>107</td>
+      <td>6</td>
+      <td>13</td>
+      <td>3</td>
+      <td>30</td>
+      <td>6</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
+      <td>1</td>
+      <td>4</td>
+      <td>7</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>22096</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>54.0</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>599999</th>
+      <td>1</td>
+      <td>2</td>
+      <td>22</td>
+      <td>116</td>
+      <td>5</td>
+      <td>13</td>
+      <td>3</td>
+      <td>30</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>1</td>
+      <td>4</td>
+      <td>7</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>25784</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>20.0</td>
+      <td>8</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<p>600000 rows × 26 columns</p>
+</div>
+
+
+
+```python
+train2 = allData2[:len(train)]
+test2 = allData2[len(train):]  ## 의사결정나무는 결측값을 꼭 삭제하지 않아도됨
+```
+
+
+```python
+## 카테고리 컬럼이 많으면 캣보스트가 좋음 -> 해당 종속변수명을 보면 숫자형 값이기 떄문에 회귀가 맞는 것 같음, 1~5까지 독립적인 값이면 회귀가 아님
+## 평가 방식을 보면, 알 수 있음
+from catboost import CatBoostRegressor
+
+cbr = CatBoostRegressor(verbose=100, cat_features=np.where(train2.dtypes=="int")[0], task_type="GPU") # 문자열 컬럼을 지정해줌으로 성능 개선 가능
+cbr.fit(train2, train["Number_of_Casualties"])
+```
+
+
+Learning rate set to 0.090658
+0:	learn: 0.8152081	total: 69.3ms	remaining: 1m 9s
+100:	learn: 0.8091180	total: 6.39s	remaining: 56.9s
+200:	learn: 0.8084150	total: 12.5s	remaining: 49.8s
+300:	learn: 0.8078782	total: 19s	remaining: 44.1s
+400:	learn: 0.8073509	total: 25.5s	remaining: 38s
+500:	learn: 0.8068257	total: 32.4s	remaining: 32.3s
+600:	learn: 0.8063155	total: 38.9s	remaining: 25.8s
+700:	learn: 0.8057963	total: 44.9s	remaining: 19.2s
+800:	learn: 0.8053197	total: 51.4s	remaining: 12.8s
+900:	learn: 0.8048163	total: 58s	remaining: 6.37s
+999:	learn: 0.8043314	total: 1m 4s	remaining: 0us
+
+
+<catboost.core.CatBoostRegressor at 0x7f8d1c9cc810>
+
+
+```python
+result = cbr.predict(test2)
+result
+```
+
+
+array([1.57795473, 1.3487906 , 1.56461338, ..., 1.63487308, 1.1952281 ,
+       1.25536967])
+
+```python
+test["result"] = result
+result_mean = test.groupby("postcode")["result"].mean().values ## 배열로 들어옴
+result_mean
+```
+
+
+array([1.34552517, 1.33128254, 1.43940316, ..., 1.23775476, 1.52623692,
+       1.34229754])
+
+```python
+sub["Accident_risk_index"] = result_mean # postcode별 종속변수값을 넣어주어야함
+sub.to_csv("kwankyuqqqq.csv")
+```
