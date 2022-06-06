@@ -21,11 +21,12 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 # You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
 ```
 
-<pre>
 /kaggle/input/sf-crime/train.csv.zip
+
 /kaggle/input/sf-crime/sampleSubmission.csv.zip
+
 /kaggle/input/sf-crime/test.csv.zip
-</pre>
+
 
 ```python
 train=pd.read_csv("/kaggle/input/sf-crime/train.csv.zip")
@@ -333,10 +334,10 @@ display(train,test)
 <p>884262 rows × 7 columns</p>
 </div>
 
-
+----
 train,test 각 데이터에서 겹치지 않는 값과 정답 값을 drop하여 정제합니다
 
-
+----
 
 ```python
 alldata=pd.concat([train,test],axis=0)
@@ -463,10 +464,10 @@ alldata2
 <p>1762311 rows × 6 columns</p>
 </div>
 
-
+------
 날짜를 숫자로 변경하여 러닝에 용이합니다
 
-
+------
 
 ```python
 alldata2["DayOfWeek"].unique()
@@ -474,23 +475,34 @@ alldata2["DayOfWeek"]=alldata2["DayOfWeek"].replace({"Wednesday":0, "Tuesday":1,
 alldata2["DayOfWeek"]
 ```
 
-<pre>
 0         0
+
 1         0
+
 2         0
+
 3         0
+
 4         0
-         ..
+
+..
+
 884257    0
+
 884258    0
+
 884259    0
+
 884260    0
+
 884261    0
+
 Name: DayOfWeek, Length: 1762311, dtype: int64
-</pre>
+
+-----------
 LabelEncoder를 이용하면 해당 칼럼의 값을 임의의 숫자로 지정해줍니다
 
-
+-----
 
 ```python
 from sklearn.preprocessing import LabelEncoder
@@ -618,17 +630,16 @@ alldata2
 <p>1762311 rows × 6 columns</p>
 </div>
 
-
+------------
 PdDistrict의 각 칼럼 고유값에 해당하는 숫자 값을 dictionary로 만들어 줍니다
 
-
+-------------
 
 ```python
 len(le.classes_) #10개
 dict(zip(le.classes_,range(10)))
 ```
 
-<pre>
 {'BAYVIEW': 0,
  'CENTRAL': 1,
  'INGLESIDE': 2,
@@ -639,22 +650,24 @@ dict(zip(le.classes_,range(10)))
  'SOUTHERN': 7,
  'TARAVAL': 8,
  'TENDERLOIN': 9}
-</pre>
+
+--------------
 칼럼 값이 object인 것이 있는지 추가로 확인합니다.
 
-
+-----------------
 
 ```python
 category=alldata2.columns[alldata2.dtypes == object]
 category
 ```
 
-<pre>
+
 Index(['Address'], dtype='object')
-</pre>
+
+------------
 Address column에서 레이블 인코딩 처리, 숫자로 변경해 줍니다
 
-
+------------
 
 ```python
 for col in category:
@@ -929,53 +942,9 @@ alldata2
 train2=alldata2[:len(train)]
 test2=alldata2[len(train):]
 ```
-
-RandomForestClassifier 에서 score 9.53751
-
-GBDT와 달리 병렬로 트리를 작성. 각 결정 트리의 학습에서 행 데이터나 특징을 샘플링해 전달함으로써 다양한 결정 트리를 작성하고, 앙상블하여 일반화 성능이 높은 예측을 실시. 모델 구축 순서
-
-1) 학습 데이터에서 행 데이터를 샘플링하여 추출
-
-2) 1)을 학습하고 결정트리를 작성, 분기를 작성할 때는 특징의 일부만을 샘플링하여 추출하고 특징의 후보로 삼음. 그 후보들로 부터 데이터를 가장 잘 분할하는 특징과 임곗값을 선택해 분기로 삼음
-
-3) 1)과 2)의 과정을 결정트리의 개수만큼 병렬로 수행
-
-
-
--회귀문제일때는 제곱오차, 분류문제일때는 지니 불순도가 가장 감소하도록 분기를 시행
-
--결정트리마다 원래 개수와 같은 수만큼 행 데이터를 복원 추출하는 부트스트랩 샘플링을 실시.
-
-부트스트랩 샘플링에서는 중복 추출되는 행 데이터가 있는 한편, 평균적으로 행데이터의 1/3 정도는 추출되지 않음
-
--분기마다 특징의 일부를 샘플링한 것을 후보로 삼고 그중 분기의 특징을 선택. 회귀 문제에서는 샘플링하지 않고 모든 특징을 후보로 삼음. 분류문제에서는 특징개수의 제곱근 개수만큼 추출하여 후보로 삼음
-
-
-
-*결정 트리의 개수와 모델 성능의 관계
-
-결정 트리를 병렬로 작성하므로, GBDT와는 달리 결정 트리의 개수가 지나치게 증가하여 모델 성능이 낮아지는 일은 없음.
-
-어느 정도 증가한 후에는 성능이 더 이상 올라가지 않음. 결정 트리의 개수는 계산 시간과 성능의 트레이드 오프로 결정
-
-
-
-*예측 확률 타당성
-
-> 분류 작업시 GBDT에서는 가중치에 기반을 둔 예측 확률의 로그 손실을 최소화하려는 반면, 랜덤 포레스트에서는 지니 불순도를 최소화하려는 각 결정 트리의 예측값의 평균을 구함.
-
-
-
-*랜덤 포레스트 방법의 예측 확률 타당성 보증이 되지 않음
-
-1) 데이터가 충분하지 않을 경우, 0이나 1에 가까운 확률을 예측하기 어려움
-
-2) 모델이 로그 손실을 최소화 하도록 학습할 경우, 충분한 데이터가 있으면 타당한 확률을 예측하나 그렇지 않으면 왜곡
-
-> GBDT,신경망, 로지스틱 회귀일때 분류문제에서는 통상적인 설정으로 로그 손실을 목적함수로 삼아 학습하지만 랜덤포레스트에서는 다른 알고리즘으로 분류하므로 확률이 왜곡됨
-
-
-
+----
+1) RandomForestClassifier
+----
 
 ```python
 # from sklearn.ensemble import RandomForestClassifier 
@@ -988,17 +957,10 @@ GBDT와 달리 병렬로 트리를 작성. 각 결정 트리의 학습에서 행
 # result=rfc.predict_proba(test2)
 # result
 ```
+----
+2) CatBoostClassifier
 
-# CatBoostClassifier에서 score 2.41086으로 상승 (score 낮을 수록 순위 높아짐)
-
-GBDT의 라이브러리인 CATBOOST는 범주형 변수 지원, 과적합 해소를 위한 정렬된 부스팅, GPU를 활용한 트리모델에서의 부스팅 성능 향상과 같은 기능을 지원
-
-범주형 변수로서 지정한 특징을 자동으로 타깃 인코딩하여 수치로 변환. 타깃 인코딩을 잘못 사용하면 목적변수의 정보를 부적절하게 사용. 랜덤하게 데이터를 정렬하면서 적용하는 식의 연구 진행. 결정 트리를 작성하는 과정에서 동적으로 범주형 변수의 조합에 대해 타깃 인코딩이 이루어짐. 즉 어떤 분기에서 범주형 변수가 사용되었을 때 그 범주형 변수와 다른 범주형 변수와의 조합에 대해 타깃 인코딩 연산이 이루어지며 급다 깊은 분기에서 그 결과가 사용
-
-
-
-데이터 수가 적을 때는 정렬부스팅이라는 알고리즘 사용. 속도는 느리지만 데이터 수가 적을 때 모델 성능이 높음.
-
+---
 
 
 ```python
@@ -1010,49 +972,86 @@ result=cbc.predict_proba(test2)
 result
 ```
 
-<pre>
 Learning rate set to 0.258679
+
 0:	learn: 2.9675235	total: 86.6ms	remaining: 1m 26s
+
 1:	learn: 2.8087564	total: 167ms	remaining: 1m 23s
+
 2:	learn: 2.7177632	total: 246ms	remaining: 1m 21s
+
 3:	learn: 2.6591386	total: 323ms	remaining: 1m 20s
+
 4:	learn: 2.6195879	total: 405ms	remaining: 1m 20s
+
 5:	learn: 2.5929342	total: 481ms	remaining: 1m 19s
+
 6:	learn: 2.5713568	total: 559ms	remaining: 1m 19s
+
 7:	learn: 2.5560285	total: 637ms	remaining: 1m 18s
+
 8:	learn: 2.5391151	total: 713ms	remaining: 1m 18s
+
 9:	learn: 2.5296752	total: 791ms	remaining: 1m 18s
+
 10:	learn: 2.5216833	total: 866ms	remaining: 1m 17s
+
 11:	learn: 2.5168089	total: 941ms	remaining: 1m 17s
+
 12:	learn: 2.5130235	total: 1.02s	remaining: 1m 17s
+
 13:	learn: 2.5082091	total: 1.09s	remaining: 1m 17s
+
 14:	learn: 2.5058305	total: 1.17s	remaining: 1m 16s
+
 15:	learn: 2.5025722	total: 1.25s	remaining: 1m 16s
+
 16:	learn: 2.4997859	total: 1.32s	remaining: 1m 16s
+
 17:	learn: 2.4958220	total: 1.4s	remaining: 1m 16s
+
 18:	learn: 2.4941350	total: 1.48s	remaining: 1m 16s
+
 19:	learn: 2.4920508	total: 1.55s	remaining: 1m 16s
+
 20:	learn: 2.4905757	total: 1.63s	remaining: 1m 15s
+
 21:	learn: 2.4890146	total: 1.71s	remaining: 1m 15s
+
 22:	learn: 2.4872111	total: 1.78s	remaining: 1m 15s
+
 23:	learn: 2.4851523	total: 1.87s	remaining: 1m 16s
+
 24:	learn: 2.4835806	total: 1.95s	remaining: 1m 16s
+
 25:	learn: 2.4821135	total: 2.03s	remaining: 1m 16s
+
 26:	learn: 2.4805743	total: 2.1s	remaining: 1m 15s
+
 27:	learn: 2.4789716	total: 2.18s	remaining: 1m 15s
+
 28:	learn: 2.4782270	total: 2.26s	remaining: 1m 15s
+
 29:	learn: 2.4764247	total: 2.33s	remaining: 1m 15s
+
 30:	learn: 2.4748778	total: 2.41s	remaining: 1m 15s
+
 31:	learn: 2.4737705	total: 2.48s	remaining: 1m 15s
+
 ...
+
 994:	learn: 2.3135787	total: 1m 20s	remaining: 403ms
+
 995:	learn: 2.3134935	total: 1m 20s	remaining: 322ms
+
 996:	learn: 2.3134485	total: 1m 20s	remaining: 242ms
+
 997:	learn: 2.3133665	total: 1m 20s	remaining: 161ms
+
 998:	learn: 2.3132940	total: 1m 20s	remaining: 80.6ms
+
 999:	learn: 2.3132355	total: 1m 20s	remaining: 0us
-</pre>
-<pre>
+
 array([[5.13981685e-03, 1.33836675e-01, 2.60218668e-04, ...,
         1.04583196e-01, 2.96222535e-02, 2.08501741e-02],
        [6.52594062e-04, 1.23925386e-01, 5.93575446e-05, ...,
@@ -1066,17 +1065,11 @@ array([[5.13981685e-03, 1.33836675e-01, 2.60218668e-04, ...,
         1.03926996e-01, 5.75476796e-02, 2.37595173e-02],
        [1.62208050e-03, 4.06436602e-02, 3.91631858e-03, ...,
         2.97695394e-02, 6.53736414e-02, 2.59673197e-03]])
-</pre>
-**GBM에 비해 시간은 적게 걸리고, RANDOM FOREST에 비해 성능이 좋다.
 
-약한 학습기를 순차적으로 학습-예측하면서 잘못 예측한 데이터에 가중치 부여를 통해 오류를 개선해 나가면서 학습하는 방식이기 때문에**
+-----
+3) GradientBoostingClassifier
 
-
-GBM(Gradient Boosting Machine)
-
-부스팅 알고리즘은 여러개의 약한 학습기를 순차적으로 학습-예측하면서 잘못 예측한 데이터에 가중치 부여를 통해 오류를 개선해 나가면서 학습하는 방식. 랜덤 포레스트보다는 예측성능이 조금 뛰어난 경우가 많음. 그러나 수행시간이 오래 걸리고, 하이퍼 파라미터 튜닝 노력도 더 필요. 약한 학습기의 순차적인 예측 오류 보정을 통해 학습을 수행하므로 멀티 cpu코어 시스템을 사용하더라도 병렬 처리가 되지않아서 대용량 데이터의 경우 학습에 매우 많은 시간이 필요. => 5시간 이상 소요되어 pause
-
-
+-----
 
 ```python
 # from sklearn.ensemble import GradientBoostingClassifier
@@ -1627,19 +1620,6 @@ sub
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
