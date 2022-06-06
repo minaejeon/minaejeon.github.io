@@ -514,8 +514,7 @@ array([[    0,     0,     0, ...,    98,     1,   443],
        [    0,     0,     0, ...,    90, 18101, 12055],
        [    0,     0,     0, ...,    61,  8069,   523],
        [    0,     0,     0, ...,     9,     2,  6011]], dtype=int32)
-</pre>
-<pre>
+
 array([[    0,     0,     0, ...,   420,     4,  2315],
        [    0,     0,     0, ...,     2,     6,  7023],
        [    0,     0,     0, ...,     1,  2161,  4474],
@@ -536,7 +535,9 @@ from sklearn.model_selection import train_test_split
 x_train, x_valid, y_train, y_valid = train_test_split(train2,train["author"],test_size=0.2,random_state=42,stratify=train["author"])
 ```
 ---------------------------
+
 # EarlyStopping의 patience를 3/5/8로 변경하고, Stopwords를 사용할 경우와 Stemming을 사용할 경우의 예측 정확도를 확인하겠습니다.
+
 ----------
 
 ```python
@@ -674,8 +675,8 @@ Epoch 20/1000
 -------
 STOP WORD를 사용하는 경우 결과를 result의 row수가 증가하는 것을 감안하여 
 'a = np.delete(result, 8392, 0)
-sub.iloc[:, 1:] = a'
-로 바꾸어 주어야 합니다.
+sub.iloc[:, 1:] = a' 로 바꾸어 주어야 합니다.
+
 ----------------
 
 
