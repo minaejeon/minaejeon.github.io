@@ -24,7 +24,9 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 
 
 /kaggle/input/spooky-author-identification/train.zip
+
 /kaggle/input/spooky-author-identification/test.zip
+
 /kaggle/input/spooky-author-identification/sample_submission.zip
 
 
@@ -302,19 +304,31 @@ array(['EAP', 'HPL', 'MWS', nan], dtype=object)
 alldata['text']
 ```
 
-
 0       This process, however, afforded me no means of...
+
+
 1       It never once occurred to me that the fumbling...
+
 2       In his left hand was a gold snuff box, from wh...
+
 3       How lovely is spring As we looked from Windsor...
+
 4       Finding nothing else, not even gold, the Super...
-                              ...                        
+
+...                        
+
 8387           All this is now the fitter for my purpose.
+
 8388                   I fixed myself on a wide solitude.
+
 8389    It is easily understood that what might improv...
+
 8390    Be this as it may, I now began to feel the ins...
+
 8391    Long winded, statistical, and drearily genealo...
+
 Name: text, Length: 27971, dtype: object
+
 
 ---------------
 Lemmatization은 정확한 원형 단어 추출을 위해 단어의 '품사'를 입력해 주어야합니다.
@@ -336,17 +350,29 @@ alldata['text']
 
 
 0       this process, however, afforded me no means of...
+
 1       it never once occurred to me that the fumbling...
+
 2       in his left hand was a gold snuff box, from wh...
+
 3       how lovely is spring as we looked from windsor...
+
 4       finding nothing else, not even gold, the super...
-                              ...                        
+
+...                        
+
 8387           all this is now the fitter for my purpose.
+
 8388                   i fixed myself on a wide solitude.
+
 8389    it is easily understood that what might improv...
+
 8390    be this as it may, i now began to feel the ins...
+
 8391    long winded, statistical, and drearily genealo...
+
 Name: text, Length: 27971, dtype: object
+
 
 
 ```python
@@ -398,6 +424,7 @@ text
 
 ------
 분석에 큰 의미가 없는 단어를 학습에 되면 텍스트에 빈번하게 나타나 중요한 단어로 인지되는 오류가 우려됩니다.
+
 따라서 is, the, a, will등 문장을 구성하는 필수 문법 요소이나 문맥적으로 큰 의미가 없는 단어를 전처리하는 작업을 진행하겠습니다.
 
 ------
@@ -425,16 +452,28 @@ pd.Series(text)
 
 
 0        [26, 3334, 139, 1295, 22, 36, 285, 2, 6426, 1,...
+
 1        [11, 90, 128, 725, 4, 22, 9, 1, 5966, 80, 28, ...
+
 2        [7, 15, 154, 173, 8, 6, 694, 5967, 560, 24, 19...
+
 3        [120, 568, 25, 766, 16, 34, 216, 24, 754, 4176...
+
 4        [1229, 160, 735, 20, 75, 694, 1, 5214, 1464, 1...
-                               ...                        
+
+...                        
+
 27966              [32, 26, 25, 52, 1, 18603, 17, 10, 500]
+
 27967                      [5, 1045, 110, 27, 6, 574, 817]
+
 27968    [11, 25, 672, 1112, 9, 53, 80, 7208, 6, 1402, ...
+
+
 27969    [28, 26, 16, 11, 123, 5, 52, 273, 4, 297, 1, 6...
+
 27970    [109, 18563, 29450, 3, 29451, 6647, 16, 54, 2,...
+
 Length: 27971, dtype: object
 
 
@@ -471,17 +510,29 @@ pd.Series(text)
 
 
 0        [26, 3334, 139, 1295, 22, 36, 285, 2, 6426, 1,...
+
 1        [11, 90, 128, 725, 4, 22, 9, 1, 5966, 80, 28, ...
+
 2        [7, 15, 154, 173, 8, 6, 694, 5967, 560, 24, 19...
+
 3        [120, 568, 25, 766, 16, 34, 216, 24, 754, 4176...
+
 4        [1229, 160, 735, 20, 75, 694, 1, 5214, 1464, 1...
-                               ...                        
+
+...                        
+
 27966              [32, 26, 25, 52, 1, 18603, 17, 10, 500]
+
 27967                      [5, 1045, 110, 27, 6, 574, 817]
+
 27968    [11, 25, 672, 1112, 9, 53, 80, 7208, 6, 1402, ...
+
 27969    [28, 26, 16, 11, 123, 5, 52, 273, 4, 297, 1, 6...
+
 27970    [109, 18563, 29450, 3, 29451, 6647, 16, 54, 2,...
+
 Length: 27971, dtype: object
+
 
 
 ```python
@@ -492,12 +543,19 @@ pad_text
 
 
 array([[    0,     0,     0, ...,    98,     1,   443],
-       [    0,     0,     0, ...,     6,   450,  2453],
-       [    0,     0,     0, ...,   353,   526,  3101],
-       ...,
-       [    0,     0,     0, ..., 13787,   482,   541],
-       [    0,     0,     0, ...,     4,    28, 16748],
-       [    0,     0,     0, ...,     1,   189,  1581]], dtype=int32)
+
+[    0,     0,     0, ...,     6,   450,  2453],
+
+[    0,     0,     0, ...,   353,   526,  3101],
+
+...,
+
+[    0,     0,     0, ..., 13787,   482,   541],
+
+[    0,     0,     0, ...,     4,    28, 16748],
+
+[    0,     0,     0, ...,     1,   189,  1581]], dtype=int32)
+
 
 
 ```python
@@ -508,20 +566,34 @@ display(train2,test2)
 
 
 array([[    0,     0,     0, ...,    98,     1,   443],
-       [    0,     0,     0, ...,     6,   450,  2453],
-       [    0,     0,     0, ...,   353,   526,  3101],
-       ...,
-       [    0,     0,     0, ...,    90, 18101, 12055],
-       [    0,     0,     0, ...,    61,  8069,   523],
-       [    0,     0,     0, ...,     9,     2,  6011]], dtype=int32)
+
+[    0,     0,     0, ...,     6,   450,  2453],
+
+[    0,     0,     0, ...,   353,   526,  3101],
+
+...,
+
+[    0,     0,     0, ...,    90, 18101, 12055],
+
+[    0,     0,     0, ...,    61,  8069,   523],
+
+[    0,     0,     0, ...,     9,     2,  6011]], dtype=int32)
+
 
 array([[    0,     0,     0, ...,   420,     4,  2315],
-       [    0,     0,     0, ...,     2,     6,  7023],
-       [    0,     0,     0, ...,     1,  2161,  4474],
-       ...,
-       [    0,     0,     0, ..., 13787,   482,   541],
-       [    0,     0,     0, ...,     4,    28, 16748],
-       [    0,     0,     0, ...,     1,   189,  1581]], dtype=int32)
+
+[    0,     0,     0, ...,     2,     6,  7023],
+
+[    0,     0,     0, ...,     1,  2161,  4474],
+
+...,
+
+[    0,     0,     0, ..., 13787,   482,   541],
+
+[    0,     0,     0, ...,     4,    28, 16748],
+
+[    0,     0,     0, ...,     1,   189,  1581]], dtype=int32)
+
 
 
 ```python
@@ -905,5 +977,5 @@ sub.to_csv("submission.csv",index=0)
 
 # STOP WORDS의 경우 미개선 이유는 is, the, a, will등 문장을 구성하는 문법 등이 train data의 text column의 의미를 조금씩 변화시켜 정확도를 향상하는데 도움이 되었던 것으로 보입니다.
 
-# Stemming의 경우 미개선 이유는 역시 단어의 원형을 찾을 때 train data의 text column의 의미를 조금씩 변화시켜 정확도를 향상하는데 도움이 되었던 것으로 보입니다.
+# Stemming의 경우 미개선 이유는 역시 단어의 원형을 찾는 과정에서 train data의 text column의 의미를 조금씩 변화시켜 정확도를 향상하는데 도움이 되지 않았던 것으로 보입니다.
 
