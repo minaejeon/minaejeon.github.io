@@ -1,6 +1,6 @@
 
 
-#  MachineHack, Dacon 상위권 달성
+#  MachineHack, Dacon 진행중인 대회 상위권 달성
 
 ## 1. Predict accident risk score for unique postcode
 ### Score : 0.64 , Rank : 20 / 283
