@@ -563,10 +563,10 @@ from sklearn.model_selection import train_test_split  #train["정답 column"]
 x_train, x_valid, y_train, y_valid = train_test_split(train2,train["toxic"], test_size=0.2, random_state=42, stratify=train["toxic"])
 ```
 
+-----
+데이터가 multi-class classification problem에 해당 하므로, 손실 함수는 'sparse_categorical_crossentropy'를 사용하는 것이 적합합니다.
 
-# 데이터가 multi-class classification problem에 해당 하므로, 손실 함수는 'sparse_categorical_crossentropy'를 사용하는 것이 적합합니다.
-
-
+-----
 
 ```python
 model=Sequential()
@@ -580,19 +580,6 @@ model.compile(optimizer='rmsprop',
 model.fit(x_train, y_train, epochs=5, batch_size=128, validation_data=(x_valid,y_valid))
 result=model.predict(test2)
 ```
-2022-03-30 03:18:25.369316: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:937] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-03-30 03:18:25.443869: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:937] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-03-30 03:18:25.444593: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:937] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-03-30 03:18:25.445725: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2022-03-30 03:18:25.447310: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:937] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-03-30 03:18:25.447984: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:937] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-03-30 03:18:25.448584: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:937] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-03-30 03:18:27.373254: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:937] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-03-30 03:18:27.374173: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:937] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-03-30 03:18:27.374894: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:937] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2022-03-30 03:18:27.375602: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 15403 MB memory:  -> device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:00:04.0, compute capability: 6.0
-2022-03-30 03:18:28.120608: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:185] None of the MLIR Optimization Passes are enabled (registered 2)
 
 Epoch 1/5
 
@@ -621,8 +608,9 @@ multiple classification이므로 컴파일의 loss를 categorical_crossentropy�
 
 categorical_crossentropy는 이진분류에 적합하므로 데이터를 one-hot encoding 처리한 경우 사용 가능합니다.
 
-# SequentialModel을 이용하여 LSTM층과 GRU 층으로 차이점을 분석하고, compile의 optimizer로 Adam / SGD / Adadelta / Adagrad / Adamax / Nadam 적용하여 비교 분석하겠습니다.
-# 또한, BatchNormalization을 추가하고, 추가 시점을 달리하여 효용성을 확인하겠습니다.
+SequentialModel을 이용하여 LSTM층과 GRU 층으로 차이점을 분석하고, compile의 optimizer로 Adam / SGD / Adadelta / Adagrad / Adamax / Nadam 적용하여 비교 분석하겠습니다.
+
+또한, BatchNormalization을 추가하고, 추가 시점을 달리하여 효용성을 확인하겠습니다.
 
 1) LSTM layer사용, optimizer : Adam
 
@@ -740,7 +728,8 @@ Epoch 20/20
 998/998 [==============================] - 12s 12ms/step - loss: nan - acc: 0.9042 - val_loss: nan - val_acc: 0.9042
 
 ----
-# 데이터에 적용하였을 때, LSTM과 GRU의 ACCURACY와 학습 시간의 차이는 거의 없습니다.
+LSTM과 GRU의 ACCURACY와 학습 시간의 차이는 거의 없습니다.
+
 -----
 
 
@@ -879,26 +868,17 @@ Epoch 5/5
 998/998 [==============================] - 14s 14ms/step - loss: nan - acc: 0.9042 - val_loss: nan - val_acc: 0.9042
 
 ----
-# 초기 속도
+초기 속도 : SGD > ADADELTA = ADAM > ADAGRAD > ADAMAX > NADAM
 
-# SGD>ADADELTA=ADAM>ADAGRAD>ADAMAX>NADAM
+초기 ACCURACY : NADAM = SGD > ADADELTA = ADAGRAD = ADAMAX = ADAM
 
+전체 속도 : SGD > ADADELTA = ADAGRAD > ADAM > ADAMAX > NADAM
 
-# 초기 ACCURACY
+속도에서는 우수함을 보이는 SGD는 방대한 데이터를 빠르게 처리할 경우 사용하는 것이 적합해 보입니다.
 
-# NADAM=SGD>ADADELTA=ADAGRAD=ADAMAX=ADAM
+ACCURACY 면에서 초기에는 SGD와 NADAM이 우수해 보이나 다른 Optimizer의 경우 Accuracy가 학습에 따라 증가하는 경향을 보입니다.
 
-
-# 전체 속도
-
-# SGD>ADADELTA=ADAGRAD>ADAM>ADAMAX>NADAM
-
-
-# 속도에서는 SGD가 우수한 것으로 보이는데, 방대한 데이터를 빠르게 처리할 경우 SGD가 필요할 것 같습니다. 
-
-# ACCURACY 면에서 초기에는 SGD와 NADAM이 우수해 보이나, 학습이 반복되면서 차이가 작아집니다.
-
-다음은 오차를 적게 나오도록 정규화하는 BatchNormalization을 적용하겠습니다.
+다음은 오차를 적게 나오도록 정규화하는 BatchNormalization을 적용해 보겠습니다.
 
 7) BatchNormalization
 ---------
@@ -978,7 +958,8 @@ Epoch 5/5
 998/998 [==============================] - 14s 14ms/step - loss: nan - acc: 0.9042 - val_loss: nan - val_acc: 0.9042
 
 -----
-# embedding layer, LSTM layer, Dense layer 에서 정규화의 시기는 이 데이터에서 accuracy에 크게 영향을 주지 않아 시간이 비교적 유리한 embedding 직후가 적합할 것으로 보입니다
+embedding layer, LSTM layer, Dense layer 에서 정규화의 시기는 이 데이터에서 accuracy에 크게 영향을 주지 않아 시간이 비교적 유리한 embedding 직후가 적합할 것으로 보입니다
+
 -----
 
 
@@ -1004,11 +985,11 @@ Epoch 5/5
 998/998 [==============================] - 4s 4ms/step - loss: 5.5215 - acc: 0.0958 - val_loss: 5.5215 - val_acc: 0.0958
 
 -------
-위 case를 적용하였을 때, 2번 case에서 score 0.57450 나머지 case는 score 0.5000으로 동일하였습니다
 
-# LSTM layer를 삭제할 경우, 이외의 조건이 동일할 때 보다 accuracy가 크게 저하되는데 이는 앞서 학습한 것에 대한 기억을 잃었기 때문입니다.
+LSTM layer를 삭제할 경우, 이외의 조건이 동일할 때 보다 accuracy가 크게 저하되는데 이는 앞서 학습한 것에 대한 기억을 잃었기 때문입니다.
 
-# 따라서 LSTM layer를 사용하는 것이 적합합니다.
+# Optimizer의 차이는 예측 정확성에 큰 영향을 미치지 않고, 데이터의 양이 방대한 정도에 따라 처리 속도를 고려하여 선택 사용하는 것이 중요해보입니다.
+# 또한, LSTM layer를 사용함으로써 accuracy를 보완할 수 있습니다.
 --
 
 ```python
