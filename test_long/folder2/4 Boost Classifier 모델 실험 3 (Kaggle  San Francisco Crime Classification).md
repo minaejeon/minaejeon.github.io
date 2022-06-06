@@ -927,6 +927,7 @@ CatBoostingClassifier의 경우, 성능도 월등히 높고 GBM에 비해 시간
 
 약한 학습기를 순차적으로 학습-예측하면서 잘못 예측한 데이터에 가중치 부여를 통해 오류를 개선해 나가면서 학습하는 방식이기 때문으로 보입니다.
 
+적용 code는 아래와 같습니다.
 
 1) RandomForestClassifier
 ----
