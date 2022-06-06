@@ -353,17 +353,29 @@ pd.Series(text)
 
 
 0         [2, 315, 3, 16573, 7660, 1, 8313, 9, 53, 8, 47...
+
 1         [2, 315, 3, 16573, 7660, 1, 8313, 9, 53, 8, 47...
+
 2                                                  [2, 315]
+
+
 3                                                       [2]
+
 4                                                     [315]
                                 ...                        
+
 222347                            [2, 118, 4456, 343, 1623]
+
 222348                            [2, 118, 4456, 343, 1623]
+
 222349                                       [2, 118, 4456]
+
 222350                                       [2, 118, 4456]
+
 222351                                          [343, 1623]
+
 Length: 222352, dtype: object
+
 
 
 ```python
@@ -371,15 +383,25 @@ pd.Series(text).apply(len).max
 ```
 
 1         14
+
 2          2
+
 3          1
+
 4          1
-          ..
+
+..
+
 222347     5
+
 222348     5
+
 222349     3
+
 222350     3
+
 222351     2
+
 Length: 222352, dtype: int64>
 
 
@@ -391,11 +413,6 @@ sns.displot(pd.Series(text).apply(len))
 plt.xlim(0,30)
 ```
 
-
-(0.0, 30.0)
-
-<Figure size 1152x576 with 0 Axes>
-</pre>
 <img src="data:image/png;base64,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"/>
 
 
@@ -409,12 +426,18 @@ pad_text
 
 
 array([[   1, 8313,    9, ...,    3,    2,   42],
-       [   0,    0,    0, ...,   13,    1, 3940],
-       [   0,    0,    0, ...,    0,    2,  315],
-       ...,
-       [   0,    0,    0, ...,    2,  118, 4456],
-       [   0,    0,    0, ...,    2,  118, 4456],
-       [   0,    0,    0, ...,    0,  343, 1623]], dtype=int32)
+
+[   0,    0,    0, ...,   13,    1, 3940],
+
+[   0,    0,    0, ...,    0,    2,  315],
+
+...,
+
+[   0,    0,    0, ...,    2,  118, 4456],
+
+[   0,    0,    0, ...,    2,  118, 4456],
+
+[   0,    0,    0, ...,    0,  343, 1623]], dtype=int32)
 
 
 ```python
@@ -457,15 +480,24 @@ embeddings
 
 
 {'2000000': array([ 2.0600e-02,  1.9530e-01, -9.0400e-02, -3.5390e-01, -6.2700e-02,
-        -1.4600e-02, -1.3150e-01,  5.8600e-02,  5.9930e-01,  6.3100e-02,
-        -9.3200e-02,  7.1720e-01, -3.4950e-01, -6.1100e-02, -3.0790e-01,
-        ...
-                1.681e-01, -4.000e-04,  2.214e-01,  1.369e-01,  1.029e-01,
-         1.317e-01,  6.520e-02, -1.035e-01,  1.597e-01,  9.220e-02,
-         4.165e-01,  9.100e-02, -3.026e-01,  3.280e-02, -2.860e-02,
-         1.461e-01, -2.332e-01,  2.790e-02,  1.100e-03, -9.940e-02],
-       dtype=float32),
- ...}
+
+-1.4600e-02, -1.3150e-01,  5.8600e-02,  5.9930e-01,  6.3100e-02,
+
+-9.3200e-02,  7.1720e-01, -3.4950e-01, -6.1100e-02, -3.0790e-01,
+
+...
+
+1.681e-01, -4.000e-04,  2.214e-01,  1.369e-01,  1.029e-01,
+
+1.317e-01,  6.520e-02, -1.035e-01,  1.597e-01,  9.220e-02,
+
+4.165e-01,  9.100e-02, -3.026e-01,  3.280e-02, -2.860e-02,
+
+1.461e-01, -2.332e-01,  2.790e-02,  1.100e-03, -9.940e-02],
+
+dtype=float32),
+
+...}
 
 
 ```python
@@ -474,9 +506,12 @@ np.zeros([4,3])
 
 
 array([[0., 0., 0.],
-       [0., 0., 0.],
-       [0., 0., 0.],
-       [0., 0., 0.]])
+      
+      [0., 0., 0.],
+      
+      [0., 0., 0.],
+      
+      [0., 0., 0.]])
 
 ```python
 TK.word_index.items()
@@ -545,17 +580,27 @@ for train_index, valid_index in kf.split(train2):
 ```
 
 Epoch 1/10
+
 2022-04-07 13:10:37.733123: I tensorflow/stream_executor/cuda/cuda_dnn.cc:369] Loaded cuDNN version 8005
 
 976/976 [==============================] - 12s 8ms/step - loss: 0.9415 - acc: 0.6123 - val_loss: 0.8859 - val_acc: 0.6321
+
 Epoch 2/10
+
 976/976 [==============================] - 6s 7ms/step - loss: 0.8511 - acc: 0.6454 - val_loss: 0.8530 - val_acc: 0.6434
+
 Epoch 3/10
+
 976/976 [==============================] - 7s 7ms/step - loss: 0.8223 - acc: 0.6581 - val_loss: 0.8498 - val_acc: 0.6478
+
 ....
+
 Epoch 9/10
+
 976/976 [==============================] - 6s 7ms/step - loss: 0.7213 - acc: 0.7040 - val_loss: 0.7932 - val_acc: 0.6710
+
 Epoch 10/10
+
 976/976 [==============================] - 6s 6ms/step - loss: 0.7098 - acc: 0.7083 - val_loss: 0.7914 - val_acc: 0.6720
 
 
@@ -581,9 +626,13 @@ for train_index, valid_index in skf.split(train2,train['Sentiment']):
 
 
 Epoch 1/10
+
 976/976 [==============================] - 8s 7ms/step - loss: 0.9425 - acc: 0.6114 - val_loss: 0.8675 - val_acc: 0.6383
+
 Epoch 2/10
+
 976/976 [==============================] - 7s 7ms/step - loss: 0.8506 - acc: 0.6442 - val_loss: 0.8447 - val_acc: 0.6494
+
 ...
 
 
@@ -608,13 +657,21 @@ for train_index, valid_index in gkf.split(train2,train['Sentiment'],train['Sente
 ```
 
 Epoch 1/10
+
 976/976 [==============================] - 9s 7ms/step - loss: 0.9476 - acc: 0.6104 - val_loss: 0.8879 - val_acc: 0.6290
+
 Epoch 2/10
+
 976/976 [==============================] - 6s 6ms/step - loss: 0.8510 - acc: 0.6457 - val_loss: 0.8696 - val_acc: 0.6373
+
 Epoch 3/10
+
 ...
+
 976/976 [==============================] - 7s 7ms/step - loss: 0.7107 - acc: 0.7063 - val_loss: 0.8895 - val_acc: 0.6373
+
 Epoch 10/10
+
 976/976 [==============================] - 7s 7ms/step - loss: 0.6993 - acc: 0.7119 - val_loss: 0.8951 - val_acc: 0.6363
 
 
@@ -641,11 +698,15 @@ Epoch 10/10
 ---------------
 데이터가 극히 적은 경우가 아니므로 LeaveOneOut 교차 검증의 적용은 적합치 않습니다.
 
-동일 조건에서 교차 검증을 비교하였을 때 도는 StratifiedKFold > GroupKFold > KFold 순으로 빠르고 확성은 GroupKFold > KFold > StratifiedKFold 순으로 높은 것으로 확인되었습니다.
+동일 조건에서 교차 검증을 비교하였을 때 속도는 StratifiedKFold > GroupKFold > KFold 순으로 빠르고 정확성은 GroupKFold > KFold > StratifiedKFold 순으로 높은 것으로 확인되었습니다.
+
+# StratifiedKFold를 이용하면 빈도가 적은 클래스의 랜덤 분할로 인한 불균형을 해소할 수 있으나 학습 과정에서 왜곡이 일어나지 않을까 생각하게 되었습니다.
+# 정확성이 GroupKFold에서 높게 나타난 이유는 학습 데이터와 테스트 데이터에 동일한 데이터가 포함되지 않도록 분할하므로 있는 그대로의 데이터를 지속 학습할 수 있기 때문으로 보입니다.
 
 또한, 손실은 GroupKFold > KFold > StratifiedKFold 순으로 작게나타났습니다.
 
-속도 측면에서는 StratifiedKFold가 빠르지만, accurcy와 loss 측면에서 GroupKFold가 유리한 결과를 얻었습니다.
+# 손실이 StratifiedKFold에서 높았던 것으로 보아 클래스의 불균형이 높아 이를 해결하고자 손실이 증가했음을 생각하게 되었습니다.
+
 --------------
 
 
@@ -670,14 +731,23 @@ for train_index, valid_index in skf.split(train2,train['Sentiment']):
 ```
 
 Epoch 1/10
+
 1046/1046 [==============================] - 9s 7ms/step - loss: 0.9419 - acc: 0.6098 - val_loss: 0.8728 - val_acc: 0.6358
+
 Epoch 2/10
+
 1046/1046 [==============================] - 6s 6ms/step - loss: 0.8515 - acc: 0.6438 - val_loss: 0.8540 - val_acc: 0.6463
+
 ...
+
 Epoch 9/10
+
 1046/1046 [==============================] - 6s 6ms/step - loss: 0.7201 - acc: 0.7018 - val_loss: 0.7830 - val_acc: 0.6755
+
 Epoch 10/10
+
 1046/1046 [==============================] - 6s 6ms/step - loss: 0.7087 - acc: 0.7063 - val_loss: 0.7780 - val_acc: 0.6789
+
 
 
 ```python
@@ -702,21 +772,30 @@ for train_index, valid_index in skf.split(train2,train['Sentiment']):
 
 
 Epoch 1/10
+
 1084/1084 [==============================] - 10s 6ms/step - loss: 0.9376 - acc: 0.6127 - val_loss: 0.8689 - val_acc: 0.6409
+
 Epoch 2/10
+
 1084/1084 [==============================] - 6s 6ms/step - loss: 0.8485 - acc: 0.6450 - val_loss: 0.8418 - val_acc: 0.6479
+
 ...
+
 Epoch 9/10
+
 1084/1084 [==============================] - 7s 7ms/step - loss: 0.7177 - acc: 0.7028 - val_loss: 0.7826 - val_acc: 0.6769
+
 Epoch 10/10
+
 1084/1084 [==============================] - 6s 6ms/step - loss: 0.7073 - acc: 0.7079 - val_loss: 0.7700 - val_acc: 0.6809
 
 ------------
 StratifiedKFold를 기준으로 split 수를 5,7,9로 나누어 비교하고자합니다.
 
-split을 많이 할 수록 전체 교차 검증의 횟수가 증가하므로 많은 시간이 소요되나, loss는 적게 나왔습니다.
+# split을 많이 할 수록 전체 교차 검증의 횟수가 증가하므로 많은 시간이 소요되나, loss는 적게 나왔습니다.
 
-그러나 정확도 측면에서는 split수가 5>7>9 순으로 높았는데, 5보다 많이 split 갯수를 추가하면 과대적합이 일어나기 때문으로 보입니다.
+# 그러나 정확도 측면에서는 split수가 5>7>9 순으로 높았는데, 5보다 많이 split 갯수를 추가하면 과대적합이 일어나기 때문으로 보입니다.
+
 -------------
 
 ```python
@@ -725,6 +804,8 @@ sub.to_csv('submission.csv',index=False)
 ```
 
 # 동일 조건일 때, score는 StratifiedKfold > GroupKFold > KFold 순으로 높았습니다.(score가 향상 될 수록 순위가 개선됩니다)
+# 학습과정에서 평균 accuracy는 GroupKFold가 높았으나 실제 예측하는 과정에서 StratifiedKFold보다 정확성이 낮게 나왔습니다.
+# GroupKFold는 새로운 데이터 학습에 사용되기에 유연성이 낮은 것으로 보아 과대적합 학습되었음을 알 수 있습니다.
 
 KFold : 0.66557
 
