@@ -30,7 +30,7 @@ https://minaejeon.github.io/
    ### 9.  Sequential Model 적합 Layer 및 Compile 실험 (Kaggle Toxic Comment Classification Challenge)
 
   
-###  정형  정제 및 분석
+###  정형 빅 정제 및 분석
 
   좌측 메뉴의 田 버튼 누르시면 아래 CODE 및 분석 내용을 조회하실 수 있습니다
 
