@@ -1,6 +1,6 @@
 # MinaeJeon / 93.10.05 #
 
-# MachineHack, Dacon 진행중인 대회 상위권 달성
+# MachineHack, Dacon 진행중인 대회 최종 상위권 달성
 
 ------------------------
 
