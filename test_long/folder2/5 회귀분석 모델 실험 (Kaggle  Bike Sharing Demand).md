@@ -1499,7 +1499,7 @@ linear model중 Lasso model과 Ridge model이 있습니다.
 
 Lasso model (score : 1.20873) 과 Ridge model (score : 1.21130) 의 적용 code는 아래와 같습니다.
 
-Lasso 모델
+Lasso model
 
 ----------
 
@@ -1552,7 +1552,7 @@ array([ 11.78 ,   4.62 ,   3.95 , ...,  98.425, 102.26 ,  47.31 ])
 
 결론적으로 count값이 균일하지 않으므로 linear_model은 사용이 부적합하며, 절댓값 제출한 것을 포함하면
 
-RandomForestRegressor score : 0.42058 > CatBoostRegressor 절댓값  score : 0.49252 > GradientBoostingRegressor 절댓값 score : 0.70437 > Lasso 모델 절댓값 score : 1.20873 > Ridge model  절댓값  score : 1.21130 >LinearRegression 절댓값 score : 1.21132 > LogisticRegression score : 2.46839 순으로 점수가 개선됩니다.
+RandomForestRegressor score : 0.42058 > CatBoostRegressor 절댓값  score : 0.49252 > GradientBoostingRegressor 절댓값 score : 0.70437 > Lasso model 절댓값 score : 1.20873 > Ridge model  절댓값  score : 1.21130 >LinearRegression 절댓값 score : 1.21132 > LogisticRegression score : 2.46839 순으로 점수가 개선됩니다.
 
 그러나 주의해야할 점은 -값은 0에 가깝기 때문에 절댓값으로 예측하는 것은 무리가 있어 보입니다.
 
