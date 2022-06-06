@@ -546,8 +546,7 @@ for train_index, valid_index in kf.split(train2):
 
 Epoch 1/10
 2022-04-07 13:10:37.733123: I tensorflow/stream_executor/cuda/cuda_dnn.cc:369] Loaded cuDNN version 8005
-</pre>
-<pre>
+
 976/976 [==============================] - 12s 8ms/step - loss: 0.9415 - acc: 0.6123 - val_loss: 0.8859 - val_acc: 0.6321
 Epoch 2/10
 976/976 [==============================] - 6s 7ms/step - loss: 0.8511 - acc: 0.6454 - val_loss: 0.8530 - val_acc: 0.6434
