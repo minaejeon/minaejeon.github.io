@@ -1,6 +1,8 @@
 
 # 8 Image Classification 모델 실험 (Kaggle Invasive Species Monitoring)
 
+![image](https://user-images.githubusercontent.com/69743938/172272601-a2da78e5-1826-4563-adef-61adf6746e3a.png)
+![image](https://user-images.githubusercontent.com/69743938/172272635-8e235996-9f66-424d-a6cd-39999f79a990.png)
 
 ```python
 # This Python 3 environment comes with many helpful analytics libraries installed
