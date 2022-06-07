@@ -1,5 +1,8 @@
 # 5 회귀분석 모델 실험 (Kaggle  Bike Sharing Demand)
 
+![image](https://user-images.githubusercontent.com/69743938/172272305-9e152b38-376a-43b8-8a58-5089b4f0eef7.png)
+![image](https://user-images.githubusercontent.com/69743938/172272334-e4866091-0e95-4a38-92a9-95ae8bd93786.png)
+
 ```python
 # This Python 3 environment comes with many helpful analytics libraries installed
 # It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
