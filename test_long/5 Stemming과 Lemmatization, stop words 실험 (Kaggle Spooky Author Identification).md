@@ -1,6 +1,7 @@
 # 5 Stemming과 Lemmatization, stop words 실험 (Kaggle Spooky Author Identification)
 
-
+![image](https://user-images.githubusercontent.com/69743938/172271470-c6312226-5e71-4585-ba64-ff1dcfd40332.png)
+![image](https://user-images.githubusercontent.com/69743938/172271552-3c7c0611-49e7-4172-a30f-92bfd865b393.png)
 
 ```python
 # This Python 3 environment comes with many helpful analytics libraries installed
