@@ -1,4 +1,4 @@
-# About MySelf
+# About MinAe
 
 ## 1. Language Exchage Gathering (with Foreighners)
 ![EXCHANGE LAUNGUAGE GATHERING](https://user-images.githubusercontent.com/69743938/172278218-0a715da5-46c4-4cd7-b9b4-cbb410861ad1.jpg)
