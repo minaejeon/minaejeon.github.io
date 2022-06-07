@@ -1,5 +1,7 @@
 # 3 Boost Classifier 모델 실험 2 (Kaggle  Don't Get Kicked!)
 
+![image](https://user-images.githubusercontent.com/69743938/172272110-93721aae-6349-4cd7-9c68-beaa3e7f9c71.png)
+![image](https://user-images.githubusercontent.com/69743938/172272135-4b6b6bff-d6a5-45fc-b2a4-0d847f2c0a2c.png)
 
 ```python
 # This Python 3 environment comes with many helpful analytics libraries installed
