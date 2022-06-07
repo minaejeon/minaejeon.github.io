@@ -44,9 +44,13 @@ score : 0.66756, rank : 19 / 861 추정
    
 ### 7. training Image 전처리 기법 효과 분석 (Kaggle Plant Seedlings Classification)       
 score : 0.97103, rank : 262 / 835 추정
+![image](https://user-images.githubusercontent.com/69743938/172272484-fa2fc4ba-a810-416c-b23d-69392c3e8cc3.png)
+![image](https://user-images.githubusercontent.com/69743938/172272550-50d9b680-b4e4-469f-9dbb-9220c7c11786.png)
    
 ### 8. Image Classification 모델 실험 (Kaggle Invasive Species Monitoring)                
 score : 0.99315, rank : 32 / 512 추정
+![image](https://user-images.githubusercontent.com/69743938/172272601-a2da78e5-1826-4563-adef-61adf6746e3a.png)
+![image](https://user-images.githubusercontent.com/69743938/172272635-8e235996-9f66-424d-a6cd-39999f79a990.png)
    
 ### 9.  Sequential Model 적합 Layer 및 Compile 실험 (Kaggle Toxic Comment Classification Challenge)
 
