@@ -1,7 +1,8 @@
 
 # 6 교차 검증 모델 실험 (Kaggle Sentiment Analysis on Movie Reviews)
 
-
+![image](https://user-images.githubusercontent.com/69743938/172271610-1635bf05-58be-4835-9bed-bfbd0365f61c.png)
+![image](https://user-images.githubusercontent.com/69743938/172271642-f84459e1-2e15-4758-ad60-267c01dad360.png)
 
 ```python
 # This Python 3 environment comes with many helpful analytics libraries installed
