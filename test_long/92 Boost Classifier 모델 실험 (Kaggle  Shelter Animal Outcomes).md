@@ -1,5 +1,8 @@
 # 2 Boost Classifier 모델 실험 (Kaggle  Shelter Animal Outcomes).md
 
+![image](https://user-images.githubusercontent.com/69743938/172271984-049eed77-fd87-4f6d-a64e-be934e6a7698.png)
+![image](https://user-images.githubusercontent.com/69743938/172272044-9c49ad12-14c1-43ad-987e-fa1800f90cda.png)
+
 ```python
 # This Python 3 environment comes with many helpful analytics libraries installed
 # It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
