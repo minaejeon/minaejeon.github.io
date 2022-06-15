@@ -1148,9 +1148,9 @@ features=hv.fit_transform(alldata['features'])
 
 ------------
 적합한 Vectorizer방식을 고민하였을 때, 중요치 않은 정보가 학습에 중점적으로 사용된다면 예측의 정확성을 떨어뜨릴 수 있다는 생각이 들었습니다.
-따라서 한 column에는 많이 등장하나 다른 데이터에 해당하는 column에서는 적게 등장할 수록 분별력이 있음을 이용하는 TfidVectorizer에 대해 알게되었고 이를 적극 활용하였습니다.
+따라서 한 column에는 많이 등장하나 다른 데이터에 해당하는 column에서는 적게 등장할 수록 분별력이 있음을 이용하는 TfidfVectorizer에 대해 알게되었고 이를 적극 활용하였습니다.
 
-Vectorizer3 : TfidVectorizer
+Vectorizer3 : TfidfVectorizer
 -------------
 
 ```python
@@ -1850,7 +1850,7 @@ HashingVectorizer를 사용하였을 때 negative 값 발생 및 정규화 어�
 
 TruncatedSVD의 경우 차원의 수를 증가(10에서20)함에 따라 score가 개선되는 듯 보였으나 30 이상에서 오히려 미개선 되는 것을 확인하였습니다.
 차원의 수가 증가함에 따라 학습의 정교성은 향상될 수 있으나 오히려 과적합이 발생할 우려가 있기 때문으로 보입니다.
-# 같은 조건이라면 TfidVectorizer에서 점수 개선이 뚜렷하였는데, Data내의 각 단어의 중요성을 고려하는 것이 효과적임을 느꼈습니다.
+# 같은 조건이라면 TfidfVectorizer에서 점수 개선이 뚜렷하였는데, Data내의 각 단어의 중요성을 고려하는 것이 효과적임을 느꼈습니다.
 # 따라서 Text 분석의 경우에는 문맥에 맞는 단어의 의미 유추와 중요 특징을 추출하는 과정이 반드시 필요함을 느꼈습니다.
-# TfidVectorizer와 CountVectorizer를 사용하면 음수값이 존재하지 않아 NMF를 사용할 수 있으나 오히려 예측의 정확성은 TruncatedSVD 보다 떨어지기 때문에 제 예상을 빗나갔습니다.
-# 이 데이터에서 가장 적합한 조합은 TfidVectorizer와 TruncatedSVD의 사용인데 Vectorizer의 특성에 따라 적합한 차원 축소 기법을 고찰해야함을 느꼈습니다.
+# TfidfVectorizer와 CountVectorizer를 사용하면 음수값이 존재하지 않아 NMF를 사용할 수 있으나 오히려 예측의 정확성은 TruncatedSVD 보다 떨어지기 때문에 제 예상을 빗나갔습니다.
+# 이 데이터에서 가장 적합한 조합은 TfidfVectorizer와 TruncatedSVD의 사용인데 Vectorizer의 특성에 따라 적합한 차원 축소 기법을 고찰해야함을 느꼈습니다.
