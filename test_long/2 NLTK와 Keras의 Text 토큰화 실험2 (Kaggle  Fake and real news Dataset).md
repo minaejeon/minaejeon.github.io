@@ -672,11 +672,11 @@ plt.xlim(0,20000)
 <Figure size 1152x576 with 0 Axes>
 ![image](https://user-images.githubusercontent.com/69743938/172044885-5cf35e2f-4b06-4d23-978f-04bf025e992a.png)
 
-
+```python
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 pad_text=pad_sequences(text,maxlen=1750)
 pad_text
-
+```
 
 --------------
 # 단어 단위의 토큰화를 진행하고, 예측의 유연성을 확보하고자 pretrain을 추가하겠습니다.
