@@ -1,7 +1,4 @@
 
-## 실제 상위권 달성 대회 code 첨부 파일로 공유드립니다. ##
-## 추가 실험 내용은 https://minaejeon.github.io/ 에 포함하였습니다 ##
-
 # MinaeJeon / 93.10.05 #
 
 # MachineHack, Dacon 실제 대회 최종 상위권 달성
