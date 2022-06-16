@@ -1,4 +1,6 @@
-# MinaeJeon / 93.10.05 (파일에 상위권 달성 대회 code만 공유 드립니다. 자세한 내용은 https://minaejeon.github.io/ 에서 확인하실 수 있습니다) #
+# MinaeJeon / 93.10.05 #
+
+# (파일에 상위권 달성 대회 code만 공유 드립니다. 자세한 내용은 https://minaejeon.github.io/ 에서 확인하실 수 있습니다) #
 
 # MachineHack, Dacon 실제 대회 최종 상위권 달성
 
