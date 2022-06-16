@@ -1,4 +1,4 @@
-# MinaeJeon / 93.10.05 #
+# MinaeJeon / 93.10.05 (자세한 내용은 https://minaejeon.github.io/ 에서 확인하실 수 있습니다) #
 
 # MachineHack, Dacon 실제 대회 최종 상위권 달성
 
