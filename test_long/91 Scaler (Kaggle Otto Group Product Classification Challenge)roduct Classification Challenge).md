@@ -1,5 +1,5 @@
 
-# 1 Scaler 실험 및 결과 분석 (Kaggle Otto Group Product Classification Challenge)
+# 1. Scaler (Kaggle Otto Group Product Classification Challenge)
 
 ![image](https://user-images.githubusercontent.com/69743938/172271810-08614eeb-e5df-4f80-b8d5-adddac04d65c.png)
 ![image](https://user-images.githubusercontent.com/69743938/172271933-2e9e24c8-ad9a-4a29-8244-a603222e42ee.png)
