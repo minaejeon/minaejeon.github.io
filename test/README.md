@@ -1,6 +1,6 @@
 
 
-#  MachineHack, Dacon 실제 대회 최종 상위권 달성
+#  MachineHack, Dacon (high rank in the running competitions)
 
 ## 1. Predict accident risk score for unique postcode
 ### Score : 0.64 , Rank : 20 / 283
@@ -8,18 +8,18 @@
 
 
 
-## 2. Computer Vision 이상치 탐지 알고리즘 경진대회
+## 2. Computer Vision Outlier Detection Algorithm Competition
 ### Score : 0.82019 , Rank : 71 / 481
 
 ![image](https://user-images.githubusercontent.com/69743938/172152981-c7814f6c-6e64-4ffa-9b12-5f2ae491dff9.png)
 
 
-## 3. 생육 환경 최적화 경진대회
+## 3. Growth Environment Optimization Competition
 ### Score : 0.15606 , Rank : 25 / 136
 ![image](https://user-images.githubusercontent.com/69743938/172153090-98a6e77e-bdc6-4218-9bb4-f75cd490c173.png)
 
 
-## 4. 수화 이미지 분류 경진대회
+## 4. Sign Language Image Classification Competition
 ### Score : 0.97222 , Rank : 16 / 150
 ![image](https://user-images.githubusercontent.com/69743938/172153237-b25dd76a-07e0-42a9-b7b3-1b6edd0f5b74.png)
 
