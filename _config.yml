@@ -1,8 +1,9 @@
-title: jekyll-rtd-theme
+title: MinaeJeon
 description: Just another documentation theme compatible with GitHub Pages
 name: minae_jeon
-url: "https://minaejeon.github.io"
+url: "https://minaejeon.study"
 theme: null
+futrue: true
 
 # debug:
 #   compress: true
