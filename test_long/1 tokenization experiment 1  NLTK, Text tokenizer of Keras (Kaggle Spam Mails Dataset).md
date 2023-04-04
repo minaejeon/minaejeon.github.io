@@ -1,4 +1,4 @@
-# 1. tokenization experiment 1 : NLTK, Text tokenizer of Keras (Kaggle Spam Mails Dataset)
+# 1. tokenization experiment 1  NLTK, Text tokenizer of Keras (Kaggle Spam Mails Dataset)
 
 
 ```python
