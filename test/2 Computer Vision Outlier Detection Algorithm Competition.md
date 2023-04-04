@@ -31,7 +31,7 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 
 /kaggle/input/362-trainzip/bottle-broken_large/2010839.png
 
-/kaggle/input/362-trainzip/cable-good/12743.png
+/kaggle/input/362-trainzip/cable-good/12743.png 
 
 /kaggle/input/362-trainzip/zipper-rough/2013782.png
 
