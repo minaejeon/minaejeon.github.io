@@ -877,9 +877,9 @@ test['Number_of_Casualties'].value_counts()
 Name: Number_of_Casualties, dtype: int64
 
 -------------
-train data와 달리 test data에서는 'Number_of_Casualties' column의 값이 모두 0으로 되어있습니다.
+As opposed to train data, in test data, all 'Number_of_Casualties' column values are 'zero'.
 
-'Number_of_Casualties'를 예측하고 submission data의 'Accident_risk_index' 값을 유추하려합니다.
+I will predict 'Number_of_Casualties' and then expect the value of 'Accident_risk_index' in submission data.
 
 ---------------
 
@@ -1201,9 +1201,10 @@ display(roads_network,population)
 </div>
 
 ------------------
-train과 test, road_network, population 각 dataframe에는 'postcode' column이 존재하여 merge하기 용이합니다.
-그러나 Number_of_Casualties(사상자 수)예측에 도움이 되지 않는 column은 제외하고 밀접한 관계가 있어 분석에 용이한 column만 추출하여 학습이 필요합니다. 각 column값의 특성 및 데이터 수를 고려할 때 road_network data에서는 'length' 가장 밀접해 보입니다.
-또한, data의 unique counts를 고려할 때 population data에서는 'Variable: All usual residents; measures: Value'와 'Variable: Lives in a household; measures: Value', 그리고 'Variable: Area (Hectares); measures: Value'가 가장 밀접해 보입니다.
+'postcode' columns are in train, test, road_network, and population, which is beneficial for merge.
+ However, we should delete the useless data for predicting the 'Number_of_Casualties' while training only meaningful columns
+ Concerning the properties and amounts of data, 'length' column in road_network data look most useful factor.
+In addition, according to the unique counts of data, in population data, 'Variable: All usual residents; measures: Value', 'Variable: Lives in a household; measures: Value', 뭉 'Variable: Area (Hectares); measures: Value' look so elegible.
 
 ------------
 
@@ -1619,7 +1620,7 @@ train["Number_of_Casualties"].value_counts()
 Name: Number_of_Casualties, dtype: int64
 
 -----------
-train data와 test data의 각 column 특징을 파악하여 밀접한 column만 학습에 사용하는 것이 필요합니다. unique한 값의 갯수가 1개 이하인 경우 정답값에 영향을 주지 않으므로 제외합니다. 따라서 '2nd_Road_Number', 'country' column은 제거하되 test data의 정답값 column 'Number_of_Casualties' 또한 제외합니다. train과 test의 data를 allData로 합치되,부가적으로 도움되는 column을 함께 merge해 주겠습니다. 또한, 날짜를 세분화하여 column을 생성합니다.
+We should examine the properties of individual columns in terms of correlation with result. I think that the one whose number is less than one, it is not effective to predict the answer. Therefore, I would delete the columns of '2nd_Road_Number', 'country' as well as removing the target column, 'Number_of_casualties'. I will merge the train and test into alldata with additionally helpful columns. I will also distribute the date columns into more specified columns.
 
 -----------
 
@@ -1639,7 +1640,7 @@ allData["month"] = allData["Date"].dt.month
 allData["day"] = allData["Date"].dt.day
 ```
 -----------
-아래 boxplot을 통해 allData["Day_of_Week"],allData["Number_of_Casualties"]는 상관관계가 있음을 알 수 있습니다.
+With boxplot below, we can find the correlation between allData["Day_of_Week"] and allData["Number_of_Casualties"].
 
 ------------
 
@@ -2055,7 +2056,7 @@ allData2
 </div>
 
 -------
-column값이 불연속형인 경우 label encoding을 적용합니다.
+The several values of columns are range, which will be transformed into the label encoding.
 
 --------
 
@@ -2469,7 +2470,7 @@ allData2
 </div>
 
 ------------
-boosting 학습을 진행하기위해 정제된 allData2로부터 train2와 test2로 데이터를 나누어줍니다.
+In order to train the boosting, we should divide the refiend alldata2 into train2 and test2.
 
 ---------
 
@@ -2478,7 +2479,7 @@ train2 = allData2[:len(train)]
 test2 = allData2[len(train):]
 ```
 -----------
-CatBoostRegressor를 이용하여 ["Number_of_Casualties"] column을 학습합니다.
+We can make training the ["Number_of_Casualties"] column by using CatBoostRegressor.
 
 ----------
 
@@ -2530,7 +2531,7 @@ array([1.56039144, 1.40014073, 1.5783172 , ..., 1.63602668, 1.20295673,
 test["result"] = result
 ```
 --------
-각 postcode별 result의 평균값을 구하여 submission data의 정답값 column에 넣어줍니다.
+The mean value of individual postcode will be result to submission data.
 
 ---------
 
