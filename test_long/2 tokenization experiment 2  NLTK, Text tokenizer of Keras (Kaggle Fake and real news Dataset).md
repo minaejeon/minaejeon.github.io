@@ -1,4 +1,4 @@
-# 2. tokenization experiment 2 : NLTK, Text tokenizer of Keras (Kaggle Fake and real news Dataset)
+# 2. tokenization experiment 2  NLTK, Text tokenizer of Keras (Kaggle Fake and real news Dataset)
 
 ```python
 # This Python 3 environment comes with many helpful analytics libraries installed
