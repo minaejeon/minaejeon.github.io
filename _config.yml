@@ -5,6 +5,10 @@ name: minae_jeon
 url: "https://minaejeon.github.io/"
 theme: null
 futrue: true
+encoding: UTF-8
+kramdown:
+  syntax_highlighter_opts:
+    disable : true
 
 # debug:
 #   compress: true
