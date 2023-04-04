@@ -1,7 +1,8 @@
 title: MinaeJeon
+published: true
 description: Just another documentation theme compatible with GitHub Pages
 name: minae_jeon
-url: "https://minaejeon.study"
+url: "https://minaejeon.github.io/"
 theme: null
 futrue: true
 
@@ -9,6 +10,7 @@ futrue: true
 #   compress: true
 #   dist: false
 #   shortcodes: true
+futrue: true
 
 readme_index:
   with_frontmatter: true
