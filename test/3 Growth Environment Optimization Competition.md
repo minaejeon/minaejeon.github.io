@@ -995,7 +995,7 @@ train
 
 
 -------
-이미지 픽셀 용량이 크기 때문에 램소모량 줄이고자 batch size 지정하여 진행할 수 있는 image_data_generator를 이용하여 train_generator를 만듭니다.
+이미지 픽셀 용량이 크기 때문에 램소모량 줄이고자 batch size 지정하여 진행할 수 있는 image_data_generator를 이용하여 train_generator를 만듭니다. 
 
 -------
 
