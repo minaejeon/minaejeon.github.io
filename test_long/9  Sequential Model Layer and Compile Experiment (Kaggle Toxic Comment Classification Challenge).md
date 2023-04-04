@@ -1,5 +1,5 @@
 
-# 9.  Sequential Model : Layer and Compile Experiment (Kaggle Toxic Comment Classification Challenge)
+# 9.  Sequential Model Layer and Compile Experiment (Kaggle Toxic Comment Classification Challenge)
 
 
 ```python
